@@ -14,10 +14,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if let conteudo = conteudo {
+                AsyncImage(url: URL(string: conteudo.image), scale: 5)
                 Text("Título: \(conteudo.title)")
-                Text("ID do IMDB: \(conteudo.idImdb)")
                 Text("Duração: \(conteudo.duracao)")
-                // Adicione mais campos conforme necessário
             } else {
                 Text("Carregando...")
             }
@@ -33,7 +32,7 @@ struct ContentView: View {
     }
     
     func fetchData(completion: @escaping (Conteudo) -> Void) {
-        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/k_cj8fffs5/tt0386676/Ratings,Wikipedia") else {
+        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/k_cj8fffs5/tt0861739/Ratings,Wikipedia") else {
             print("URL inválida")
             return
         }
@@ -46,13 +45,14 @@ struct ContentView: View {
                 do {
                     let response = try decoder.decode(Response.self, from: data)
                     let conteudo = Conteudo(idImdb: response.id,
-                                            title: response.title,
-                                            image: response.image,
-                                            lancamento: response.fullTitle!,
-                                            duracao: response.duration ?? "0",
-                                            plot: response.plot,
-                                            type: response.type)
-                    completion(conteudo)
+                        title: response.originalTitle ?? response.title,
+                        originalTitle: response.originalTitle ?? response.title,
+                        image: response.image,
+                        releaseDate: response.releaseDate,
+                        duracao: response.duration ?? "0",
+                        plot: response.plot,
+                        type: response.type)
+                        completion(conteudo)
                 } catch {
                     print("Erro na decodificação: \(error)")
                 }
@@ -65,6 +65,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
     }
 }
