@@ -9,83 +9,59 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @State private var conteudo: Conteudo?
 
     var body: some View {
-        NavigationView {
-            VStack{
-                AsyncImage(url: URL(string: "https://m.media-amazon.com/images/M/MV5BMjA4NDg3NzYxMF5BMl5BanBnXkFtZTcwNTgyNzkyNw@@._V1_Ratio0.6762_AL_.jpg")) { image in image.resizable() } placeholder: { Color.red } .frame(width: 150, height: 200)
-                    .scaledToFit()
-                    
-                
-                List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
-                        }
-                    }
-                    .onDelete(perform: deleteItems)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
-                Text("Select an item")
+        VStack {
+            if let conteudo = conteudo {
+                Text("Título: \(conteudo.title)")
+                Text("ID do IMDB: \(conteudo.idImdb)")
+                Text("Duração: \(conteudo.duracao)")
+                // Adicione mais campos conforme necessário
+            } else {
+                Text("Carregando...")
             }
-            }
+        }.onAppear(perform: loadData)
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+    
+    func loadData() {
+        fetchData { fetchedConteudo in
+            DispatchQueue.main.async {
+                self.conteudo = fetchedConteudo
             }
         }
     }
+    
+    func fetchData(completion: @escaping (Conteudo) -> Void) {
+        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/k_cj8fffs5/tt0386676/Ratings,Wikipedia") else {
+            print("URL inválida")
+            return
+        }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Erro na requisição: \(error)")
+            } else if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let response = try decoder.decode(Response.self, from: data)
+                    let conteudo = Conteudo(idImdb: response.id,
+                                            title: response.title,
+                                            image: response.image,
+                                            lancamento: response.fullTitle!,
+                                            duracao: response.duration ?? "0",
+                                            plot: response.plot,
+                                            type: response.type)
+                    completion(conteudo)
+                } catch {
+                    print("Erro na decodificação: \(error)")
+                }
             }
         }
+
+        task.resume()
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

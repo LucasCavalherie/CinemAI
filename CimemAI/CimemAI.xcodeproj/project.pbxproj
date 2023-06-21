@@ -13,6 +13,8 @@
 		AF44826A2A423B41001C9628 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482692A423B41001C9628 /* Preview Assets.xcassets */; };
 		AF44826C2A423B41001C9628 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44826B2A423B41001C9628 /* Persistence.swift */; };
 		AF44826F2A423B41001C9628 /* CimemAI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF44826D2A423B41001C9628 /* CimemAI.xcdatamodeld */; };
+		AFB114E22A4382E200A30D4A /* Conteudo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E12A4382E200A30D4A /* Conteudo.swift */; };
+		AFB114E42A43831600A30D4A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E32A43831600A30D4A /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AF44826B2A423B41001C9628 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AF44826E2A423B41001C9628 /* CimemAI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CimemAI.xcdatamodel; sourceTree = "<group>"; };
 		AF4482702A423B41001C9628 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB114E12A4382E200A30D4A /* Conteudo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conteudo.swift; sourceTree = "<group>"; };
+		AFB114E32A43831600A30D4A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		AF4482612A423B40001C9628 /* CimemAI */ = {
 			isa = PBXGroup;
 			children = (
+				AFB114E12A4382E200A30D4A /* Conteudo.swift */,
+				AFB114E32A43831600A30D4A /* Response.swift */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
 				AF4482642A423B40001C9628 /* ContentView.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
@@ -145,9 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFB114E22A4382E200A30D4A /* Conteudo.swift in Sources */,
 				AF44826C2A423B41001C9628 /* Persistence.swift in Sources */,
 				AF44826F2A423B41001C9628 /* CimemAI.xcdatamodeld in Sources */,
 				AF4482652A423B40001C9628 /* ContentView.swift in Sources */,
+				AFB114E42A43831600A30D4A /* Response.swift in Sources */,
 				AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
