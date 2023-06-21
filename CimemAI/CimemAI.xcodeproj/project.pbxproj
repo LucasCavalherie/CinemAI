@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		734D03702A438E1400F547B6 /* ChatGptRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D036F2A438E1400F547B6 /* ChatGptRequestManager.swift */; };
+		73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6D0EC2A438D910084DB3C /* ChatGptView.swift */; };
 		AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482622A423B40001C9628 /* CimemAIApp.swift */; };
 		AF4482652A423B40001C9628 /* IMDbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* IMDbView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		734D036F2A438E1400F547B6 /* ChatGptRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptRequestManager.swift; sourceTree = "<group>"; };
+		73E6D0EC2A438D910084DB3C /* ChatGptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptView.swift; sourceTree = "<group>"; };
 		AF44825F2A423B40001C9628 /* CimemAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CimemAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* IMDbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbView.swift; sourceTree = "<group>"; };
@@ -36,6 +40,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		734D036E2A438DFA00F547B6 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				734D036F2A438E1400F547B6 /* ChatGptRequestManager.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		AF4482562A423B40001C9628 = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +67,7 @@
 		AF4482612A423B40001C9628 /* CimemAI */ = {
 			isa = PBXGroup;
 			children = (
+				734D036E2A438DFA00F547B6 /* Request */,
 				AFB114E62A438BE900A30D4A /* View */,
 				AFB114E52A438BD900A30D4A /* Model */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
@@ -85,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4482642A423B40001C9628 /* IMDbView.swift */,
+				73E6D0EC2A438D910084DB3C /* ChatGptView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +175,8 @@
 			files = (
 				AFB114E22A4382E200A30D4A /* Conteudo.swift in Sources */,
 				AF4482652A423B40001C9628 /* IMDbView.swift in Sources */,
+				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
+				734D03702A438E1400F547B6 /* ChatGptRequestManager.swift in Sources */,
 				AFB114E42A43831600A30D4A /* Response.swift in Sources */,
 				AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */,
 			);
