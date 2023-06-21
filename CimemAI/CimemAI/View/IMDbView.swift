@@ -36,7 +36,6 @@ struct ContentView: View {
             print("URL inválida")
             return
         }
-
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Erro na requisição: \(error)")
