@@ -1,8 +1,8 @@
-//
-//  Secrets.swift
-//  CimemAI
-//
-//  Created by Lucas Cavalherie on 22/06/23.
-//
 
 import Foundation
+
+
+class Secrets {
+    static let CHATGPT_API_KEY = "KEY"
+    static let IMDB_API_KEY = "KEY"
+}

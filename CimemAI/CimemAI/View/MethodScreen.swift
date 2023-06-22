@@ -9,7 +9,39 @@ import SwiftUI
 
 struct MethodScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack (alignment: .center) {
+            Text("Qual método você prefere usar para encontrar o que assistir?")
+                .font(.system(size: 32))
+                .fontWeight(.bold)
+                .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
+            
+            Button {
+                
+            } label: {
+                Text("Escrever uma descrição")
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .frame(width: 300, height: 60, alignment: .center)
+            .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+            .cornerRadius(16)
+            .padding(.vertical, 8)
+            
+            Button {
+                
+            } label: {
+                Text("Selecione entre opções")
+                    .font(.system(size: 20))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .frame(width: 300, height: 60, alignment: .center)
+            .background(Color(red: 0.26, green: 0.57, blue: 0.58))
+            .cornerRadius(16)
+            .padding(.vertical, 8)
+        }
+        .padding()
     }
 }
 

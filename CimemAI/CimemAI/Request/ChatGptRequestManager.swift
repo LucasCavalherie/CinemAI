@@ -11,7 +11,7 @@ class ChatRequestManager: ObservableObject {
     @Published var responseError: Error?
 
     func makeRequest(text: String) {
-        let apiKey = "KEY-AQUI"
+        let apiKey = Secrets.CHATGPT_API_KEY
         let model = "text-davinci-003"
         let prompt = text
         let maxTokens = 150
