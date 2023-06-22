@@ -32,7 +32,7 @@ struct ContentView: View {
     }
     
     func fetchData(completion: @escaping (Conteudo) -> Void) {
-        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/k_cj8fffs5/tt0861739/Ratings,Wikipedia") else {
+        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/\(Secrets.IMDB_API_KEY)/tt0861739/Ratings,Wikipedia") else {
             print("URL inválida")
             return
         }
