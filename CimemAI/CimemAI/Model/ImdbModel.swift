@@ -1,6 +1,6 @@
 import Foundation
 
-struct Conteudo: Identifiable{
+struct FindData: Identifiable{
     let id = UUID()
     let idImdb: String
     let title: String
@@ -10,4 +10,9 @@ struct Conteudo: Identifiable{
     let duracao: String
     let plot: String
     let type : String
+}
+
+struct SearchData: Identifiable{
+    let id = UUID()
+    let idImdb: String
 }
