@@ -111,6 +111,7 @@
 				AFEFB8452A44CB0E0040C6B4 /* Poppins-ThinItalic.ttf */,
 			);
 			path = Fonts;
+		};
 		734D036E2A438DFA00F547B6 /* Request */ = {
 			isa = PBXGroup;
 			children = (
