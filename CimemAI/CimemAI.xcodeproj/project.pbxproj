@@ -39,6 +39,8 @@
 		AFEFB8B12A44DE3F0040C6B4 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB89E2A44DE3F0040C6B4 /* Poppins-SemiBold.ttf */; };
 		AFEFB8B22A44DE3F0040C6B4 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB89F2A44DE3F0040C6B4 /* Poppins-Italic.ttf */; };
 		AFEFB8B32A44DE3F0040C6B4 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB8A02A44DE3F0040C6B4 /* Poppins-MediumItalic.ttf */; };
+		AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEFB8B42A44E18A0040C6B4 /* ResultsView.swift */; };
+		AFEFB8B72A44E95D0040C6B4 /* IMDbDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFEFB8B62A44E95D0040C6B4 /* IMDbDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		AFEFB89E2A44DE3F0040C6B4 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		AFEFB89F2A44DE3F0040C6B4 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
 		AFEFB8A02A44DE3F0040C6B4 /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		AFEFB8B42A44E18A0040C6B4 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		AFEFB8B62A44E95D0040C6B4 /* IMDbDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				73CF55542A44BC33008D0AD8 /* MethodScreen.swift */,
 				73CF55582A44C6B0008D0AD8 /* TypeView.swift */,
 				73CF555A2A44C820008D0AD8 /* SearchView.swift */,
+				AFEFB8B42A44E18A0040C6B4 /* ResultsView.swift */,
+				AFEFB8B62A44E95D0040C6B4 /* IMDbDetail.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,10 +273,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB114EA2A43F5FD00A30D4A /* IMDbCard.swift in Sources */,
+				AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */,
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				73CF55572A44C1EE008D0AD8 /* Secrets.swift in Sources */,
 				AF4482652A423B40001C9628 /* IMDbView.swift in Sources */,
 				73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */,
+				AFEFB8B72A44E95D0040C6B4 /* IMDbDetail.swift in Sources */,
 				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
 				73CF555F2A44E126008D0AD8 /* ImdbResponseModel.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
