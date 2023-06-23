@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject var apiRequestManager = ChatRequestManager()
     @State var message = ""
     
     var body: some View {
@@ -30,8 +29,8 @@ struct SearchView: View {
                 )
             
             
-            Button {
-                self.apiRequestManager.makeRequest(text: message)
+            NavigationLink {
+                ChatGptView(inputText: message)
             } label: {
                 Text("Pesquisar")
                     .font(.system(size: 20))

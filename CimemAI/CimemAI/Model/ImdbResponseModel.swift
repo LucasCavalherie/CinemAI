@@ -1,6 +1,6 @@
 import Foundation
 
-struct Response: Codable {
+struct FindResponse: Codable {
     let id: String
     let title: String
     let image: String
@@ -28,5 +28,21 @@ struct Response: Codable {
         case director = "directors"
         case stars = "stars"
         
+    }
+}
+
+struct SearchResponse: Codable {
+    let results: [SearchResultResponse]
+
+    enum CodingKeys: String, CodingKey {
+        case results = "results"
+    }
+}
+
+struct SearchResultResponse: Codable {
+    let id: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
     }
 }

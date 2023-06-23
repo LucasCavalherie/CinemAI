@@ -24,7 +24,7 @@ struct CimemAIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TypeView()
         }
     }
 }
