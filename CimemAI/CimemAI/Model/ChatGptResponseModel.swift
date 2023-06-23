@@ -10,9 +10,17 @@ struct ChatGptResponse: Codable {
 }
 
 struct ChatGptResultResponse: Codable {
-    let text: String
+    let message: ChatGptResultTextResponse
 
     enum CodingKeys: String, CodingKey {
-        case text = "text"
+        case message = "message"
+    }
+}
+
+struct ChatGptResultTextResponse: Codable {
+    let content: String
+
+    enum CodingKeys: String, CodingKey {
+        case content = "content"
     }
 }
