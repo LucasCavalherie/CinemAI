@@ -44,13 +44,17 @@ struct ContentView: View {
                 do {
                     let response = try decoder.decode(Response.self, from: data)
                     let conteudo = Conteudo(idImdb: response.id,
-                        title: response.originalTitle ?? response.title,
-                        originalTitle: response.originalTitle ?? response.title,
+                        title: response.title,
+                        originalTitle: response.originalTitle ?? "",
                         image: response.image,
                         releaseDate: response.releaseDate,
-                        duracao: response.duration ?? "0",
+                        year: response.year,
+                        duracao: response.duration ?? "",
                         plot: response.plot,
-                        type: response.type)
+                        type: response.type,
+                        imDbRating: response.imDbRating,
+                        director: response.director,
+                        stars: response.stars)
                         completion(conteudo)
                 } catch {
                     print("Erro na decodificação: \(error)")
