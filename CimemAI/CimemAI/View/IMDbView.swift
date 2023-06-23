@@ -11,31 +11,48 @@ import CoreData
 struct IMDBView: View {
     var filmes : [String]
     @State var findData: FindData?
-    @State var searchData: SearchData?
+    @State var findAllData: [FindData] = []
     
     var body: some View {
         VStack {
-            if let findData = findData {
-                IMDbCard(title: findData.title,url: findData.image, rating: findData.duracao)
-            } else {
+            ForEach(findAllData) { data in
+                IMDbCard(title: data.title,url: data.image, rating: data.duracao)
+            }
+            
+            
+            if findAllData.isEmpty {
                 Text("Carregando...")
             }
         }.onAppear(perform: loadData)
     }
     
     func loadData() {
-        search(message: filmes[0]) { fetchedConteudo in
+        Task {
+            let data = await findAll()
             DispatchQueue.main.async {
-                self.searchData = fetchedConteudo
-                if let searchData = searchData {
-                    find(id: searchData.idImdb) { fetchedConteudo in
-                        DispatchQueue.main.async {
-                            self.findData = fetchedConteudo
-                        }
-                    }
-                }
+                findAllData = data
             }
         }
+    }
+    
+    func findAll () async -> [FindData] {
+        return await withTaskGroup(of: FindData?.self, body: { group in
+            var datas = [FindData]()
+            
+            for filme in filmes {
+                group.addTask {
+                    return await self.findFilmes(message: filme)
+                }
+            }
+            
+            for await filme in group {
+                if let filme = filme {
+                    datas.append(filme)
+                }
+            }
+            
+            return datas
+        })
     }
     
     func find(id: String, completion: @escaping (FindData) -> Void) {
@@ -94,10 +111,59 @@ struct IMDBView: View {
         task.resume()
     }
     
+    func findFilmes(message: String) async -> FindData? {
+        guard let urlSearch = URL(string: "https://imdb-api.com/pt/API/Search/\(Secrets.IMDB_API_KEY)/\(message)") else {
+            print("URL inválida")
+            return nil
+        }
+        
+        guard let (data, _) = try? await URLSession.shared.data(from: urlSearch) else {
+            print("deu pau")
+            return nil
+        }
+        
+        
+        let decoder = JSONDecoder()
+        guard let response = try? decoder.decode(SearchResponse.self, from: data) else {
+            print("deu pau")
+            return nil
+        }
+        
+        let id = response.results[0].id
+        
+        
+        guard let urlFind = URL(string: "https://imdb-api.com/pt/API/Title/\(Secrets.IMDB_API_KEY)/\(id)/Ratings,Wikipedia") else {
+            print("URL inválida")
+            return nil
+        }
+        
+        guard let (data, _) = try? await URLSession.shared.data(from: urlFind) else {
+            print("deu pau")
+            return nil
+        }
+        
+        guard let response = try? decoder.decode(FindResponse.self, from: data) else {
+            print("deu pau")
+            return nil
+        }
+        
+        let conteudo = FindData(
+            idImdb: response.id,
+            title: response.originalTitle ?? response.title,
+            originalTitle: response.originalTitle ?? response.title,
+            image: response.image,
+            releaseDate: response.releaseDate,
+            duracao: response.duration ?? "0",
+            plot: response.plot,
+            type: response.type
+        )
+        
+        return conteudo
+    }
 }
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(filmes: ["Vingadores"])
+        IMDBView(filmes: ["Vingadores", "JurassicPark"])
     }
 }
