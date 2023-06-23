@@ -2,51 +2,75 @@
 import SwiftUI
 
 struct ChatGptView: View {
-    @ObservedObject var apiRequestManager = ChatRequestManager()
-    @State private var inputText: String = ""
-
+    @State var inputText: String
+    @State var response: String?
+        
     var body: some View {
-        VStack(spacing: 25) {
+        VStack {
+            if let response = response {
+                IMDBView(messageChatGpt: response)
+            } else {
+                Text("Carregando...")
+            }
+        }.onAppear(perform: loadData)
+    }
+    
+    func loadData() {
+        search(message: inputText) { fetchedConteudo in
+            DispatchQueue.main.async {
+                self.response = fetchedConteudo
+                print(self.response)
+            }
+        }
+    }
+    
+    func search(message: String, completion: @escaping (String) -> Void) {
+        let apiKey = Secrets.CHATGPT_API_KEY
+        let model = "text-davinci-003"
+        let prompt = message
+        let maxTokens = 150
 
-            if let data = apiRequestManager.responseData {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    if let choices = json["choices"] as? [[String: Any]] {
-                        if let text = choices[0]["text"] as? String {
-                            Text(text)
-                        }
-                    }
+        let requestBody : [String : Any] = [
+            "model": model,
+            "prompt": prompt,
+            "max_tokens": maxTokens
+        ]
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+
+        var request = URLRequest(url: URL(string: "https://api.openai.com/v1/completions")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpBody = jsonData
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Erro na requisição: \(error)")
+            } else if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let response = try decoder.decode(ChatGptResponse.self, from: data)
+                    var text = response.choices[0].text
+                    text = text.filter{!$0.isWhitespace}
+                    text = text.replacingOccurrences(of: "'", with: "")
+                    text = text.replacingOccurrences(of: "\"", with: "")
+                    
+                    print(text)
+                    completion(text)
+                } catch {
+                    print("Erro na decodificação: \(error)")
                 }
             }
-            
-            TextField("Pergunte", text: $inputText)
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.gray, style: StrokeStyle(lineWidth: 1.5)))
-            Button(action: {
-                self.apiRequestManager.makeRequest(text: inputText)
-             }) {
-                 Text("Busque o seu filme")
-                     .frame(minWidth: 0, maxWidth: .infinity)
-                     .font(.system(size: 18))
-                     .fontWeight(.bold)
-                     .padding()
-                     .foregroundColor(.white)
-                     .overlay(
-                         RoundedRectangle(cornerRadius: 20)
-                             .stroke(Color.white, lineWidth: 1)
-                 )
-             }
-             .background(Color.orange)
-             .cornerRadius(20)
-
-            
         }
-        .padding()
+
+        task.resume()
     }
 }
 
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView()
+        ChatGptView(inputText: "Escreva exatamente o que estiver entre aspas: 'Vingadores Ultimato'")
     }
 }

@@ -8,16 +8,15 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct IMDBView: View {
+    var messageChatGpt : String
     @State var findData: FindData?
     @State var searchData: SearchData?
     
     var body: some View {
         VStack {
             if let findData = findData {
-                AsyncImage(url: URL(string: findData.image), scale: 5)
-                Text("Título: \(findData.title)")
-                Text("Duração: \(findData.duracao)")
+                IMDbCard(title: findData.title,url: findData.image, rating: findData.duracao)
             } else {
                 Text("Carregando...")
             }
@@ -25,7 +24,7 @@ struct ContentView: View {
     }
     
     func loadData() {
-        search(message: "Vingadores") { fetchedConteudo in
+        search(message: messageChatGpt) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.searchData = fetchedConteudo
                 if let searchData = searchData {
@@ -97,8 +96,8 @@ struct ContentView: View {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        IMDBView(messageChatGpt: "Vingadores")
     }
 }
