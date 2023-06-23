@@ -16,7 +16,7 @@ struct IMDBView: View {
     var body: some View {
         VStack {
             ForEach(findAllData) { data in
-                IMDbCard(title: data.title,url: data.image, rating: data.duracao)
+                IMDbCard(conteudo: data)
             }
             
             
@@ -67,17 +67,20 @@ struct IMDBView: View {
                 let decoder = JSONDecoder()
                 do {
                     let response = try decoder.decode(FindResponse.self, from: data)
-                    let conteudo = FindData(
+                    let findData = FindData(
                         idImdb: response.id,
                         title: response.originalTitle ?? response.title,
                         originalTitle: response.originalTitle ?? response.title,
                         image: response.image,
                         releaseDate: response.releaseDate,
-                        duracao: response.duration ?? "0",
+                        year: response.year,
+                        duracao: response.duration ?? "",
                         plot: response.plot,
-                        type: response.type
-                    )
-                    completion(conteudo)
+                        type: response.type,
+                        imDbRating: response.imDbRating,
+                        director: response.director,
+                        stars: response.stars)
+                    completion(findData)
                 } catch {
                     print("Erro na decodificação: \(error)")
                 }
@@ -153,9 +156,13 @@ struct IMDBView: View {
             originalTitle: response.originalTitle ?? response.title,
             image: response.image,
             releaseDate: response.releaseDate,
-            duracao: response.duration ?? "0",
+            year: response.year,
+            duracao: response.duration ?? "",
             plot: response.plot,
-            type: response.type
+            type: response.type,
+            imDbRating: response.imDbRating,
+            director: response.director,
+            stars: response.stars
         )
         
         return conteudo
