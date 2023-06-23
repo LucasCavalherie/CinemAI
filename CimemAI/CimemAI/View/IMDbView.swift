@@ -24,7 +24,7 @@ struct IMDBView: View {
     }
     
     func loadData() {
-        search(message: messageChatGpt) { fetchedConteudo in
+        search(message: filmes[0]) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.searchData = fetchedConteudo
                 if let searchData = searchData {
@@ -98,6 +98,6 @@ struct IMDBView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(messageChatGpt: "Vingadores")
+        IMDBView(filmes: ["Vingadores"])
     }
 }

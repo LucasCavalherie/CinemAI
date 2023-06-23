@@ -8,7 +8,7 @@ struct ChatGptView: View {
     var body: some View {
         VStack {
             if let response = response {
-                IMDBView(messageChatGpt: response)
+                IMDBView(filmes: response)
             } else {
                 Text("Carregando...")
             }
