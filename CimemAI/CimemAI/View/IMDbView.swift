@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct IMDBView: View {
-    var messageChatGpt : String
+    var filmes : [String]
     @State var findData: FindData?
     @State var searchData: SearchData?
     

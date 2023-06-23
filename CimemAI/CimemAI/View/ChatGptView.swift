@@ -3,7 +3,7 @@ import SwiftUI
 
 struct ChatGptView: View {
     @State var inputText: String
-    @State var response: String?
+    @State var response: [String]?
         
     var body: some View {
         VStack {
@@ -19,26 +19,21 @@ struct ChatGptView: View {
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo
-                print(self.response)
             }
         }
     }
     
-    func search(message: String, completion: @escaping (String) -> Void) {
+    func search(message: String, completion: @escaping ([String]) -> Void) {
         let apiKey = Secrets.CHATGPT_API_KEY
-        let model = "text-davinci-003"
-        let prompt = message
-        let maxTokens = 150
+        let model = "gpt-3.5-turbo"
+        let prompt = Prompt(role: "user", content: formatInputText(message: message))
+        
+        let requestJson = Request(model: model, messages: [prompt])
 
-        let requestBody : [String : Any] = [
-            "model": model,
-            "prompt": prompt,
-            "max_tokens": maxTokens
-        ]
+        let encoder = JSONEncoder()
+        let jsonData = try? encoder.encode(requestJson)
 
-        let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-
-        var request = URLRequest(url: URL(string: "https://api.openai.com/v1/completions")!)
+        var request = URLRequest(url: URL(string: "https://api.openai.com/v1/chat/completions")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
@@ -50,14 +45,18 @@ struct ChatGptView: View {
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
+                    
                     let response = try decoder.decode(ChatGptResponse.self, from: data)
-                    var text = response.choices[0].text
+                    var text = response.choices[0].message.content
                     text = text.filter{!$0.isWhitespace}
                     text = text.replacingOccurrences(of: "'", with: "")
                     text = text.replacingOccurrences(of: "\"", with: "")
                     
-                    print(text)
-                    completion(text)
+                    let filmes = text
+                        .split(separator: ";")
+                        .map { String($0.trimmingCharacters(in: .whitespacesAndNewlines)) }
+                    
+                    completion(filmes)
                 } catch {
                     print("Erro na decodificação: \(error)")
                 }
@@ -65,6 +64,11 @@ struct ChatGptView: View {
         }
 
         task.resume()
+    }
+    
+    
+    func formatInputText(message: String) -> String {
+        return "Forneça apenas o nome 9 filmes no formato: filme1;filme2;filme3 a partir da seguinte descrição: " + message
     }
 }
 
