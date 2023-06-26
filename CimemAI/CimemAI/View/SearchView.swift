@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
+    var type: String
     @State var message = ""
     
     var body: some View {
@@ -30,7 +31,7 @@ struct SearchView: View {
             
             
             NavigationLink {
-                ChatGptView(inputText: message)
+                ChatGptView(type: type, inputText: message)
             } label: {
                 Text("Pesquisar")
                     .font(.system(size: 20))
@@ -48,6 +49,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(type: "filmes")
     }
 }
