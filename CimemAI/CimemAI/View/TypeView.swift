@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct TypeView: View {
-    @EnvironmentObject var chatGptFilterModel: ChatGptFilterModel
-    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
@@ -24,7 +22,7 @@ struct TypeView: View {
                 
                 HStack {
                     NavigationLink {
-                        MethodScreen()
+                        MethodScreen(type: "filme")
                     } label: {
                         Text("Filme")
                             .font(.system(size: 20))
@@ -39,7 +37,7 @@ struct TypeView: View {
                     Spacer()
                     
                     NavigationLink {
-                        MethodScreen()
+                        MethodScreen(type: "série")
                     } label: {
                         Text("Série")
                             .font(.system(size: 20))
@@ -52,11 +50,7 @@ struct TypeView: View {
                     .padding(.vertical, 8)
                 }
                 .padding(.horizontal, 32)
-        }
-        
-        
-            
-            
+            }
         }
         
     }
