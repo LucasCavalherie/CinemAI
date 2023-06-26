@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		731CBD8D2A4A0B88004FF08E /* ChatGptFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD8C2A4A0B88004FF08E /* ChatGptFilterModel.swift */; };
+		731CBD8F2A4A113D004FF08E /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD8E2A4A113D004FF08E /* Secrets.swift */; };
 		73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */; };
 		73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55542A44BC33008D0AD8 /* MethodScreen.swift */; };
 		73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55582A44C6B0008D0AD8 /* TypeView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		731CBD8C2A4A0B88004FF08E /* ChatGptFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptFilterModel.swift; sourceTree = "<group>"; };
+		731CBD8E2A4A113D004FF08E /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptResponseModel.swift; sourceTree = "<group>"; };
 		73CF55542A44BC33008D0AD8 /* MethodScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodScreen.swift; sourceTree = "<group>"; };
 		73CF55582A44C6B0008D0AD8 /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
+				731CBD8E2A4A113D004FF08E /* Secrets.swift */,
 			);
 			path = CimemAI;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB114EA2A43F5FD00A30D4A /* IMDbCard.swift in Sources */,
+				731CBD8F2A4A113D004FF08E /* Secrets.swift in Sources */,
 				AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */,
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				731CBD8D2A4A0B88004FF08E /* ChatGptFilterModel.swift in Sources */,
