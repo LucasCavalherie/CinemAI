@@ -45,7 +45,6 @@ struct ChatGptView: View {
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    
                     let response = try decoder.decode(ChatGptResponse.self, from: data)
                     var text = response.choices[0].message.content
                     text = text.filter{!$0.isWhitespace}
@@ -68,7 +67,7 @@ struct ChatGptView: View {
     
     
     func formatInputText(message: String) -> String {
-        return "Forneça apenas o nome 9 filmes no formato: filme1;filme2;filme3 a partir da seguinte descrição: " + message
+        return "Forneça apenas o nome 3 filmes no formato: filme1;filme2;filme3 a partir da seguinte descrição: " + message
     }
 }
 

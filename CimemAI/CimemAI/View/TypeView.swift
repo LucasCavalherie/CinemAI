@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TypeView: View {
+    @EnvironmentObject var chatGptFilterModel: ChatGptFilterModel
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
