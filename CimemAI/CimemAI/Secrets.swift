@@ -2,6 +2,7 @@
 import Foundation
 
 class Secrets {
-    static let CHATGPT_API_KEY = "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"
-    static let IMDB_API_KEY = "k_j44nsf5d"
+    static let CHATGPT_API_KEY = "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"
+    static let IMDB_API_KEY = "k_cj8fffs5-"
+    static let TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyY2M3ZDViNjdlZDY3YTdlZGQ0YTQxMTMwZGJiODc4ZiIsInN1YiI6IjY0OTljMzMwYjM0NDA5MDExYzdjYWQ3NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HcGGZcuqXS7H_WsH18mWDY5O2j3X-EUw7ZVTpph_-qE"
 }

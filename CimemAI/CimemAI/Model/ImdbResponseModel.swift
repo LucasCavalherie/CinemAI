@@ -1,32 +1,24 @@
 import Foundation
 
 struct FindResponse: Codable {
-    let id: String
+    let id: Int32
     let title: String
     let image: String
     let releaseDate: String
-    let year: String
     let originalTitle: String?
-    let duration: String?
+    let duration: Int
     let plot: String
-    let type: String
-    let imDbRating : String
-    let director: String
-    let stars: String
+    let rating : Double
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
-        case image = "image"
-        case releaseDate = "releaseDate"
-        case year = "year"
+        case image = "poster_path"
+        case releaseDate = "release_date"
         case originalTitle = "originalTitle"
-        case duration = "runtimeMins"
-        case plot = "plotLocal"
-        case type = "type"
-        case imDbRating = "imDbRating"
-        case director = "directors"
-        case stars = "stars"
+        case duration = "runtime"
+        case plot = "overview"
+        case rating = "vote_average"
         
     }
 }
@@ -40,7 +32,7 @@ struct SearchResponse: Codable {
 }
 
 struct SearchResultResponse: Codable {
-    let id: String
+    let id: Int32
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

@@ -4,14 +4,14 @@ struct IMDbDetail: View {
     let conteudo: FindData
     
     var ratingAsStars: Int {
-        return Int((Double(conteudo.imDbRating) ?? 0) / 2.0 + 0.5)
+        return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
 
     
     var body: some View {
         ScrollView{
             VStack(spacing: -25){
-                AsyncImage(url: URL(string: conteudo.image)) { phase in
+                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(conteudo.image)")) { phase in
                     if let image = phase.image {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
@@ -47,7 +47,7 @@ struct IMDbDetail: View {
                         HStack{
                             Text(.init(systemName: "clock"))
                                 .font(Font.custom("SF Pro", size: 14))
-                            Text("\(conteudo.duracao) min")
+                            Text("\(conteudo.duration) min")
                                 .font(Font.custom("SF Pro", size: 14))
                                 .multilineTextAlignment(.center)
                                 
@@ -62,7 +62,7 @@ struct IMDbDetail: View {
                                     .inset(by: 0.5)
                                     .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
                             ))
-                        Text(conteudo.year)
+                        Text(conteudo.releaseDate)
                             .font(Font.custom("SF Pro", size: 14))
                             .multilineTextAlignment(.center)
                             .padding(.vertical, 9)
@@ -78,19 +78,12 @@ struct IMDbDetail: View {
                             
                         Spacer()
                     }.padding(.leading, 30)
-                    HStack{
-                        Text("DIRIGIDO POR:")
-                            .font(Font.custom("Poppins-Regular", size: 14))
-                        Text(conteudo.director)
-                            .font(Font.custom("Poppins-Regular", size: 14))
-                            .bold()
-                    }.padding(.horizontal, 30)
                     Text(conteudo.plot)
                         .font(Font.custom("SF Pro", size: 16))
                         .padding(.horizontal, 30)
                     
                     
-                    
+                Spacer()
                 }.background(Rectangle()
                     .foregroundColor(.white)
                     .cornerRadius(28))
@@ -101,6 +94,6 @@ struct IMDbDetail: View {
 
 struct IMDbDetail_Previews: PreviewProvider {
     static var previews: some View {
-        IMDbDetail(conteudo: FindData(idImdb: "tt4154796", title: "Avengers: Endgame", originalTitle: "Avengers: Endgame (2019)", image:  "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_Ratio0.6762_AL_.jpg", releaseDate: "2019-04-26",year: "2019", duracao: "181", plot: "Depois dos eventos devastadores de “Guerra do Infinito”, o universo está em ruínas. Com a ajuda dos aliados que restam, os Vingadores juntam-se mais uma vez para tentar desfazer as ações de Thanos e restaurar a ordem ao universo.", type: "Movie", imDbRating: "8.4", director: "Anthony Russo, Joe Russo", stars: "Robert Downey Jr., Chris Evans, Mark Ruffalo"))
+        IMDbDetail(conteudo: FindData(idFilme: 19995, title: "Avatar", image: "/iNMP8uzV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571))
     }
 }

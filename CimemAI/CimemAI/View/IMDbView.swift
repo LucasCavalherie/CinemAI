@@ -71,74 +71,18 @@ struct IMDBView: View {
             return datas
         })
     }
-    
-    func find(id: String, completion: @escaping (FindData) -> Void) {
-        guard let url = URL(string: "https://imdb-api.com/pt/API/Title/\(Secrets.IMDB_API_KEY)/\(id)/Ratings,Wikipedia") else {
-            print("URL inválida")
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Erro na requisição: \(error)")
-            } else if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let response = try decoder.decode(FindResponse.self, from: data)
-                    let findData = FindData(
-                        idImdb: response.id,
-                        title: response.originalTitle ?? response.title,
-                        originalTitle: response.originalTitle ?? response.title,
-                        image: response.image,
-                        releaseDate: response.releaseDate,
-                        year: response.year,
-                        duracao: response.duration ?? "",
-                        plot: response.plot,
-                        type: response.type,
-                        imDbRating: response.imDbRating,
-                        director: response.director,
-                        stars: response.stars)
-                    completion(findData)
-                } catch {
-                    print("Erro na decodificação: \(error)")
-                }
-            }
-        }
 
-        task.resume()
-    }
-    
-    func search(message: String, completion: @escaping (SearchData) -> Void) {
-        guard let url = URL(string: "https://imdb-api.com/pt/API/Search/\(Secrets.IMDB_API_KEY)/\(message)") else {
-            print("URL inválida")
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Erro na requisição: \(error)")
-            } else if let data = data {
-                let decoder = JSONDecoder()
-                do {
-                    let response = try decoder.decode(SearchResponse.self, from: data)
-                    let conteudo = SearchData(idImdb: response.results[0].id)
-                    completion(conteudo)
-                } catch {
-                    print("Erro na decodificação: \(error)")
-                }
-            }
-        }
-
-        task.resume()
-    }
     
     func findFilmes(message: String) async -> FindData? {
-        guard let urlSearch = URL(string: "https://imdb-api.com/pt/API/Search/\(Secrets.IMDB_API_KEY)/\(message)") else {
-            print("URL inválida")
-            return nil
-        }
+        print(message)
+        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/multi?query=\(message)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
+        request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "accept")
+
+        request.httpMethod = "GET"
         
-        guard let (data, _) = try? await URLSession.shared.data(from: urlSearch) else {
-            print("deu pau")
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+            print("deu pau 1")
             return nil
         }
         
@@ -152,42 +96,36 @@ struct IMDBView: View {
         let id = response.results[0].id
         
         
-        guard let urlFind = URL(string: "https://imdb-api.com/pt/API/Title/\(Secrets.IMDB_API_KEY)/\(id)/Ratings,Wikipedia") else {
-            print("URL inválida")
-            return nil
-        }
+        var urlFind = URLRequest(url: URL(string: "https://api.themoviedb.org/3/movie/\(id)?language=pt-BR")!,timeoutInterval: Double.infinity)
+        urlFind.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
+        urlFind.httpMethod = "GET"
         
-        guard let (data, _) = try? await URLSession.shared.data(from: urlFind) else {
-            print("deu pau")
+        guard let (data, _) = try? await URLSession.shared.data(for: urlFind) else {
+            print("deu pau de novo")
             return nil
         }
         
         guard let response = try? decoder.decode(FindResponse.self, from: data) else {
-            print("deu pau")
+            print("deu pau na response")
             return nil
         }
         
         let conteudo = FindData(
-            idImdb: response.id,
+            idFilme: response.id,
             title: response.title,
-            originalTitle: response.originalTitle ?? response.title,
             image: response.image,
             releaseDate: response.releaseDate,
-            year: response.year,
-            duracao: response.duration ?? "",
+            originalTitle: response.releaseDate,
+            duration: response.duration,
             plot: response.plot,
-            type: response.type,
-            imDbRating: response.imDbRating,
-            director: response.director,
-            stars: response.stars
+            rating: response.rating
         )
-        
         return conteudo
     }
 }
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(filmes: ["Vingadores", "JurassicPark", "poderosochefão"])
+        IMDBView(filmes: ["Vingadores", "Jurassic-Park", "poderoso-chefao"])
     }
 }
