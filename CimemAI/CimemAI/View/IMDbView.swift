@@ -14,19 +14,36 @@ struct IMDBView: View {
     @State var findAllData: [FindData] = []
     
     var body: some View {
-        VStack {
-            ForEach(findAllData) { data in
-                IMDbCard(conteudo: data)
+        NavigationStack{
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Estes são os três filmes mais compatíveis com você hoje:")
+                    .font(
+                        Font.custom("Poppins", size: 24)
+                            .weight(.bold)
+                    )
+                    .foregroundColor(.black)
+                    .frame(width: 290, height: 110, alignment: .topLeading)
+                
+                ScrollView(.horizontal, showsIndicators: false){
+                    HStack(spacing: 20){
+                        ForEach(findAllData) { data in
+                            NavigationLink {
+                                IMDbDetail(conteudo: data)
+                            } label: {
+                                IMDbCard(conteudo: data)
+                            }
+                        }
+                    }
+                }
             }
-            
-            
-            if findAllData.isEmpty {
-                Text("Carregando...")
-            }
+            .padding(.horizontal, 30)
+            .padding(.vertical, 0)
+            .ignoresSafeArea()
         }.onAppear(perform: loadData)
     }
     
     func loadData() {
+    
         Task {
             let data = await findAll()
             DispatchQueue.main.async {
@@ -152,7 +169,7 @@ struct IMDBView: View {
         
         let conteudo = FindData(
             idImdb: response.id,
-            title: response.originalTitle ?? response.title,
+            title: response.title,
             originalTitle: response.originalTitle ?? response.title,
             image: response.image,
             releaseDate: response.releaseDate,
@@ -171,6 +188,6 @@ struct IMDBView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(filmes: ["Vingadores", "JurassicPark"])
+        IMDBView(filmes: ["Vingadores", "JurassicPark", "poderosochefão"])
     }
 }
