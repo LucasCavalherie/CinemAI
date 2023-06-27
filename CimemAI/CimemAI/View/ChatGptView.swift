@@ -46,19 +46,22 @@ struct ChatGptView: View {
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
+<<<<<<< HEAD
+=======
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
                     print(jsonObject)
                     
+>>>>>>> main
                     let response = try decoder.decode(ChatGptResponse.self, from: data)
                     var text = response.choices[0].message.content
-                    text = text.filter{!$0.isWhitespace}
+                    text = text.trimmingCharacters(in: .whitespacesAndNewlines)
                     text = text.replacingOccurrences(of: "'", with: "")
                     text = text.replacingOccurrences(of: "\"", with: "")
-                    
+                    print(text)
                     let filmes = text
                         .split(separator: ";")
                         .map { String($0.trimmingCharacters(in: .whitespacesAndNewlines)) }
-                    
+
                     completion(filmes)
                 } catch {
                     print("Erro na decodificação: \(error)")
@@ -66,12 +69,18 @@ struct ChatGptView: View {
             }
         }
 
+
+
         task.resume()
     }
     
     
     func formatInputText(message: String) -> String {
+<<<<<<< HEAD
+        return "Forneça apenas o nome 4 filmes, onde os espaços são -, no formato: filme1;filme2;filme3 a partir da seguinte descrição: " + message
+=======
         return "Forneça apenas o nome 3 \(type) no formato: filme1;filme2;filme3 a partir da seguinte descrição: " + message
+>>>>>>> main
     }
 }
 
