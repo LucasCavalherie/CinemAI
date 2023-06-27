@@ -64,7 +64,8 @@ struct CategoriesView: View {
                 .padding(.horizontal)
                 
                 NavigationLink {
-                    ChatGptView(type: type, inputText: "\(type) que estejam nas seguintes categorias: \(selectedCategories.map{$0.name}.joined(separator: ", "))")
+                    let inputText = " me diga \(type) que sejam \(selectedCategories.map{$0.name}.joined(separator: ", "))"
+                    ChatGptView(type: type, inputText: inputText)
                 } label: {
                     Text("Pesquisar")
                         .font(.system(size: 20))
