@@ -16,6 +16,8 @@
 		73CF555F2A44E126008D0AD8 /* ImdbResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF555E2A44E126008D0AD8 /* ImdbResponseModel.swift */; };
 		73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D6A97E2A46198400AF5886 /* ChatGptModel.swift */; };
 		73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6D0EC2A438D910084DB3C /* ChatGptView.swift */; };
+		AF0091022A4B4F2E00CB4530 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0091012A4B4F2E00CB4530 /* Secrets.swift */; };
+		AF0091042A4B4FEB00CB4530 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0091032A4B4FEB00CB4530 /* Secrets.swift */; };
 		AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482622A423B40001C9628 /* CimemAIApp.swift */; };
 		AF4482652A423B40001C9628 /* IMDbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* IMDbView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		73CF555E2A44E126008D0AD8 /* ImdbResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImdbResponseModel.swift; sourceTree = "<group>"; };
 		73D6A97E2A46198400AF5886 /* ChatGptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptModel.swift; sourceTree = "<group>"; };
 		73E6D0EC2A438D910084DB3C /* ChatGptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptView.swift; sourceTree = "<group>"; };
+		AF0091012A4B4F2E00CB4530 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../Documents/Secrets.swift; sourceTree = "<group>"; };
+		AF0091032A4B4FEB00CB4530 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../../Documents/Secrets.swift; sourceTree = "<group>"; };
 		AF44825F2A423B40001C9628 /* CimemAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CimemAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* IMDbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 		AF4482562A423B40001C9628 = {
 			isa = PBXGroup;
 			children = (
+				AF0091012A4B4F2E00CB4530 /* Secrets.swift */,
 				AF4482612A423B40001C9628 /* CimemAI */,
 				AF4482602A423B40001C9628 /* Products */,
 			);
@@ -119,6 +124,7 @@
 				AFB114E62A438BE900A30D4A /* View */,
 				AFB114E52A438BD900A30D4A /* Model */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
+				AF0091032A4B4FEB00CB4530 /* Secrets.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
 			);
@@ -276,6 +282,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB114EA2A43F5FD00A30D4A /* IMDbCard.swift in Sources */,
+				AF0091042A4B4FEB00CB4530 /* Secrets.swift in Sources */,
+				AF0091022A4B4F2E00CB4530 /* Secrets.swift in Sources */,
 				AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */,
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				AF4482652A423B40001C9628 /* IMDbView.swift in Sources */,
