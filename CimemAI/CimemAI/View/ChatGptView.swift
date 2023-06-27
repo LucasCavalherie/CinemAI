@@ -14,19 +14,20 @@ struct ChatGptView: View {
             }
         }.onAppear(perform: loadData)
     }
-    
     func loadData() {
+        print(inputText)
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo
             }
         }
     }
-    
+
     func search(message: String, completion: @escaping ([String]) -> Void) {
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
-        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de filmes a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3.")
+        
+        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de filmes a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3. Não faça nenhum comentário. Voce retornara apenas os nomes dos filmes no formato indicado.")
         let promptUser = Prompt(role: "user", content: message)
         
         let requestJson = Request(model: model, messages: [promptSys,promptUser])
