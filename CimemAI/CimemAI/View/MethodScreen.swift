@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct MethodScreen: View {
+    var type: String
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
-                Text("Qual método você prefere usar para encontrar o que assistir?")
+                Text("Qual método você prefere usar para encontrar qual \(type) assistir?")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
                     .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
                 
                 NavigationLink {
-                    SearchView()
+                    SearchView(type: type)
                 } label: {
                     Text("Escrever uma descrição")
                         .font(.system(size: 20))
@@ -30,7 +32,7 @@ struct MethodScreen: View {
                 .padding(.vertical, 8)
                 
                 NavigationLink {
-                    SearchView()
+                    CategoriesView(type: type)
                 } label: {
                     Text("Selecione entre opções")
                         .font(.system(size: 20))
@@ -49,6 +51,6 @@ struct MethodScreen: View {
 
 struct MethodScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MethodScreen()
+        MethodScreen(type: "filme")
     }
 }

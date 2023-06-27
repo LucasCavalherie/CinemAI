@@ -7,6 +7,10 @@ xcuserdata/
 
 ## User Passwords
 CimemAI/CimemAI/Secrets.swift
+CimemAI/.DS_Store
+.DS_Store
+CimemAI/CimemAI/.DS_Store
+CimemAI/CimemAI/Assets.xcassets/.DS_Store
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
