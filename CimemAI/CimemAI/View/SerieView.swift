@@ -1,23 +1,17 @@
-//
-//  ContentView.swift
-//  CimemAI
-//
-//  Created by André Wozniack on 20/06/23.
-//
-
 import SwiftUI
-import CoreData
 
-struct IMDBView: View {
-    var filmes : [String]
-    @State var findData: FindData?
-    @State var findAllData: [FindData] = []
+struct SerieView: View {
+    var contents : [String]
+    var type : String
+    @State var findData: SerieFindData?
+    @State var findAllData: [SerieFindData] = []
+
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
                 if findAllData.count > 0 {
-                    Text("Estes são os três filmes mais compatíveis com você hoje:")
+                    Text("Estes são as séries mais compatíveis com você hoje:")
                         .font(
                             Font.custom("Poppins", size: 24)
                                 .weight(.bold)
@@ -27,12 +21,11 @@ struct IMDBView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 20){
-                            
                             ForEach(findAllData) { data in
                                 NavigationLink {
-                                    IMDbDetail(conteudo: data)
+                                    SerieDetail(conteudo: data)
                                 } label: {
-                                    IMDbCard(conteudo: data)
+                                    SerieCard(conteudo: data)
                                 }
                             }
                         }
@@ -57,14 +50,15 @@ struct IMDBView: View {
             }
         }
     }
+
     
-    func findAll () async -> [FindData] {
-        return await withTaskGroup(of: FindData?.self, body: { group in
-            var datas = [FindData]()
+    func findAll () async -> [SerieFindData] {
+        return await withTaskGroup(of: SerieFindData?.self, body: { group in
+            var datas = [SerieFindData]()
             
-            for filme in filmes {
+            for content in contents {
                 group.addTask {
-                    return await self.findFilmes(message: filme)
+                    return await self.findSeries(message: content)
                 }
             }
             
@@ -77,14 +71,14 @@ struct IMDBView: View {
             return datas
         })
     }
-
     
-    func findFilmes(message: String) async -> FindData? {
-        var mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
-        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/multi?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
+    func findSeries(message: String) async -> SerieFindData? {
+        print(message)
+        let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
+        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "accept")
-
+    
         request.httpMethod = "GET"
         
         guard let (data, _) = try? await URLSession.shared.data(for: request) else {
@@ -102,12 +96,10 @@ struct IMDBView: View {
         guard response.results.count > 0 else {
             print("Reponse.count == 0")
             return nil
-            
         }
         let id = response.results[0].id
         
-        
-        var urlFind = URLRequest(url: URL(string: "https://api.themoviedb.org/3/movie/\(id)?language=pt-BR")!,timeoutInterval: Double.infinity)
+        var urlFind = URLRequest(url: URL(string: "https://api.themoviedb.org/3/tv/\(id)?language=pt-BR")!,timeoutInterval: Double.infinity)
         urlFind.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         urlFind.httpMethod = "GET"
         
@@ -116,12 +108,12 @@ struct IMDBView: View {
             return nil
         }
         
-        guard let response = try? decoder.decode(FindResponse.self, from: data) else {
+        guard let response = try? decoder.decode(SerieFindResponse.self, from: data) else {
             print("deu pau na response")
             return nil
         }
         
-        let conteudo = FindData(
+        let conteudo = SerieFindData(
             idFilme: response.id,
             title: response.title,
             image: response.image,
@@ -133,10 +125,11 @@ struct IMDBView: View {
         )
         return conteudo
     }
+    
 }
 
-struct IMDBView_Previews: PreviewProvider {
+struct SerieView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(filmes: ["Vingadores", "Jurassic-aasdaPark", "poderoso-chefao"])
+        SerieView(contents: ["dark", "black-Mirror", "suits"], type: "série")
     }
 }
