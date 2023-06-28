@@ -4,35 +4,39 @@ import CoreData
 struct FilmView: View {
     var contents : [String]
     var type : String
+    @State var load : Bool = false
 
     @State var findAllData: [FilmData] = []
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
-                if findAllData.count > 0 {
-                    Text("Estes são os três filmes mais compatíveis com você hoje:")
-                        .font(
-                            Font.custom("Poppins", size: 24)
-                                .weight(.bold)
-                        )
-                        .foregroundColor(.black)
-                        .frame(width: 290, height: 110, alignment: .topLeading)
-                    
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 20){
-                            ForEach(findAllData) { data in
-                                NavigationLink {
-                                    FilmDetail(conteudo: data)
-                                    
-                                } label: {
-                                    IMDbCard(conteudo: data)
+                if load {
+                    if findAllData.count > 0 {
+                        Text("Estes são os três filmes mais compatíveis com você hoje:")
+                            .font(
+                                Font.custom("Poppins", size: 24)
+                                    .weight(.bold)
+                            )
+                            .foregroundColor(.black)
+                            .frame(width: 290, height: 110, alignment: .topLeading)
+                        
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 20){
+                                ForEach(findAllData) { data in
+                                    NavigationLink {
+                                        IMDbDetail(conteudo: data)
+                                    } label: {
+                                        IMDbCard(conteudo: data)
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        Text("Não achou nada")
                     }
                 } else {
-                    Text("Não achou nada")
+                    Text("Carregando...")
                 }
             }
             .padding(.horizontal, 30)
@@ -48,7 +52,7 @@ struct FilmView: View {
                 DispatchQueue.main.async {
                     findAllData = data
                 }
-                
+                load = true
             }
         }
     }
@@ -73,9 +77,8 @@ struct FilmView: View {
         })
     }
     
-    
-    func findFilmes(message: String) async -> FilmData? {
-        var mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
+    func findFilmes(message: String) async -> FindData? {
+        let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/movie?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "accept")
