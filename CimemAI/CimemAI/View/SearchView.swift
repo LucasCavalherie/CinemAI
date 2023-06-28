@@ -13,13 +13,13 @@ struct SearchView: View {
     
     var body: some View {
         VStack (alignment: .center) {
-            Text("Digite aqui uma descrição do tipo de entretenimento que você busca.")
+            Text("Descreva tipo de entretenimento que você busca.")
                 .font(.system(size: 32))
                 .fontWeight(.bold)
                 .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
                 .padding(.bottom)
             
-            TextField("Ex: filmes de romance que se passam em Nova York", text: $message)
+            TextField("Ex: filmes de romance que se passam em Nova York", text: $message, axis: .vertical)
                 .foregroundColor(.black)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 10)

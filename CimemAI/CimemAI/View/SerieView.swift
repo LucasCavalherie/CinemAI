@@ -5,34 +5,40 @@ struct SerieView: View {
     var type : String
     @State var findData: SerieFindData?
     @State var findAllData: [SerieFindData] = []
+    @State var load : Bool = false
 
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
-                if findAllData.count > 0 {
-                    Text("Estes são as séries mais compatíveis com você hoje:")
-                        .font(
-                            Font.custom("Poppins", size: 24)
-                                .weight(.bold)
-                        )
-                        .foregroundColor(.black)
-                        .frame(width: 290, height: 110, alignment: .topLeading)
-                    
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 20){
-                            ForEach(findAllData) { data in
-                                NavigationLink {
-                                    SerieDetail(conteudo: data)
-                                } label: {
-                                    SerieCard(conteudo: data)
+                if load {
+                    if findAllData.count > 0 {
+                        Text("Estes são as séries mais compatíveis com você hoje:")
+                            .font(
+                                Font.custom("Poppins", size: 24)
+                                    .weight(.bold)
+                            )
+                            .foregroundColor(.black)
+                            .frame(width: 290, height: 110, alignment: .topLeading)
+                        
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 20){
+                                ForEach(findAllData) { data in
+                                    NavigationLink {
+                                        SerieDetail(conteudo: data)
+                                    } label: {
+                                        SerieCard(conteudo: data)
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        Text("Não achou nada")
                     }
                 } else {
-                    Text("Não achou nada")
+                    Text("Carregando...")
                 }
+                
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
@@ -47,6 +53,7 @@ struct SerieView: View {
                 DispatchQueue.main.async {
                     findAllData = data
                 }
+                load = true
             }
         }
     }
