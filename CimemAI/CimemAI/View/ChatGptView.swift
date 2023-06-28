@@ -8,7 +8,11 @@ struct ChatGptView: View {
     var body: some View {
         VStack {
             if let response = response {
-                IMDBView(filmes: response)
+                if type == "filme" {
+                    IMDBView(contents: response, type: type)
+                } else if type == "série" {
+                    SerieView(contents: response, type: type)
+                }
             } else {
                 Text("Carregando as \nmelhores escolhas...")
                     .fontWeight(.heavy)
@@ -23,19 +27,20 @@ struct ChatGptView: View {
             }
         }.onAppear(perform: loadData)
     }
-    
     func loadData() {
+        print(inputText)
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo
             }
         }
     }
-    
+
     func search(message: String, completion: @escaping ([String]) -> Void) {
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
-        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de filmes a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3.")
+        
+        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3. Não faça nenhum comentário. Voce retornara apenas os nomes dos filmes no formato indicado.")
         let promptUser = Prompt(role: "user", content: message)
         
         let requestJson = Request(model: model, messages: [promptSys,promptUser])
@@ -70,6 +75,7 @@ struct ChatGptView: View {
                     completion(filmes)
                 } catch {
                     print("Erro na decodificação: \(error)")
+                    
                 }
             }
         }
@@ -80,6 +86,6 @@ struct ChatGptView: View {
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView(type: "filmes", inputText: "Um filme de comedia com romance com carros")
+        ChatGptView(type: "série", inputText: "Uma série de comedia com romance com carros")
     }
 }
