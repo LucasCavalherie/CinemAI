@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		243A7BB02A4B5802008AB323 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BAF2A4B5802008AB323 /* Secrets.swift */; };
+		243A7BB42A4B659A008AB323 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 243A7BB32A4B659A008AB323 /* Lottie */; };
+		243A7BB62A4B65DF008AB323 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BB52A4B65DF008AB323 /* LottieView.swift */; };
+		243A7BB82A4B666B008AB323 /* pipocascertasmesmo.json in Resources */ = {isa = PBXBuildFile; fileRef = 243A7BB72A4B666B008AB323 /* pipocascertasmesmo.json */; };
+		243A7BBA2A4B6DA2008AB323 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BB92A4B6DA2008AB323 /* ErrorView.swift */; };
 		731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD902A4A13C0004FF08E /* CategoriesView.swift */; };
 		73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */; };
 		73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55542A44BC33008D0AD8 /* MethodScreen.swift */; };
@@ -16,8 +21,6 @@
 		73CF555F2A44E126008D0AD8 /* ImdbResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF555E2A44E126008D0AD8 /* ImdbResponseModel.swift */; };
 		73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D6A97E2A46198400AF5886 /* ChatGptModel.swift */; };
 		73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6D0EC2A438D910084DB3C /* ChatGptView.swift */; };
-		AF0091022A4B4F2E00CB4530 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0091012A4B4F2E00CB4530 /* Secrets.swift */; };
-		AF0091042A4B4FEB00CB4530 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0091032A4B4FEB00CB4530 /* Secrets.swift */; };
 		AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482622A423B40001C9628 /* CimemAIApp.swift */; };
 		AF4482652A423B40001C9628 /* IMDbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* IMDbView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
@@ -47,6 +50,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		243A7BAF2A4B5802008AB323 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		243A7BB52A4B65DF008AB323 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		243A7BB72A4B666B008AB323 /* pipocascertasmesmo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pipocascertasmesmo.json; sourceTree = "<group>"; };
+		243A7BB92A4B6DA2008AB323 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		731CBD902A4A13C0004FF08E /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptResponseModel.swift; sourceTree = "<group>"; };
 		73CF55542A44BC33008D0AD8 /* MethodScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodScreen.swift; sourceTree = "<group>"; };
@@ -56,8 +63,6 @@
 		73CF555E2A44E126008D0AD8 /* ImdbResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImdbResponseModel.swift; sourceTree = "<group>"; };
 		73D6A97E2A46198400AF5886 /* ChatGptModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptModel.swift; sourceTree = "<group>"; };
 		73E6D0EC2A438D910084DB3C /* ChatGptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptView.swift; sourceTree = "<group>"; };
-		AF0091012A4B4F2E00CB4530 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../Documents/Secrets.swift; sourceTree = "<group>"; };
-		AF0091032A4B4FEB00CB4530 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Secrets.swift; path = ../../../../Documents/Secrets.swift; sourceTree = "<group>"; };
 		AF44825F2A423B40001C9628 /* CimemAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CimemAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* IMDbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbView.swift; sourceTree = "<group>"; };
@@ -93,16 +98,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				243A7BB42A4B659A008AB323 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		243A7BB12A4B6564008AB323 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				243A7BB72A4B666B008AB323 /* pipocascertasmesmo.json */,
+				243A7BB52A4B65DF008AB323 /* LottieView.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		AF4482562A423B40001C9628 = {
 			isa = PBXGroup;
 			children = (
-				AF0091012A4B4F2E00CB4530 /* Secrets.swift */,
 				AF4482612A423B40001C9628 /* CimemAI */,
 				AF4482602A423B40001C9628 /* Products */,
 			);
@@ -119,14 +133,15 @@
 		AF4482612A423B40001C9628 /* CimemAI */ = {
 			isa = PBXGroup;
 			children = (
+				243A7BB12A4B6564008AB323 /* Animations */,
 				AFEFB8402A44C9120040C6B4 /* Info.plist */,
 				AFEFB88D2A44DE3F0040C6B4 /* Fonts */,
 				AFB114E62A438BE900A30D4A /* View */,
 				AFB114E52A438BD900A30D4A /* Model */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
-				AF0091032A4B4FEB00CB4530 /* Secrets.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
+				243A7BAF2A4B5802008AB323 /* Secrets.swift */,
 			);
 			path = CimemAI;
 			sourceTree = "<group>";
@@ -162,6 +177,7 @@
 				AFEFB8B42A44E18A0040C6B4 /* ResultsView.swift */,
 				AFEFB8B62A44E95D0040C6B4 /* IMDbDetail.swift */,
 				731CBD902A4A13C0004FF08E /* CategoriesView.swift */,
+				243A7BB92A4B6DA2008AB323 /* ErrorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,6 +224,9 @@
 			dependencies = (
 			);
 			name = CimemAI;
+			packageProductDependencies = (
+				243A7BB32A4B659A008AB323 /* Lottie */,
+			);
 			productName = CimemAI;
 			productReference = AF44825F2A423B40001C9628 /* CimemAI.app */;
 			productType = "com.apple.product-type.application";
@@ -236,6 +255,9 @@
 				Base,
 			);
 			mainGroup = AF4482562A423B40001C9628;
+			packageReferences = (
+				243A7BB22A4B6599008AB323 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = AF4482602A423B40001C9628 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -271,6 +293,7 @@
 				AFEFB8B22A44DE3F0040C6B4 /* Poppins-Italic.ttf in Resources */,
 				AFEFB8B32A44DE3F0040C6B4 /* Poppins-MediumItalic.ttf in Resources */,
 				AF4482672A423B41001C9628 /* Assets.xcassets in Resources */,
+				243A7BB82A4B666B008AB323 /* pipocascertasmesmo.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,15 +305,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB114EA2A43F5FD00A30D4A /* IMDbCard.swift in Sources */,
-				AF0091042A4B4FEB00CB4530 /* Secrets.swift in Sources */,
-				AF0091022A4B4F2E00CB4530 /* Secrets.swift in Sources */,
+				243A7BB02A4B5802008AB323 /* Secrets.swift in Sources */,
 				AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */,
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				AF4482652A423B40001C9628 /* IMDbView.swift in Sources */,
 				73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */,
 				AFEFB8B72A44E95D0040C6B4 /* IMDbDetail.swift in Sources */,
+				243A7BB62A4B65DF008AB323 /* LottieView.swift in Sources */,
 				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
 				731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */,
+				243A7BBA2A4B6DA2008AB323 /* ErrorView.swift in Sources */,
 				73CF555F2A44E126008D0AD8 /* ImdbResponseModel.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
 				73CF555D2A44D230008D0AD8 /* FindData.swift in Sources */,
@@ -503,6 +527,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		243A7BB22A4B6599008AB323 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		243A7BB32A4B659A008AB323 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 243A7BB22A4B6599008AB323 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF4482572A423B40001C9628 /* Project object */;
 }

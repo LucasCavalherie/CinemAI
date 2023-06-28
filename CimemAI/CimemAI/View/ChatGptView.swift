@@ -10,7 +10,16 @@ struct ChatGptView: View {
             if let response = response {
                 IMDBView(filmes: response)
             } else {
-                Text("Carregando...")
+                Text("Carregando as \nmelhores escolhas...")
+                    .fontWeight(.heavy)
+                    .font(.title)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
+                
+                LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                    .frame(width: 250, height: 112.0)
+                    .scaleEffect(0.8)
+                    .padding(.bottom, 60)
             }
         }.onAppear(perform: loadData)
     }

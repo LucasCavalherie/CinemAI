@@ -14,7 +14,7 @@ struct ResultsView: View {
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
-                Text("Estes são os três filmes mais compatíveis com você hoje:")
+                Text("Estes são os filmes mais compatíveis com você hoje:")
                   .font(
                     Font.custom("Poppins", size: 24)
                       .weight(.bold)
