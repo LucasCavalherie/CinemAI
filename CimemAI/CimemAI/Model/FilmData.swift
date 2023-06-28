@@ -1,6 +1,6 @@
 import Foundation
 
-struct FilmData: Identifiable{
+struct FilmData: Identifiable, Codable{
     let id = UUID()
     let idFilme: Int32
     let title: String
@@ -20,5 +20,3 @@ struct SearchData: Identifiable{
     let id = UUID()
     let idImdb: String
 }
-
-

@@ -3,8 +3,8 @@ import SwiftUI
 struct SerieView: View {
     var contents : [String]
     var type : String
-    @State var findData: SerieFindData?
-    @State var findAllData: [SerieFindData] = []
+    @State var findData: SerieData?
+    @State var findAllData: [SerieData] = []
 
     
     var body: some View {
@@ -52,9 +52,9 @@ struct SerieView: View {
     }
 
     
-    func findAll () async -> [SerieFindData] {
-        return await withTaskGroup(of: SerieFindData?.self, body: { group in
-            var datas = [SerieFindData]()
+    func findAll () async -> [SerieData] {
+        return await withTaskGroup(of: SerieData?.self, body: { group in
+            var datas = [SerieData]()
             
             for content in contents {
                 group.addTask {
@@ -72,7 +72,7 @@ struct SerieView: View {
         })
     }
     
-    func findSeries(message: String) async -> SerieFindData? {
+    func findSeries(message: String) async -> SerieData? {
         print(message)
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
@@ -113,7 +113,7 @@ struct SerieView: View {
             return nil
         }
         
-        let conteudo = SerieFindData(
+        let conteudo = SerieData(
             idFilme: response.id,
             title: response.title,
             image: response.image,
@@ -121,7 +121,10 @@ struct SerieView: View {
             originalTitle: response.releaseDate,
             duration: response.duration,
             plot: response.plot,
-            rating: response.rating
+            rating: response.rating,
+            favorite: false,
+            saved: false,
+            watched: false
         )
         return conteudo
     }
