@@ -1,19 +1,12 @@
-//
-//  ContentView.swift
-//  CimemAI
-//
-//  Created by André Wozniack on 20/06/23.
-//
-
 import SwiftUI
 import CoreData
 
-struct IMDBView: View {
+struct FilmView: View {
     var contents : [String]
     var type : String
     @State var load : Bool = false
 
-    @State var findAllData: [FindData] = []
+    @State var findAllData: [FilmData] = []
     
     var body: some View {
         NavigationStack{
@@ -32,7 +25,7 @@ struct IMDBView: View {
                             HStack(spacing: 20){
                                 ForEach(findAllData) { data in
                                     NavigationLink {
-                                        IMDbDetail(conteudo: data)
+                                        FilmDetail(conteudo: data)
                                     } label: {
                                         IMDbCard(conteudo: data)
                                     }
@@ -64,9 +57,9 @@ struct IMDBView: View {
         }
     }
     
-    func findAll () async -> [FindData] {
-        return await withTaskGroup(of: FindData?.self, body: { group in
-            var datas = [FindData]()
+    func findAll () async -> [FilmData] {
+        return await withTaskGroup(of: FilmData?.self, body: { group in
+            var datas = [FilmData]()
             
             for content in contents {
                 group.addTask {
@@ -84,8 +77,7 @@ struct IMDBView: View {
         })
     }
     
-    
-    func findFilmes(message: String) async -> FindData? {
+    func findFilmes(message: String) async -> FilmData? {
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/movie?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
@@ -126,7 +118,7 @@ struct IMDBView: View {
             return nil
         }
         
-        let conteudo = FindData(
+        let conteudo = FilmData(
             idFilme: response.id,
             title: response.title,
             image: response.image,
@@ -134,7 +126,11 @@ struct IMDBView: View {
             originalTitle: response.releaseDate,
             duration: response.duration,
             plot: response.plot,
-            rating: response.rating
+            rating: response.rating,
+            favorite: false,
+            saved: false,
+            watched: false
+            
         )
         return conteudo
     }
@@ -143,6 +139,6 @@ struct IMDBView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        IMDBView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
     }
 }

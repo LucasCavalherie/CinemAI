@@ -13,8 +13,6 @@ struct SerieData: Identifiable, Codable{
     var favorite : Bool?
     var saved : Bool?
     var watched : Bool?
-
-    
 }
 
 struct SerieSearchData: Identifiable{

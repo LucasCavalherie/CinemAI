@@ -9,7 +9,7 @@ struct ChatGptView: View {
         VStack {
             if let response = response {
                 if type == "filme" {
-                    IMDBView(contents: response, type: type)
+                    FilmView(contents: response, type: type)
                 } else if type == "série" {
                     SerieView(contents: response, type: type)
                 }
@@ -66,7 +66,6 @@ struct ChatGptView: View {
                     completion(filmes)
                 } catch {
                     print("Erro na decodificação: \(error)")
-                    
                 }
             }
         }
@@ -77,6 +76,6 @@ struct ChatGptView: View {
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView(type: "série", inputText: "Uma série de comedia com romance com carros")
+        ChatGptView(type: "filme", inputText: "Uma filme de comedia com romance com carros")
     }
 }
