@@ -68,7 +68,7 @@
 		AF00910B2A4B88CC00CB4530 /* SerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieView.swift; sourceTree = "<group>"; };
 		AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieCard.swift; sourceTree = "<group>"; };
 		AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetail.swift; sourceTree = "<group>"; };
-		AF44825F2A423B40001C9628 /* Film Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF44825F2A423B40001C9628 /* FilmFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		AF4482662A423B41001C9628 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		AF4482602A423B40001C9628 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF44825F2A423B40001C9628 /* Film Finder.app */,
+				AF44825F2A423B40001C9628 /* FilmFinder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,9 +216,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF44825E2A423B40001C9628 /* Film Finder */ = {
+		AF44825E2A423B40001C9628 /* FilmFinder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "Film Finder" */;
+			buildConfigurationList = AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "FilmFinder" */;
 			buildPhases = (
 				AF44825B2A423B40001C9628 /* Sources */,
 				AF44825C2A423B40001C9628 /* Frameworks */,
@@ -228,9 +228,9 @@
 			);
 			dependencies = (
 			);
-			name = "Film Finder";
+			name = FilmFinder;
 			productName = CimemAI;
-			productReference = AF44825F2A423B40001C9628 /* Film Finder.app */;
+			productReference = AF44825F2A423B40001C9628 /* FilmFinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -248,7 +248,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "Film Finder" */;
+			buildConfigurationList = AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "FilmFinder" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -261,7 +261,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF44825E2A423B40001C9628 /* Film Finder */,
+				AF44825E2A423B40001C9628 /* FilmFinder */,
 			);
 		};
 /* End PBXProject section */
@@ -452,7 +452,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"CimemAI/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
@@ -489,7 +489,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"CimemAI/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
@@ -522,7 +522,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "Film Finder" */ = {
+		AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "FilmFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF4482712A423B41001C9628 /* Debug */,
@@ -531,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "Film Finder" */ = {
+		AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "FilmFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF4482742A423B41001C9628 /* Debug */,
