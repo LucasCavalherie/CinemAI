@@ -27,7 +27,6 @@
 		AF44826A2A423B41001C9628 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482692A423B41001C9628 /* Preview Assets.xcassets */; };
 		AF57F2372A4DFD64009D1373 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57F2362A4DFD64009D1373 /* History.swift */; };
 		AF57F2392A4E0277009D1373 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57F2382A4E0277009D1373 /* HistoryView.swift */; };
-		AF72CD6F2A4CCBE8000393CB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF72CD6E2A4CCBE8000393CB /* Secrets.swift */; };
 		AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */; };
 		AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E92A43F5FD00A30D4A /* FilmCard.swift */; };
 		AFEFB8A12A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB88E2A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf */; };
@@ -75,7 +74,6 @@
 		AF4482692A423B41001C9628 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AF57F2362A4DFD64009D1373 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = History.swift; path = CimemAi/Model/History.swift; sourceTree = SOURCE_ROOT; };
 		AF57F2382A4E0277009D1373 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = CimemAi/View/HistoryView.swift; sourceTree = SOURCE_ROOT; };
-		AF72CD6E2A4CCBE8000393CB /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManenger.swift; sourceTree = "<group>"; };
 		AFB114E92A43F5FD00A30D4A /* FilmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCard.swift; sourceTree = "<group>"; };
 		AFEFB8402A44C9120040C6B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				AFB114E62A438BE900A30D4A /* View */,
 				AFB114E52A438BD900A30D4A /* Model */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
-				AF72CD6E2A4CCBE8000393CB /* Secrets.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
 			);
@@ -320,7 +317,6 @@
 				AF57F2372A4DFD64009D1373 /* History.swift in Sources */,
 				AF0091082A4B7FDD00CB4530 /* SerieResponseModel.swift in Sources */,
 				73CF555D2A44D230008D0AD8 /* FilmData.swift in Sources */,
-				AF72CD6F2A4CCBE8000393CB /* Secrets.swift in Sources */,
 				73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */,
 				AF00910C2A4B88CC00CB4530 /* SerieView.swift in Sources */,
 				73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */,
