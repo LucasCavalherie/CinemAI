@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		243A7BB02A4B5802008AB323 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BAF2A4B5802008AB323 /* Secrets.swift */; };
 		243A7BB42A4B659A008AB323 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 243A7BB32A4B659A008AB323 /* Lottie */; };
 		243A7BB62A4B65DF008AB323 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BB52A4B65DF008AB323 /* LottieView.swift */; };
 		243A7BB82A4B666B008AB323 /* pipocascertasmesmo.json in Resources */ = {isa = PBXBuildFile; fileRef = 243A7BB72A4B666B008AB323 /* pipocascertasmesmo.json */; };
 		243A7BBA2A4B6DA2008AB323 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243A7BB92A4B6DA2008AB323 /* ErrorView.swift */; };
 		731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD902A4A13C0004FF08E /* CategoriesView.swift */; };
+		7320C0802A4E024900BF0A77 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320C07F2A4E024900BF0A77 /* Secrets.swift */; };
 		73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */; };
 		73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55542A44BC33008D0AD8 /* MethodScreen.swift */; };
 		73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55582A44C6B0008D0AD8 /* TypeView.swift */; };
@@ -30,7 +30,6 @@
 		AF4482652A423B40001C9628 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* FilmView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
 		AF44826A2A423B41001C9628 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482692A423B41001C9628 /* Preview Assets.xcassets */; };
-		AF72CD6F2A4CCBE8000393CB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF72CD6E2A4CCBE8000393CB /* Secrets.swift */; };
 		AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */; };
 		AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E92A43F5FD00A30D4A /* FilmCard.swift */; };
 		AFEFB8A12A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB88E2A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf */; };
@@ -57,11 +56,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		243A7BAF2A4B5802008AB323 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		243A7BB52A4B65DF008AB323 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		243A7BB72A4B666B008AB323 /* pipocascertasmesmo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pipocascertasmesmo.json; sourceTree = "<group>"; };
 		243A7BB92A4B6DA2008AB323 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		731CBD902A4A13C0004FF08E /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		7320C07F2A4E024900BF0A77 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptResponseModel.swift; sourceTree = "<group>"; };
 		73CF55542A44BC33008D0AD8 /* MethodScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodScreen.swift; sourceTree = "<group>"; };
 		73CF55582A44C6B0008D0AD8 /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 		AF4482642A423B40001C9628 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		AF4482662A423B41001C9628 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF4482692A423B41001C9628 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AF72CD6E2A4CCBE8000393CB /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManenger.swift; sourceTree = "<group>"; };
 		AFB114E92A43F5FD00A30D4A /* FilmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCard.swift; sourceTree = "<group>"; };
 		AFEFB8402A44C9120040C6B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -133,6 +131,7 @@
 			children = (
 				AF4482612A423B40001C9628 /* CimemAI */,
 				AF4482602A423B40001C9628 /* Products */,
+				7320C07E2A4E020600BF0A77 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +146,7 @@
 		AF4482612A423B40001C9628 /* CimemAI */ = {
 			isa = PBXGroup;
 			children = (
+				7320C07F2A4E024900BF0A77 /* Secrets.swift */,
 				243A7BB12A4B6564008AB323 /* Animations */,
 				AFEFB8402A44C9120040C6B4 /* Info.plist */,
 				AFEFB88D2A44DE3F0040C6B4 /* Fonts */,
@@ -155,7 +155,6 @@
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
-				243A7BAF2A4B5802008AB323 /* Secrets.swift */,
 			);
 			path = CimemAI;
 			sourceTree = "<group>";
@@ -324,8 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFB114EA2A43F5FD00A30D4A /* IMDbCard.swift in Sources */,
-				243A7BB02A4B5802008AB323 /* Secrets.swift in Sources */,
+				AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */,
 				AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */,
 				AF0091102A4B8BC300CB4530 /* SerieDetail.swift in Sources */,
 				AF00910A2A4B81D800CB4530 /* SerieData.swift in Sources */,
@@ -333,12 +331,12 @@
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				AF4482652A423B40001C9628 /* FilmView.swift in Sources */,
 				73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */,
-				AFEFB8B72A44E95D0040C6B4 /* IMDbDetail.swift in Sources */,
+				AFEFB8B72A44E95D0040C6B4 /* FilmDetail.swift in Sources */,
 				243A7BB62A4B65DF008AB323 /* LottieView.swift in Sources */,
 				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
 				731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */,
 				243A7BBA2A4B6DA2008AB323 /* ErrorView.swift in Sources */,
-				73CF555F2A44E126008D0AD8 /* ImdbResponseModel.swift in Sources */,
+				73CF555F2A44E126008D0AD8 /* FilmResponseModel.swift in Sources */,
 				AFEFB8B72A44E95D0040C6B4 /* FilmDetail.swift in Sources */,
 				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
 				AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */,
@@ -346,9 +344,9 @@
 				73CF555F2A44E126008D0AD8 /* FilmResponseModel.swift in Sources */,
 				AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
+				7320C0802A4E024900BF0A77 /* Secrets.swift in Sources */,
 				AF0091082A4B7FDD00CB4530 /* SerieResponseModel.swift in Sources */,
 				73CF555D2A44D230008D0AD8 /* FilmData.swift in Sources */,
-				AF72CD6F2A4CCBE8000393CB /* Secrets.swift in Sources */,
 				73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */,
 				AF00910C2A4B88CC00CB4530 /* SerieView.swift in Sources */,
 				73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */,
