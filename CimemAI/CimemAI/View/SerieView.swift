@@ -3,36 +3,42 @@ import SwiftUI
 struct SerieView: View {
     var contents : [String]
     var type : String
-    @State var findData: SerieFindData?
-    @State var findAllData: [SerieFindData] = []
+    @State var findData: SerieData?
+    @State var findAllData: [SerieData] = []
+    @State var load : Bool = false
 
     
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
-                if findAllData.count > 0 {
-                    Text("Estes são as séries mais compatíveis com você hoje:")
-                        .font(
-                            Font.custom("Poppins", size: 24)
-                                .weight(.bold)
-                        )
-                        .foregroundColor(.black)
-                        .frame(width: 290, height: 110, alignment: .topLeading)
-                    
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing: 20){
-                            ForEach(findAllData) { data in
-                                NavigationLink {
-                                    SerieDetail(conteudo: data)
-                                } label: {
-                                    SerieCard(conteudo: data)
+                if load {
+                    if findAllData.count > 0 {
+                        Text("Estes são as séries mais compatíveis com você hoje:")
+                            .font(
+                                Font.custom("Poppins", size: 24)
+                                    .weight(.bold)
+                            )
+                            .foregroundColor(.black)
+                            .frame(width: 290, height: 110, alignment: .topLeading)
+                        
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 20){
+                                ForEach(findAllData) { data in
+                                    NavigationLink {
+                                        SerieDetail(conteudo: data)
+                                    } label: {
+                                        SerieCard(conteudo: data)
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        Text("Não achou nada")
                     }
                 } else {
-                    Text("Não achou nada")
+                    Text("Carregando...")
                 }
+                
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
@@ -47,14 +53,15 @@ struct SerieView: View {
                 DispatchQueue.main.async {
                     findAllData = data
                 }
+                load = true
             }
         }
     }
 
     
-    func findAll () async -> [SerieFindData] {
-        return await withTaskGroup(of: SerieFindData?.self, body: { group in
-            var datas = [SerieFindData]()
+    func findAll () async -> [SerieData] {
+        return await withTaskGroup(of: SerieData?.self, body: { group in
+            var datas = [SerieData]()
             
             for content in contents {
                 group.addTask {
@@ -72,7 +79,7 @@ struct SerieView: View {
         })
     }
     
-    func findSeries(message: String) async -> SerieFindData? {
+    func findSeries(message: String) async -> SerieData? {
         print(message)
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
@@ -113,7 +120,7 @@ struct SerieView: View {
             return nil
         }
         
-        let conteudo = SerieFindData(
+        let conteudo = SerieData(
             idFilme: response.id,
             title: response.title,
             image: response.image,
@@ -121,7 +128,10 @@ struct SerieView: View {
             originalTitle: response.releaseDate,
             duration: response.duration,
             plot: response.plot,
-            rating: response.rating
+            rating: response.rating,
+            favorite: false,
+            saved: false,
+            watched: false
         )
         return conteudo
     }

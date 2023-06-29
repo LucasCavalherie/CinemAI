@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ResultsView: View {
     
-    let resultados: [FindData]
+    let resultados: [FilmData]
     
     var body: some View {
         NavigationStack{
@@ -25,17 +25,17 @@ struct ResultsView: View {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing: 20){
                         NavigationLink {
-                            IMDbDetail(conteudo: resultados[0])
+                            FilmDetail(conteudo: resultados[0])
                         } label: {
                             IMDbCard(conteudo: resultados[0])
                         }
                         NavigationLink {
-                            IMDbDetail(conteudo: resultados[1])
+                            FilmDetail(conteudo: resultados[1])
                         } label: {
                             IMDbCard(conteudo: resultados[1])
                         }
                         NavigationLink {
-                            IMDbDetail(conteudo: resultados[2])
+                            FilmDetail(conteudo: resultados[2])
                         } label: {
                             IMDbCard(conteudo: resultados[2])
                         }

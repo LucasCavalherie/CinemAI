@@ -1,6 +1,6 @@
 import Foundation
 
-struct FindData: Identifiable{
+struct FilmData: Identifiable, Codable{
     let id = UUID()
     let idFilme: Int32
     let title: String
@@ -10,6 +10,9 @@ struct FindData: Identifiable{
     let duration: Int
     let plot: String
     let rating : Double
+    var favorite : Bool?
+    var saved : Bool?
+    var watched : Bool?
     
 }
 
@@ -17,5 +20,3 @@ struct SearchData: Identifiable{
     let id = UUID()
     let idImdb: String
 }
-
-

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct SerieCard: View {
-    let conteudo : SerieFindData
+    let conteudo : SerieData
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating)) / 2.0 + 0.5)
@@ -73,6 +73,6 @@ struct SerieCard: View {
 
 struct SerieCard_Previews: PreviewProvider {
     static var previews: some View {
-        SerieCard(conteudo: SerieFindData(idFilme: 19995, title: "Dark", image: "/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg", releaseDate: "2017-12-01", originalTitle: nil, duration: 3, plot: "Quatro famílias iniciam uma desesperada busca por respostas quando uma criança desaparece e um complexo mistério envolvendo três gerações começa a se revelar.", rating: 8.427))
+        SerieCard(conteudo: SerieData(idFilme: 19995, title: "Dark", image: "/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg", releaseDate: "2017-12-01", originalTitle: nil, duration: 3, plot: "Quatro famílias iniciam uma desesperada busca por respostas quando uma criança desaparece e um complexo mistério envolvendo três gerações começa a se revelar.", rating: 8.427))
     }
 }
