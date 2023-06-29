@@ -33,7 +33,7 @@ struct FilmView: View {
                             }
                         }
                     } else {
-                        Text("Não achou nada")
+                        ErrorView()
                     }
                 } else {
                     Text("Carregando...")
@@ -41,7 +41,6 @@ struct FilmView: View {
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
-            .ignoresSafeArea()
         }.onAppear(perform: loadData)
     }
     
@@ -139,6 +138,6 @@ struct FilmView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
+        FilmView(contents: ["Foresasasasas-Gump"], type: "filme")
     }
 }

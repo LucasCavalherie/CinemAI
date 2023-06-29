@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ErrorView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         
         VStack(alignment: .center) {
@@ -31,7 +33,7 @@ struct ErrorView: View {
                 .padding(.top, 40)
             
             Button{
-                print("volta para a página de prompt")
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack {
                     Image(systemName: "chevron.backward.circle")
