@@ -53,7 +53,7 @@ struct FilmDetail: View {
 //                        }, label: {
 //                            if !conteudo.watched! {
 //                                Text(.init(systemName: "plus.circle"))
-//                                    .font(Font.custom("SF Pro", size: 36))
+//                                    .font(Font.custom("SF Pro", size 36))
 //                                    .foregroundColor(.black)
 //                            } else {
 //                                Text(.init(systemName: "plus.circle.fill"))

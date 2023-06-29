@@ -25,7 +25,7 @@ struct FilmView: View {
                             HStack(spacing: 20){
                                 ForEach(findAllData) { data in
                                     NavigationLink {
-                                        IMDbDetail(conteudo: data)
+                                        FilmDetail(conteudo: data)
                                     } label: {
                                         IMDbCard(conteudo: data)
                                     }
@@ -77,7 +77,7 @@ struct FilmView: View {
         })
     }
     
-    func findFilmes(message: String) async -> FindData? {
+    func findFilmes(message: String) async -> FilmData? {
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/movie?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")

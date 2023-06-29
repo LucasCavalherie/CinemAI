@@ -3,8 +3,8 @@ import SwiftUI
 struct SerieView: View {
     var contents : [String]
     var type : String
-    @State var findData: SerieFindData?
-    @State var findAllData: [SerieFindData] = []
+    @State var findData: SerieData?
+    @State var findAllData: [SerieData] = []
     @State var load : Bool = false
 
     
