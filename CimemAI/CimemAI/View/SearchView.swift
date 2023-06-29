@@ -17,17 +17,17 @@ struct SearchView: View {
                 Text("Descreva tipo de entretenimento que você busca.")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
-                    .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
+                    .foregroundColor(Color("Azul_Quase_Preto"))
                     .padding(.bottom)
                 
                 TextField("Ex: filmes de romance que se passam em Nova York", text: $message, axis: .vertical)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("Azul_Quase_Preto"))
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
-                    .frame(width: 300, height: 200, alignment: .topLeading)
+                    .frame(width: 300, height: 150, alignment: .topLeading)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 1)
+                            .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                     )
                 
                 
@@ -40,7 +40,7 @@ struct SearchView: View {
                         .foregroundColor(.white)
                 }
                 .frame(width: 300, height: 60, alignment: .center)
-                .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+                .background(Color("Azul_Escuro"))
                 .cornerRadius(16)
                 .padding(.vertical, 8)
             }
@@ -51,6 +51,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(type: "filmes")
+        SearchView(type: "filme")
     }
 }

@@ -30,6 +30,9 @@
 		AF4482652A423B40001C9628 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* FilmView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
 		AF44826A2A423B41001C9628 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482692A423B41001C9628 /* Preview Assets.xcassets */; };
+		AF57F2372A4DFD64009D1373 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57F2362A4DFD64009D1373 /* History.swift */; };
+		AF57F2392A4E0277009D1373 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57F2382A4E0277009D1373 /* HistoryView.swift */; };
+		AF72CD6F2A4CCBE8000393CB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF72CD6E2A4CCBE8000393CB /* Secrets.swift */; };
 		AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */; };
 		AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E92A43F5FD00A30D4A /* FilmCard.swift */; };
 		AFEFB8A12A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB88E2A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf */; };
@@ -74,11 +77,14 @@
 		AF00910B2A4B88CC00CB4530 /* SerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieView.swift; sourceTree = "<group>"; };
 		AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieCard.swift; sourceTree = "<group>"; };
 		AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetail.swift; sourceTree = "<group>"; };
-		AF44825F2A423B40001C9628 /* CimemAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CimemAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF44825F2A423B40001C9628 /* Film Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Film Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		AF4482662A423B41001C9628 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF4482692A423B41001C9628 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AF57F2362A4DFD64009D1373 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = History.swift; path = CimemAi/Model/History.swift; sourceTree = SOURCE_ROOT; };
+		AF57F2382A4E0277009D1373 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = CimemAi/View/HistoryView.swift; sourceTree = SOURCE_ROOT; };
+		AF72CD6E2A4CCBE8000393CB /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManenger.swift; sourceTree = "<group>"; };
 		AFB114E92A43F5FD00A30D4A /* FilmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCard.swift; sourceTree = "<group>"; };
 		AFEFB8402A44C9120040C6B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +144,7 @@
 		AF4482602A423B40001C9628 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF44825F2A423B40001C9628 /* CimemAI.app */,
+				AF44825F2A423B40001C9628 /* Film Finder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +183,7 @@
 				73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */,
 				73D6A97E2A46198400AF5886 /* ChatGptModel.swift */,
 				AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */,
+				AF57F2362A4DFD64009D1373 /* History.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -197,6 +204,7 @@
 				AFEFB8B42A44E18A0040C6B4 /* ResultsView.swift */,
 				731CBD902A4A13C0004FF08E /* CategoriesView.swift */,
 				243A7BB92A4B6DA2008AB323 /* ErrorView.swift */,
+				AF57F2382A4E0277009D1373 /* HistoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,9 +238,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF44825E2A423B40001C9628 /* CimemAI */ = {
+		AF44825E2A423B40001C9628 /* Film Finder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "CimemAI" */;
+			buildConfigurationList = AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "Film Finder" */;
 			buildPhases = (
 				AF44825B2A423B40001C9628 /* Sources */,
 				AF44825C2A423B40001C9628 /* Frameworks */,
@@ -246,8 +254,9 @@
 			packageProductDependencies = (
 				243A7BB32A4B659A008AB323 /* Lottie */,
 			);
+			name = "Film Finder";
 			productName = CimemAI;
-			productReference = AF44825F2A423B40001C9628 /* CimemAI.app */;
+			productReference = AF44825F2A423B40001C9628 /* Film Finder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -265,7 +274,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "CimemAI" */;
+			buildConfigurationList = AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "Film Finder" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -281,7 +290,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF44825E2A423B40001C9628 /* CimemAI */,
+				AF44825E2A423B40001C9628 /* Film Finder */,
 			);
 		};
 /* End PBXProject section */
@@ -330,6 +339,7 @@
 				AFEFB8B52A44E18A0040C6B4 /* ResultsView.swift in Sources */,
 				73CF555B2A44C820008D0AD8 /* SearchView.swift in Sources */,
 				AF4482652A423B40001C9628 /* FilmView.swift in Sources */,
+				AF57F2392A4E0277009D1373 /* HistoryView.swift in Sources */,
 				73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */,
 				AFEFB8B72A44E95D0040C6B4 /* FilmDetail.swift in Sources */,
 				243A7BB62A4B65DF008AB323 /* LottieView.swift in Sources */,
@@ -345,6 +355,7 @@
 				AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
 				7320C0802A4E024900BF0A77 /* Secrets.swift in Sources */,
+				AF57F2372A4DFD64009D1373 /* History.swift in Sources */,
 				AF0091082A4B7FDD00CB4530 /* SerieResponseModel.swift in Sources */,
 				73CF555D2A44D230008D0AD8 /* FilmData.swift in Sources */,
 				73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */,
@@ -478,15 +489,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"CimemAI/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CimemAI/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -513,15 +526,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"CimemAI/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CimemAI/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,7 +559,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "CimemAI" */ = {
+		AF44825A2A423B40001C9628 /* Build configuration list for PBXProject "Film Finder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF4482712A423B41001C9628 /* Debug */,
@@ -553,7 +568,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "CimemAI" */ = {
+		AF4482732A423B41001C9628 /* Build configuration list for PBXNativeTarget "Film Finder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF4482742A423B41001C9628 /* Debug */,

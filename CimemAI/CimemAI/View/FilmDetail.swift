@@ -26,7 +26,7 @@ struct FilmDetail: View {
                         VStack(alignment: .leading, spacing: 5){
                             Text(conteudo.title)
                                 .font(Font.custom("Poppins-Regular", size: 24))
-                                .foregroundColor(Color("Azul _Escuro"))
+                                .foregroundColor(Color("Azul_Escuro"))
                                 .fontWeight(.semibold)
                                 .padding(.top)
                                 .frame(maxWidth: .infinity, alignment: .leading)

@@ -72,6 +72,8 @@ struct SerieView: View {
             for await filme in group {
                 if let filme = filme {
                     datas.append(filme)
+                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .serie(filme)))
+                    print(DataManager.shared.getWatchedContent().count)
                 }
             }
             
@@ -80,7 +82,6 @@ struct SerieView: View {
     }
     
     func findSeries(message: String) async -> SerieData? {
-        print(message)
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
         var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")

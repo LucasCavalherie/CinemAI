@@ -15,9 +15,9 @@ struct TypeView: View {
                     Text("Qual tipo de conteúdo você procura agora?")
                         .font(.system(size: 32))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
+                        .foregroundColor(Color("Azul_Quase_Preto"))
                 }
-                .padding(.horizontal, 32)
+                .padding(.horizontal)
                 
                 
                 HStack {
@@ -28,12 +28,13 @@ struct TypeView: View {
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .frame(width: 150, height: 60, alignment: .center)
+                            .background(Color("Azul_Escuro"))
+                            .cornerRadius(16)
                     }
-                    .frame(width: 150, height: 60, alignment: .center)
-                    .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                    .cornerRadius(16)
-                    .padding(.vertical, 8)
                     
+                    .padding(.vertical, 8)
+
                     Spacer()
                     
                     NavigationLink {
@@ -43,10 +44,11 @@ struct TypeView: View {
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .frame(width: 150, height: 60, alignment: .center)
+                            .background(Color("Azul"))
+                            .cornerRadius(16)
                     }
-                    .frame(width: 150, height: 60, alignment: .center)
-                    .background(Color(red: 0.26, green: 0.57, blue: 0.58))
-                    .cornerRadius(16)
+                    
                     .padding(.vertical, 8)
                 }
                 .padding(.horizontal, 32)

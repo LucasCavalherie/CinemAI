@@ -12,7 +12,7 @@ struct MethodScreen: View {
     
     var body: some View {
         NavigationStack {
-            VStack (alignment: .center) {
+            VStack (alignment: .center, spacing: 8) {
                 Text("Qual método você prefere usar para encontrar qual \(type) assistir?")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
@@ -25,11 +25,10 @@ struct MethodScreen: View {
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(width: 300, height: 60, alignment: .center)
+                        .background(Color("Azul_Escuro"))
+                        .cornerRadius(16)
                 }
-                .frame(width: 300, height: 60, alignment: .center)
-                .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                .cornerRadius(16)
-                .padding(.vertical, 8)
                 
                 NavigationLink {
                     CategoriesView(type: type)
@@ -38,11 +37,11 @@ struct MethodScreen: View {
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
+                        .frame(width: 300, height: 60, alignment: .center)
+                        .background(Color("Azul"))
+                        .cornerRadius(16)
                 }
-                .frame(width: 300, height: 60, alignment: .center)
-                .background(Color(red: 0.26, green: 0.57, blue: 0.58))
-                .cornerRadius(16)
-                .padding(.vertical, 8)
+                
             }
             .padding()
         }

@@ -6,6 +6,7 @@ class DataManager {
     private let favoritesKey = "favorites"
     private let watchedKey = "watched"
     private let customListsKey = "customLists"
+    private let watchedContentKey = "watchedContent"
     private let defaults = UserDefaults.standard
     
     struct CustomList: Codable {
@@ -188,6 +189,41 @@ class DataManager {
             defaults.set(data, forKey: customListsKey)
         } catch {
             print("Erro ao codificar listas personalizadas: \(error)")
+        }
+    }
+    
+    // MARK: - History
+    
+    func saveWatchedContent(_ content: WatchedContent) {
+        var watchedContent = getWatchedContent()
+        watchedContent.append(content)
+        saveWatchedContent(watchedContent)
+    }
+    func removeWatchedContent(at index: Int) {
+        var watchedContent = getWatchedContent()
+        if index >= 0 && index < watchedContent.count {
+            watchedContent.remove(at: index)
+            saveWatchedContent(watchedContent)
+        }
+    }
+    func getWatchedContent() -> [WatchedContent] {
+        guard let data = defaults.data(forKey: watchedContentKey) else {
+            return []
+        }
+        do {
+            let watchedContent = try JSONDecoder().decode([WatchedContent].self, from: data)
+            return watchedContent
+        } catch {
+            print("Erro ao decodificar conteúdo assistido: \(error)")
+            return []
+        }
+    }
+    private func saveWatchedContent(_ content: [WatchedContent]) {
+        do {
+            let data = try JSONEncoder().encode(content)
+            defaults.set(data, forKey: watchedContentKey)
+        } catch {
+            print("Erro ao codificar conteúdo assistido: \(error)")
         }
     }
 }
