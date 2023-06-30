@@ -2,11 +2,13 @@ import SwiftUI
 
 struct SerieDetail: View {
     @State var conteudo: SerieData
+
+    @State private var favoriteSeries = DataManager.shared.getSeriesFromFavorites()
+
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
-
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
         Button(action: {
@@ -14,6 +16,7 @@ struct SerieDetail: View {
         }){
             BackButton()
     }}
+
     
     var body: some View {
         ScrollView{
@@ -78,7 +81,7 @@ struct SerieDetail: View {
                             Text("\(conteudo.duration) temporadas")
                                 .font(Font.custom("SF Pro", size: 14))
                                 .multilineTextAlignment(.center)
-                                
+                            
                         }
                         .padding(.vertical, 9)
                         .padding(.horizontal, 10)
@@ -103,7 +106,7 @@ struct SerieDetail: View {
                                         .inset(by: 0.5)
                                         .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                            
+                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -111,7 +114,7 @@ struct SerieDetail: View {
                         .padding(.horizontal, 30)
                     
                     
-                Spacer()
+                    Spacer()
                 }.background(Rectangle()
                     .foregroundColor(Color("Branco"))
                     .cornerRadius(28))

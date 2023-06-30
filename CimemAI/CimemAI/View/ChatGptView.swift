@@ -30,6 +30,9 @@ struct ChatGptView: View {
         .navigationBarBackButtonHidden(true)
     }
     func loadData() {
+        if response != nil {
+            return
+        }
         print(inputText)
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {

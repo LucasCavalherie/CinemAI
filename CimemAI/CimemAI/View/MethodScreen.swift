@@ -24,8 +24,7 @@ struct MethodScreen: View {
                 Text("Qual método você prefere usar para encontrar qual \(type) assistir?")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
-                    .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
-                
+                    .foregroundColor(Color("Azul_Quase_Preto"))
                 NavigationLink {
                     SearchView(type: type)
                 } label: {

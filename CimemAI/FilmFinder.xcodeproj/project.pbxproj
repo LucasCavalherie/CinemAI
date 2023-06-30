@@ -30,6 +30,7 @@
 		AF00910C2A4B88CC00CB4530 /* SerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00910B2A4B88CC00CB4530 /* SerieView.swift */; };
 		AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */; };
 		AF0091102A4B8BC300CB4530 /* SerieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */; };
+		AF4021612A4F54A7001BD771 /* FilmMiniCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4021602A4F54A7001BD771 /* FilmMiniCard.swift */; };
 		AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482622A423B40001C9628 /* CimemAIApp.swift */; };
 		AF4482652A423B40001C9628 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* FilmView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		AF00910B2A4B88CC00CB4530 /* SerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieView.swift; sourceTree = "<group>"; };
 		AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieCard.swift; sourceTree = "<group>"; };
 		AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetail.swift; sourceTree = "<group>"; };
+		AF4021602A4F54A7001BD771 /* FilmMiniCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmMiniCard.swift; sourceTree = "<group>"; };
 		AF44825F2A423B40001C9628 /* FilmFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			children = (
 				AF4482642A423B40001C9628 /* FilmView.swift */,
 				AFB114E92A43F5FD00A30D4A /* FilmCard.swift */,
+				AF4021602A4F54A7001BD771 /* FilmMiniCard.swift */,
 				AFEFB8B62A44E95D0040C6B4 /* FilmDetail.swift */,
 				AF00910B2A4B88CC00CB4530 /* SerieView.swift */,
 				AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */,
@@ -366,6 +369,7 @@
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
 				7383DF322A4F56F400193055 /* Secrets.swift in Sources */,
 				AF57F2372A4DFD64009D1373 /* History.swift in Sources */,
+				AF4021612A4F54A7001BD771 /* FilmMiniCard.swift in Sources */,
 				AF0091082A4B7FDD00CB4530 /* SerieResponseModel.swift in Sources */,
 				73CF555D2A44D230008D0AD8 /* FilmData.swift in Sources */,
 				73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */,
