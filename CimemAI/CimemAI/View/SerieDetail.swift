@@ -7,6 +7,14 @@ struct SerieDetail: View {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         ScrollView{
             VStack(spacing: -25){
@@ -108,7 +116,10 @@ struct SerieDetail: View {
                     .foregroundColor(Color("Branco"))
                     .cornerRadius(28))
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 

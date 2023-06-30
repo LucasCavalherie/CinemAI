@@ -12,7 +12,7 @@ import Foundation
 struct CimemAIApp: App {
     var body: some Scene {
         WindowGroup {
-            TypeView()
+            InicialLoading()
         }
     }
 }
