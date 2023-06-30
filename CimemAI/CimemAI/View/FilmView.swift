@@ -34,7 +34,7 @@ struct FilmView: View {
                             }
                         }
                     } else {
-                        Text("Não achou nada")
+                        ErrorView()
                     }
                 } else {
                     Text("Carregando...")

@@ -33,7 +33,7 @@ struct SerieView: View {
                             }
                         }
                     } else {
-                        Text("Não achou nada")
+                        ErrorView()
                     }
                 } else {
                     Text("Carregando...")
