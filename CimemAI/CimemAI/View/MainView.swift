@@ -1,32 +1,28 @@
-//
-//  MainView.swift
-//  FilmFinder
-//
-//  Created by Lucas Cavalherie on 30/06/23.
-//
-
 import SwiftUI
 
 struct MainView: View {
+    @State private var selectedTab = 1
+    
     var body: some View {
-        TabView {
-                HistoryView()
-                    .tabItem {
-                        Label("Histórico", systemImage: "clock.arrow.circlepath")
-                    }
+        TabView(selection: $selectedTab) {
+            HistoryView()
+                .tabItem {
+                    Label("Histórico", systemImage: "clock.arrow.circlepath")
+                }
+                .tag(0)
             
-                TypeView()
-                    .tabItem {
-                        Label("Recomendações", systemImage: "popcorn.circle.fill")
-                    }
+            TypeView()
+                .tabItem {
+                    Label("Recomendações", systemImage: "popcorn.circle.fill")
+                }
+                .tag(1)
             
-                ProfileView()
-                    .tabItem {
-                        Label("Perfil", systemImage: "person.circle.fill")
-                    }
-
-                
-            }
+            ProfileView()
+                .tabItem {
+                    Label("Perfil", systemImage: "person.circle.fill")
+                }
+                .tag(2)
+        }
     }
 }
 
