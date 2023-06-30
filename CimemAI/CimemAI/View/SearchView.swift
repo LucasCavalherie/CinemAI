@@ -4,6 +4,14 @@ struct SearchView: View {
     var type: String
     @State var message = ""
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
@@ -41,6 +49,8 @@ struct SearchView: View {
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 

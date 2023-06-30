@@ -6,6 +6,14 @@ struct FilmDetail: View {
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
 
     
     var body: some View {
@@ -130,7 +138,10 @@ struct FilmDetail: View {
                     .foregroundColor(.white)
                     .cornerRadius(28))
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 
