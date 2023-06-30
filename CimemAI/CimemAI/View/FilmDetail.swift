@@ -2,11 +2,12 @@ import SwiftUI
 
 struct FilmDetail: View {
     @State var conteudo: FilmData
+    @State private var favoriteFilms = DataManager.shared.getFilmesFromFavorites()
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
-
+    
     
     var body: some View {
         ScrollView{
@@ -43,24 +44,6 @@ struct FilmDetail: View {
                                 }
                             }
                         }
-//                        Button(action: {
-//                            conteudo.watched!.toggle()
-//                            if conteudo.favorite! {
-//                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
-//                            } else {
-//                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
-//                            }
-//                        }, label: {
-//                            if !conteudo.watched! {
-//                                Text(.init(systemName: "plus.circle"))
-//                                    .font(Font.custom("SF Pro", size 36))
-//                                    .foregroundColor(.black)
-//                            } else {
-//                                Text(.init(systemName: "plus.circle.fill"))
-//                                    .font(Font.custom("SF Pro", size: 36))
-//                                    .foregroundColor(.black)
-//                            }
-//                        })
                         Button(action: {
                             conteudo.favorite!.toggle()
                             if conteudo.favorite! {
@@ -90,9 +73,9 @@ struct FilmDetail: View {
                                 .font(Font.custom("SF Pro", size: 14))
                             Text("\(conteudo.duration) min")
                                 .font(Font.custom("SF Pro", size: 14))
-                                
+                            
                                 .multilineTextAlignment(.center)
-                                
+                            
                         }
                         .padding(.vertical, 9)
                         .padding(.horizontal, 10)
@@ -117,7 +100,7 @@ struct FilmDetail: View {
                                         .inset(by: 0.5)
                                         .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                            
+                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -125,14 +108,25 @@ struct FilmDetail: View {
                         .padding(.horizontal, 30)
                     
                     
-                Spacer()
+                    Spacer()
                 }.background(Rectangle()
                     .foregroundColor(Color("Branco"))
                     .cornerRadius(28))
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .onAppear(perform: checkIsFavorite)  // chame a função aqui
     }
+
+    func checkIsFavorite() {
+        if let favoriteFilm = favoriteFilms.first(where: { $0.idFilme == conteudo.idFilme }) {
+            conteudo = favoriteFilm
+        }
+    }
+    
+    
 }
+
 
 struct FilmDetail_Previews: PreviewProvider {
     static var previews: some View {

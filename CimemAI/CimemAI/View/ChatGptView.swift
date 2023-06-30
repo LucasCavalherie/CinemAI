@@ -28,6 +28,9 @@ struct ChatGptView: View {
         }.onAppear(perform: loadData)
     }
     func loadData() {
+        if response != nil {
+            return
+        }
         print(inputText)
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
