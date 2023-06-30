@@ -23,39 +23,63 @@ struct HistoryView: View {
                 VStack(alignment: .leading) {
                     
                     
-                    HStack{
+                    VStack{
                         switch watchedContent.content {
                         case .filme(let filme):
-                            
-                            AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(filme.image)")) { phase in
-                                if let image = phase.image {
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fill)// Displays the loaded image.
-                                } else if phase.error != nil {
-                                    Color.red
-                                } else {
-                                    Color.blue
+                            HStack {
+                                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(filme.image)")) { phase in
+                                    if let image = phase.image {
+                                        image.resizable()
+                                    } else if phase.error != nil {
+                                        Color.red
+                                    } else {
+                                        Color.blue
+                                    }
                                 }
+                                .frame(width:75, height: 105)
+                                .scaledToFit()
+                                .cornerRadius(8)
+                                
+                                VStack (alignment: .leading) {
+                                    Text(filme.title)
+                                        .padding(.bottom, 4)
+                                        .fontWeight(.bold)
+                                    Text(dateFormatter.string(from: watchedContent.date))
+                                        .font(.callout)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding(.horizontal)
                             }
-                            Text(filme.title)
+                            
                         case .serie(let serie):
                             
                             AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(serie.image)")) { phase in
                                 if let image = phase.image {
                                     image.resizable()
-                                        .aspectRatio(contentMode: .fill)// Displays the loaded image.
                                 } else if phase.error != nil {
                                     Color.red
                                 } else {
                                     Color.blue
                                 }
                             }
-                            Text(serie.title)
+                            .frame(width:75, height: 105)
+                            .scaledToFit()
+                            .cornerRadius(8)
+                            
+                            VStack (alignment: .leading) {
+                                Text(serie.title)
+                                    .padding(.bottom, 4)
+                                    .fontWeight(.bold)
+                                Text(dateFormatter.string(from: watchedContent.date))
+                                    .font(.callout)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.horizontal)
                         }
                     }
-                    Text(dateFormatter.string(from: watchedContent.date))
-                        .font(.callout)
+                    
                 }
+                .padding(.vertical, 4)
             }
         }
     }
