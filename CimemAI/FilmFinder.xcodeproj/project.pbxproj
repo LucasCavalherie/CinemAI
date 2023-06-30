@@ -29,6 +29,7 @@
 		AF57F2392A4E0277009D1373 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57F2382A4E0277009D1373 /* HistoryView.swift */; };
 		AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */; };
 		AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB114E92A43F5FD00A30D4A /* FilmCard.swift */; };
+		AFC238F12A4E15EE00709200 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC238F02A4E15EE00709200 /* Secrets.swift */; };
 		AFEFB8A12A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB88E2A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf */; };
 		AFEFB8A22A44DE3F0040C6B4 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB88F2A44DE3F0040C6B4 /* Poppins-ThinItalic.ttf */; };
 		AFEFB8A32A44DE3F0040C6B4 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFEFB8902A44DE3F0040C6B4 /* Poppins-ExtraLightItalic.ttf */; };
@@ -76,6 +77,7 @@
 		AF57F2382A4E0277009D1373 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryView.swift; path = CimemAi/View/HistoryView.swift; sourceTree = SOURCE_ROOT; };
 		AF7B8E652A4CBACA00A6E91C /* UserDefaultsManenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManenger.swift; sourceTree = "<group>"; };
 		AFB114E92A43F5FD00A30D4A /* FilmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCard.swift; sourceTree = "<group>"; };
+		AFC238F02A4E15EE00709200 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		AFEFB8402A44C9120040C6B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFEFB88E2A44DE3F0040C6B4 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		AFEFB88F2A44DE3F0040C6B4 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				AFB114E62A438BE900A30D4A /* View */,
 				AFB114E52A438BD900A30D4A /* Model */,
 				AF4482622A423B40001C9628 /* CimemAIApp.swift */,
+				AFC238F02A4E15EE00709200 /* Secrets.swift */,
 				AF4482662A423B41001C9628 /* Assets.xcassets */,
 				AF4482682A423B41001C9628 /* Preview Content */,
 			);
@@ -319,6 +322,7 @@
 				73CF555D2A44D230008D0AD8 /* FilmData.swift in Sources */,
 				73D6A97F2A46198400AF5886 /* ChatGptModel.swift in Sources */,
 				AF00910C2A4B88CC00CB4530 /* SerieView.swift in Sources */,
+				AFC238F12A4E15EE00709200 /* Secrets.swift in Sources */,
 				73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */,
 				AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */,
 			);

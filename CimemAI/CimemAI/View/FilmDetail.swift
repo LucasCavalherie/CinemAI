@@ -33,12 +33,12 @@ struct FilmDetail: View {
                             HStack {
                                 ForEach(0..<ratingAsStars, id: \.self) { _ in
                                     Text(.init(systemName: "star.fill"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                                 ForEach(0..<(5-ratingAsStars), id: \.self) { _ in
                                     Text(.init(systemName: "star"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                             }
@@ -74,7 +74,7 @@ struct FilmDetail: View {
                             if !conteudo.favorite! {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color("Azul_Quase_Preto"))
                             } else {
                                 Text(.init(systemName: "heart.fill"))
                                     .font(Font.custom("SF Pro", size: 30))
@@ -102,7 +102,7 @@ struct FilmDetail: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .inset(by: 0.5)
-                                    .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                    .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                             ))
                         Text(conteudo.releaseDate)
                             .font(Font.custom("SF Pro", size: 14))
@@ -115,7 +115,7 @@ struct FilmDetail: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .inset(by: 0.5)
-                                        .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                        .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
                             
                         Spacer()
@@ -127,7 +127,7 @@ struct FilmDetail: View {
                     
                 Spacer()
                 }.background(Rectangle()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("Branco"))
                     .cornerRadius(28))
             }
         }.ignoresSafeArea()

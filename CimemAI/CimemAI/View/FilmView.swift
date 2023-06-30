@@ -18,7 +18,7 @@ struct FilmView: View {
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
                         
                         ScrollView(.horizontal, showsIndicators: false){
