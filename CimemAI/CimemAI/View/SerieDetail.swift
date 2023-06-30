@@ -2,11 +2,21 @@ import SwiftUI
 
 struct SerieDetail: View {
     @State var conteudo: SerieData
+
     @State private var favoriteSeries = DataManager.shared.getSeriesFromFavorites()
+
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+
     
     var body: some View {
         ScrollView{
@@ -111,13 +121,8 @@ struct SerieDetail: View {
             }
         }
         .ignoresSafeArea()
-        .onAppear(perform: checkIsFavorite)  // chame a função aqui
-    }
-    
-    func checkIsFavorite() {
-        if let favoriteSerie = favoriteSeries.first(where: { $0.id == conteudo.id }) {
-            conteudo = favoriteSerie
-        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 

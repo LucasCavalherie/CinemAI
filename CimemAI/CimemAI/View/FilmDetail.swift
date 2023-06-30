@@ -8,6 +8,13 @@ struct FilmDetail: View {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         ScrollView{
@@ -115,13 +122,8 @@ struct FilmDetail: View {
             }
         }
         .ignoresSafeArea()
-        .onAppear(perform: checkIsFavorite)  // chame a função aqui
-    }
-
-    func checkIsFavorite() {
-        if let favoriteFilm = favoriteFilms.first(where: { $0.idFilme == conteudo.idFilme }) {
-            conteudo = favoriteFilm
-        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
     
     

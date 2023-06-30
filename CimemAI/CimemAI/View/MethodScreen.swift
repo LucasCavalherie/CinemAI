@@ -10,6 +10,14 @@ import SwiftUI
 struct MethodScreen: View {
     var type: String
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center, spacing: 8) {
@@ -44,6 +52,8 @@ struct MethodScreen: View {
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 

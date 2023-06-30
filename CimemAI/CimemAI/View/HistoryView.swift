@@ -142,7 +142,9 @@ struct HistoryView: View {
                             }
                         }
                     }
+
                 }
+                .padding(.vertical, 4)
             }
         }.onAppear(perform: reload)
     }

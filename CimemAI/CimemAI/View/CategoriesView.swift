@@ -33,6 +33,14 @@ struct CategoriesView: View {
         Category(name: "História")
     ]
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
@@ -78,6 +86,8 @@ struct CategoriesView: View {
                 .padding(.vertical, 8)
             }
             .padding()
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: btnBack)
         }
     }
 
