@@ -2,11 +2,19 @@ import SwiftUI
 
 struct FilmDetail: View {
     @State var conteudo: FilmData
+    @State private var favoriteFilms = DataManager.shared.getFilmesFromFavorites()
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
-
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         ScrollView{
@@ -33,34 +41,16 @@ struct FilmDetail: View {
                             HStack {
                                 ForEach(0..<ratingAsStars, id: \.self) { _ in
                                     Text(.init(systemName: "star.fill"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                                 ForEach(0..<(5-ratingAsStars), id: \.self) { _ in
                                     Text(.init(systemName: "star"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                             }
                         }
-//                        Button(action: {
-//                            conteudo.watched!.toggle()
-//                            if conteudo.favorite! {
-//                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
-//                            } else {
-//                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
-//                            }
-//                        }, label: {
-//                            if !conteudo.watched! {
-//                                Text(.init(systemName: "plus.circle"))
-//                                    .font(Font.custom("SF Pro", size 36))
-//                                    .foregroundColor(.black)
-//                            } else {
-//                                Text(.init(systemName: "plus.circle.fill"))
-//                                    .font(Font.custom("SF Pro", size: 36))
-//                                    .foregroundColor(.black)
-//                            }
-//                        })
                         Button(action: {
                             conteudo.favorite!.toggle()
                             if conteudo.favorite! {
@@ -74,7 +64,7 @@ struct FilmDetail: View {
                             if !conteudo.favorite! {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color("Azul_Quase_Preto"))
                             } else {
                                 Text(.init(systemName: "heart.fill"))
                                     .font(Font.custom("SF Pro", size: 30))
@@ -90,9 +80,9 @@ struct FilmDetail: View {
                                 .font(Font.custom("SF Pro", size: 14))
                             Text("\(conteudo.duration) min")
                                 .font(Font.custom("SF Pro", size: 14))
-                                
+                            
                                 .multilineTextAlignment(.center)
-                                
+                            
                         }
                         .padding(.vertical, 9)
                         .padding(.horizontal, 10)
@@ -102,7 +92,7 @@ struct FilmDetail: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .inset(by: 0.5)
-                                    .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                    .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                             ))
                         Text(conteudo.releaseDate)
                             .font(Font.custom("SF Pro", size: 14))
@@ -115,9 +105,9 @@ struct FilmDetail: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .inset(by: 0.5)
-                                        .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                        .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                            
+                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -125,14 +115,20 @@ struct FilmDetail: View {
                         .padding(.horizontal, 30)
                     
                     
-                Spacer()
+                    Spacer()
                 }.background(Rectangle()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("Branco"))
                     .cornerRadius(28))
             }
-        }.ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
+    
+    
 }
+
 
 struct FilmDetail_Previews: PreviewProvider {
     static var previews: some View {

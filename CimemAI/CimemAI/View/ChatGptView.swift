@@ -26,9 +26,14 @@ struct ChatGptView: View {
                         .scaleEffect(0.8)
                         .padding(.bottom, 60)
             }
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
     }
     func loadData() {
+        if response != nil {
+            return
+        }
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo

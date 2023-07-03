@@ -1,14 +1,15 @@
-//
-//  MethodScreen.swift
-//  CimemAI
-//
-//  Created by Lucas Cavalherie on 22/06/23.
-//
-
 import SwiftUI
 
 struct MethodScreen: View {
     var type: String
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         NavigationStack {
@@ -16,8 +17,7 @@ struct MethodScreen: View {
                 Text("Qual método você prefere usar para encontrar qual \(type) assistir?")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
-                    .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
-                
+                    .foregroundColor(Color("Azul_Quase_Preto"))
                 NavigationLink {
                     SearchView(type: type)
                 } label: {
@@ -45,6 +45,8 @@ struct MethodScreen: View {
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
 }
 

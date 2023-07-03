@@ -8,6 +8,14 @@ struct FilmView: View {
 
     @State var findAllData: [FilmData] = []
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 16) {
@@ -18,7 +26,7 @@ struct FilmView: View {
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
                         
                         ScrollView(.horizontal, showsIndicators: false){
@@ -64,7 +72,10 @@ struct FilmView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
             .ignoresSafeArea()
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
     
     func loadData() {

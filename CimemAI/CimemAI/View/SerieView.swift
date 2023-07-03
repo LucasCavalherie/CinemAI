@@ -7,6 +7,13 @@ struct SerieView: View {
     @State var findAllData: [SerieData] = []
     @State var load : Bool = false
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         NavigationStack{
@@ -18,7 +25,7 @@ struct SerieView: View {
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
                         
                         ScrollView(.horizontal, showsIndicators: false){
@@ -43,7 +50,10 @@ struct SerieView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
             .ignoresSafeArea()
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
     }
     
     func loadData() {
