@@ -4,6 +4,7 @@ struct ChatGptView: View {
     var type: String
     @State var inputText: String
     @State var response: [String]?
+    @State private var history = DataManager.shared.getWatchedContent()
         
     var body: some View {
         VStack {
@@ -28,7 +29,6 @@ struct ChatGptView: View {
         }.onAppear(perform: loadData)
     }
     func loadData() {
-        print(inputText)
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo
@@ -40,10 +40,29 @@ struct ChatGptView: View {
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
         
-        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3. Não faça nenhum comentário. Voce retornara apenas os nomes dos filmes no formato indicado.")
+        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de \(type) no seguinte formato: nome1;nome2;nome3. Não faça nenhum comentário. Voce retornara apenas os nomes dos \(type) no formato indicado.")
+        
+        var alreadyRecomended : [String] = []
+        
+        history.forEach() { watchedContent in
+            switch watchedContent.content {
+                case .filme(let filme):
+                    if type == "filme" {
+                        alreadyRecomended.append(filme.title)
+                    }
+                case .serie(let serie):
+                    if type == "série" {
+                        alreadyRecomended.append(serie.title)
+                    }
+            }
+        }
+        
+        
+        let filterMovies = Prompt(role: "system", content: "Não recomende nenhum dos seguintes filmes: \(alreadyRecomended)")
+        
         let promptUser = Prompt(role: "user", content: message)
         
-        let requestJson = Request(model: model, messages: [promptSys,promptUser])
+        let requestJson = Request(model: model, messages: [promptSys,filterMovies,promptUser])
         let encoder = JSONEncoder()
         let jsonData = try? encoder.encode(requestJson)
         

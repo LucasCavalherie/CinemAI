@@ -33,6 +33,27 @@ struct FilmView: View {
                                 }
                             }
                         }
+                        
+                        Button{
+                            //
+                        } label: {
+                            HStack {
+                                Image(systemName: "chevron.backward.circle")
+                                    .font(.system(size: 20))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+
+                                Text("Voltar")
+                                    .font(.system(size: 20))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .frame(width: 150, height: 60, alignment: .center)
+                        .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+                        .cornerRadius(16)
+                        .padding(.vertical, 8)
+                        
                     } else {
                         ErrorView()
                     }
