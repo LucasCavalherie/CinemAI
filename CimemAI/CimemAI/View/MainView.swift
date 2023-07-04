@@ -13,7 +13,7 @@ struct MainView: View {
             
             TypeView()
                 .tabItem {
-                    Label("Recomendações", systemImage: "popcorn.circle.fill")
+                    Label("Recomendações", systemImage: "magnifyingglass.circle.fill")
                 }
                 .tag(1)
             

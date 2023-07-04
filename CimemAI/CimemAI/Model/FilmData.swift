@@ -10,9 +10,8 @@ struct FilmData: Identifiable, Codable{
     let duration: Int
     let plot: String
     let rating : Double
-    var favorite : Bool?
-    var saved : Bool?
-    var watched : Bool?
+    var favorite : Bool
+    var watched : Bool
     
 }
 

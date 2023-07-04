@@ -90,6 +90,6 @@ struct ChatGptView: View {
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView(type: "filme", inputText: "Uma filme de comedia com romance com carros")
+        ChatGptView(type: "filme", inputText: "Uma filme com musica e romance cliche")
     }
 }

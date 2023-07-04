@@ -36,7 +36,7 @@ struct FilmView: View {
                                         FilmDetail(conteudo: data)
                                         
                                     } label: {
-                                        IMDbCard(conteudo: data)
+                                        FilmCard(conteudo: data)
                                     }
                                 }
                             }
@@ -45,7 +45,10 @@ struct FilmView: View {
                         ErrorView()
                     }
                 } else {
-                    Text("Carregando...")
+                    LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                            .frame(width: 250, height: 112.0)
+                            .scaleEffect(0.8)
+                            .padding(.bottom, 60)
                 }
             }
             .padding(.horizontal, 30)
@@ -142,7 +145,6 @@ struct FilmView: View {
             plot: response.plot,
             rating: response.rating,
             favorite: false,
-            saved: false,
             watched: false
             
         )
