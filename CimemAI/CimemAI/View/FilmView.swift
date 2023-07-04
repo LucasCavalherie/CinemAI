@@ -42,26 +42,6 @@ struct FilmView: View {
                             }
                         }
                         
-                        Button{
-                            //
-                        } label: {
-                            HStack {
-                                Image(systemName: "chevron.backward.circle")
-                                    .font(.system(size: 20))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-
-                                Text("Voltar")
-                                    .font(.system(size: 20))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                        }
-                        .frame(width: 150, height: 60, alignment: .center)
-                        .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                        .cornerRadius(16)
-                        .padding(.vertical, 8)
-                        
                     } else {
                         ErrorView()
                     }
@@ -93,6 +73,7 @@ struct FilmView: View {
     func findAll () async -> [FilmData] {
         return await withTaskGroup(of: FilmData?.self, body: { group in
             var datas = [FilmData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
@@ -102,9 +83,12 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+                    let repetido = DataManager.shared.checkFilmesAlreadyInToWatched(filme: filme)
+                    if !repetido && count < 3 {
+                        count = count + 1
+                        datas.append(filme)
+                        DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
+                    }
                 }
             }
             

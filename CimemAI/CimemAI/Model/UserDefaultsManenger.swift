@@ -82,6 +82,13 @@ class DataManager {
             print("Erro ao codificar filmes assistidos: \(error)")
         }
     }
+    func checkFilmesAlreadyInToWatched(filme: FilmData) -> Bool {
+        var filmes = getFilmesFromFavorites()
+        if !filmes.contains(where: { $0.idFilme == filme.idFilme }) {
+            return false
+        }
+        return true
+    }
     
     // MARK: - Séries
     

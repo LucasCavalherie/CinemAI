@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MethodScreen: View {
     var type: String
+    var onlyRepeated: Bool
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -52,6 +53,6 @@ struct MethodScreen: View {
 
 struct MethodScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MethodScreen(type: "filme")
+        MethodScreen(type: "filme", onlyRepeated: false)
     }
 }
