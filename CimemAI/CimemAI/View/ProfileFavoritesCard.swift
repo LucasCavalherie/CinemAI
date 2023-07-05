@@ -3,11 +3,12 @@ import SwiftUI
 struct ProfileFavoriteCard: View {
     
     var contents : [WatchedContent]
+    let title : String
 
     var body: some View {
         VStack {
             HStack {
-                Text("Favoritos")
+                Text(title)
                     .font(Font.custom("Poppins-regular", size: 20))
                     .fontWeight(.semibold)
                     .foregroundColor(Color(red: 0, green: 0.07, blue: 0.1))
@@ -76,6 +77,6 @@ struct ProfileFavoriteCard: View {
 
 struct ProfileListCard_Previews: PreviewProvider {
     static var previews: some View {
-        return ProfileFavoriteCard(contents: DataManager.shared.favorites)
+        return ProfileFavoriteCard(contents: DataManager.shared.favorites, title: "Favoritos")
     }
 }

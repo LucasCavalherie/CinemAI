@@ -23,7 +23,7 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     FavoriteViews()
                 }, label: {
-                    ProfileFavoriteCard(contents: dataManager.favorites)
+                    ProfileFavoriteCard(contents: dataManager.favorites, title: "Favoritos")
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)
@@ -35,7 +35,7 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     WatchedView()
                 }, label: {
-                    ProfileFavoriteCard(contents: dataManager.watched)
+                    ProfileFavoriteCard(contents: dataManager.watched, title: "Assistidos")
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)
