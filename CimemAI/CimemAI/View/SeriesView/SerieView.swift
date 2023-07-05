@@ -5,6 +5,7 @@ struct SerieView: View {
     var type : String
     @State var findData: SerieData?
     @State var findAllData: [SerieData] = []
+    @State var otherData: [SerieData] = []
     @State var load : Bool = false
     @ObservedObject var dataManager = DataManager.shared
 
@@ -35,7 +36,26 @@ struct SerieView: View {
                                     NavigationLink {
                                         SerieDetail(conteudo: data)
                                     } label: {
-                                        SerieCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            SerieCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeSerie(oldSerie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -60,6 +80,17 @@ struct SerieView: View {
         .navigationBarItems(leading: btnBack)
     }
     
+    func changeSerie(oldSerie: SerieData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldSerie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
+    }
+    
     func loadData() {
         if findAllData.count == 0 {
             Task {
@@ -76,6 +107,7 @@ struct SerieView: View {
     func findAll () async -> [SerieData] {
         return await withTaskGroup(of: SerieData?.self, body: { group in
             var datas = [SerieData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
@@ -83,11 +115,18 @@ struct SerieView: View {
                 }
             }
             
-            for await filme in group {
-                if let filme = filme {
-                    datas.append(filme)
-                    dataManager.addContent(WatchedContent(date: Date(), content: .serie(filme)))
-                    print(dataManager.allContent.count)
+            for await serie in group {
+                if let serie = serie {
+                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .serie(serie)))
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(serie)
+                            dataManager.addContent(WatchedContent(date: Date(), content: .serie(serie)))
+                        } else {
+                            otherData.append(serie)
+                        }
+                        count = count + 1
+                    }
                 }
             }
             
@@ -154,6 +193,6 @@ struct SerieView: View {
 
 struct SerieView_Previews: PreviewProvider {
     static var previews: some View {
-        SerieView(contents: ["dark", "black-Mirror", "suits"], type: "série")
+        SerieView(contents: ["dark", "black-Mirror", "suits", "stranger things"], type: "série")
     }
 }

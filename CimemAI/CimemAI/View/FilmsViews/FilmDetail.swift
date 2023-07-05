@@ -69,7 +69,6 @@ struct FilmDetail: View {
                                 let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
                                 dataManager.removeFavorite(watchedContent)
                             }
-                            print(dataManager.favorites)
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
@@ -89,7 +88,6 @@ struct FilmDetail: View {
                             } else {
                                 dataManager.removeWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
                             }
-                            print(dataManager.watched)
                         }, label: {
                             if !conteudo.watched {
                                 Image("Olhozin")

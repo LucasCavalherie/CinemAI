@@ -44,6 +44,18 @@ class DataManager: ObservableObject {
             }
         }
     }
+                
+    func checkContentsAlreadyInToWatched(filme: WatchedContent) -> Bool {
+        var contents = watched
+        print(contents)
+        if !contents.contains(where: { $0.content.idFilme == filme.content.idFilme }) {
+            print("false")
+            return false
+        }
+        
+        print("true")
+        return true
+    }
 
     func addContent(_ newContent: WatchedContent) {
         allContent.append(newContent)
@@ -86,5 +98,4 @@ class DataManager: ObservableObject {
             watchedContent.id == content.id
         }
     }
-
 }

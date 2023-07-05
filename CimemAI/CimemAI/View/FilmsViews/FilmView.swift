@@ -8,6 +8,7 @@ struct FilmView: View {
     @ObservedObject var dataMananger = DataManager.shared
 
     @State var findAllData: [FilmData] = []
+    @State var otherData: [FilmData] = []
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -37,11 +38,31 @@ struct FilmView: View {
                                         FilmDetail(conteudo: data)
                                         
                                     } label: {
-                                        FilmCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            FilmCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeMovie(oldMovie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
+                        
                     } else {
                         ErrorView()
                     }
@@ -61,6 +82,17 @@ struct FilmView: View {
         .navigationBarItems(leading: btnBack)
     }
     
+    func changeMovie(oldMovie: FilmData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldMovie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
+    }
+    
     func loadData() {
         if findAllData.count == 0 {
             Task {
@@ -76,6 +108,7 @@ struct FilmView: View {
     func findAll () async -> [FilmData] {
         return await withTaskGroup(of: FilmData?.self, body: { group in
             var datas = [FilmData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
@@ -85,9 +118,16 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    datas.append(filme)
-                    dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
-                    print(dataMananger.allContent.count)
+                    let repetido = dataMananger.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(filme)
+                            dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
+                        } else {
+                            otherData.append(filme)
+                        }
+                        count = count + 1
+                    }
                 }
             }
             
@@ -156,6 +196,6 @@ struct FilmView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "filme")
     }
 }
