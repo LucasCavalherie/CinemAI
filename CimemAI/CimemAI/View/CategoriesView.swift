@@ -96,7 +96,7 @@ struct CategoriesView: View {
                     Text("Selecione o que você quer ver hoje:")
                         .font(.system(size: 32))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(red: 0.17, green: 0.17, blue: 0.17))
+                        .foregroundColor(Color("Azul_Quase_Preto"))
                         .padding(.bottom)
                     
                     
@@ -112,16 +112,16 @@ struct CategoriesView: View {
                                     Text(category.name)
                                         .font(.system(size: 16))
                                         .fontWeight(.bold)
-                                        .foregroundColor(selectedGenre.contains { $0.id == category.id } ? .white : .black)
+                                        .foregroundColor(selectedGenre.contains { $0.id == category.id } ? .white : Color("Azul_Quase_Preto"))
                                 }
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 12)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.orange, lineWidth: 2)
+                                        .stroke(Color("Arenito"), lineWidth: 2)
                                         .background(
                                             RoundedRectangle(cornerRadius: 20)
-                                                .fill(selectedGenre.contains { $0.id == category.id } ? Color.orange : Color.white)
+                                                .fill(selectedGenre.contains { $0.id == category.id } ? Color("Arenito") : Color.white.opacity(0))
                                         )
                                 )
                                 
@@ -143,16 +143,16 @@ struct CategoriesView: View {
                                     Text(category.name)
                                         .font(.system(size: 16))
                                         .fontWeight(.bold)
-                                        .foregroundColor(selectedScript.contains { $0.id == category.id } ? .white : .black)
+                                        .foregroundColor(selectedScript.contains { $0.id == category.id } ? .white : Color("Azul_Quase_Preto"))
                                 }
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 12)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.yellow, lineWidth: 2)
+                                        .stroke(Color("Menta"), lineWidth: 2)
                                         .background(
                                             RoundedRectangle(cornerRadius: 20)
-                                                .fill(selectedScript.contains { $0.id == category.id } ? Color.yellow : Color.white)
+                                                .fill(selectedScript.contains { $0.id == category.id } ? Color("Menta") : Color.white.opacity(0))
                                         )
                                 )
                                 
@@ -174,16 +174,16 @@ struct CategoriesView: View {
                                     Text(category.name)
                                         .font(.system(size: 16))
                                         .fontWeight(.bold)
-                                        .foregroundColor(selectedMood.contains { $0.id == category.id } ? .white : .black)
+                                        .foregroundColor(selectedMood.contains { $0.id == category.id } ? .white : Color("Azul_Quase_Preto"))
                                 }
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 12)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color.green, lineWidth: 2)
+                                        .stroke(Color("Areia"), lineWidth: 2)
                                         .background(
                                             RoundedRectangle(cornerRadius: 20)
-                                                .fill(selectedMood.contains { $0.id == category.id } ? Color.green : Color.white)
+                                                .fill(selectedMood.contains { $0.id == category.id } ? Color("Areia") : Color.white.opacity(0))
                                         )
                                 )
                                 
