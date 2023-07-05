@@ -13,7 +13,6 @@
 		731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD902A4A13C0004FF08E /* CategoriesView.swift */; };
 		7383DF342A4F57E100193055 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7383DF332A4F57E100193055 /* MainView.swift */; };
 		7383DF362A4F648500193055 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7383DF352A4F648500193055 /* BackButton.swift */; };
-		73B5BF9E2A5484FB0077BDC4 /* RepeatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B5BF9D2A5484FB0077BDC4 /* RepeatedView.swift */; };
 		73B5BFA12A54A0DB0077BDC4 /* FlexStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B5BFA02A54A0DB0077BDC4 /* FlexStack.swift */; };
 		73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */; };
 		73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CF55542A44BC33008D0AD8 /* MethodScreen.swift */; };
@@ -72,7 +71,6 @@
 		731CBD902A4A13C0004FF08E /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		7383DF332A4F57E100193055 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = CimemAi/View/MainView.swift; sourceTree = SOURCE_ROOT; };
 		7383DF352A4F648500193055 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackButton.swift; path = CimemAi/View/BackButton.swift; sourceTree = SOURCE_ROOT; };
-		73B5BF9D2A5484FB0077BDC4 /* RepeatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RepeatedView.swift; path = CimemAi/View/RepeatedView.swift; sourceTree = SOURCE_ROOT; };
 		73B5BFA02A54A0DB0077BDC4 /* FlexStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlexStack.swift; path = CimemAi/Source/FlexStack.swift; sourceTree = SOURCE_ROOT; };
 		73C0D4E92A451FCE004A46A4 /* ChatGptResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptResponseModel.swift; sourceTree = "<group>"; };
 		73CF55542A44BC33008D0AD8 /* MethodScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodScreen.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				73F7B2692A4E5A5300FE9E22 /* InitialLoading.swift */,
 				7383DF332A4F57E100193055 /* MainView.swift */,
 				7383DF352A4F648500193055 /* BackButton.swift */,
-				73B5BF9D2A5484FB0077BDC4 /* RepeatedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,7 +395,6 @@
 				73F7B26C2A4E5A7800FE9E22 /* ProfileView.swift in Sources */,
 				731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */,
 				73CF555F2A44E126008D0AD8 /* FilmResponseModel.swift in Sources */,
-				73B5BF9E2A5484FB0077BDC4 /* RepeatedView.swift in Sources */,
 				AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */,
 				7383DF362A4F648500193055 /* BackButton.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,

@@ -5,6 +5,7 @@ struct FilmView: View {
     var contents : [String]
     var type : String
     @State var load : Bool = false
+    @ObservedObject var dataMananger = DataManager.shared
 
     @State var findAllData: [FilmData] = []
     @State var otherData: [FilmData] = []
@@ -117,11 +118,11 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
+                    let repetido = dataMananger.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
                     if !repetido {
                         if count < 3 {
                             datas.append(filme)
-                            DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
+                            dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
                         } else {
                             otherData.append(filme)
                         }

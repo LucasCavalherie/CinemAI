@@ -28,7 +28,7 @@ struct RepeatedView: View {
                 
                 HStack {
                     NavigationLink {
-                        MethodScreen(type: "filme", onlyRepeated: true)
+                        MethodScreen(type: "filme")
                     } label: {
                         Text("Sim")
                             .font(.system(size: 20))

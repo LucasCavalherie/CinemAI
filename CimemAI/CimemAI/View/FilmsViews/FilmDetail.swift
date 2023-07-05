@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FilmDetail: View {
     @State var conteudo: FilmData
+    @ObservedObject private var dataManager = DataManager.shared
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
@@ -63,12 +64,11 @@ struct FilmDetail: View {
                             conteudo.favorite.toggle()
                             if conteudo.favorite {
                                 let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
-                                DataManager.shared.saveContentToFavorites(content: watchedContent)
+                                dataManager.addFavorite(watchedContent)
                             } else {
                                 let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
-                                DataManager.shared.removeContentFromFavorites(content: watchedContent)
+                                dataManager.removeFavorite(watchedContent)
                             }
-                            print(DataManager.shared.getContentsFromFavorites())
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
@@ -84,11 +84,10 @@ struct FilmDetail: View {
                         Button(action: {
                             conteudo.watched.toggle()
                             if conteudo.watched {
-                                DataManager.shared.saveContentToWatched(content: WatchedContent(date: Date(), content: .filme(conteudo)))
+                                dataManager.addWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
                             } else {
-                                DataManager.shared.removeContentFromWatched(content: WatchedContent(date: Date(), content: .filme(conteudo)))
+                                dataManager.removeWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
                             }
-                            print(DataManager.shared.getContentsFromWatched())
                         }, label: {
                             if !conteudo.watched {
                                 Image("Olhozin")

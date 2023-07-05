@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TypeView: View {
-    @State var filterContents = DataManager.shared.getContentsFromWatched()
     
     var body: some View {
         NavigationStack {
@@ -24,9 +23,7 @@ struct TypeView: View {
                 
                 HStack {
                     NavigationLink {
-                        if filterContents.count < 10 {
-                            MethodScreen(type: "filme", onlyRepeated: false)
-                        }
+                        MethodScreen(type: "filme")
                     } label: {
                         Text("Filme")
                             .font(.system(size: 20))
@@ -42,9 +39,7 @@ struct TypeView: View {
                     Spacer()
                     
                     NavigationLink {
-                        if filterContents.count < 10 {
-                            MethodScreen(type: "série", onlyRepeated: false)
-                        }
+                        MethodScreen(type: "série")
                     } label: {
                         Text("Série")
                             .font(.system(size: 20))

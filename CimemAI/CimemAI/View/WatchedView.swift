@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WatchedView: View {
-    @State private var watched = DataManager.shared.getContentsFromWatched()
+    @ObservedObject var dataManager = DataManager.shared
     
     var body: some View {
         ScrollView {
@@ -34,15 +34,15 @@ struct WatchedView: View {
             
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible())]) {
-                    ForEach(watched) { favoriteItem in
-                        switch favoriteItem.content {
+                    ForEach(dataManager.watched) { watchedItem in
+                        switch watchedItem.content {
                         case .filme(let filmData):
                             if filmData.watched {
-                                ContentCard(watchedContent: favoriteItem)
+                                ContentCard(watchedContent: watchedItem)
                             }
                         case .serie(let serieData):
                             if serieData.watched {
-                                ContentCard(watchedContent: favoriteItem)
+                                ContentCard(watchedContent: watchedItem)
                             }
                         }
                     }
@@ -54,8 +54,6 @@ struct WatchedView: View {
         }
     }
 }
-
-
 
 struct WatchedViews_Previews: PreviewProvider {
     static var previews: some View {

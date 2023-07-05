@@ -2,10 +2,12 @@ import SwiftUI
 
 struct SerieDetail: View {
     @State var conteudo: SerieData
+    @ObservedObject private var dataManager = DataManager.shared
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
         Button(action: {
@@ -63,12 +65,13 @@ struct SerieDetail: View {
                             conteudo.favorite.toggle()
                             if conteudo.favorite {
                                 let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
-                                DataManager.shared.saveContentToFavorites(content: watchedContent)
+                                dataManager.addFavorite(watchedContent)
                             } else {
+                                
                                 let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
-                                DataManager.shared.removeContentFromFavorites(content: watchedContent)
+                                dataManager.removeFavorite(watchedContent)
                             }
-                            print(DataManager.shared.getContentsFromFavorites())
+                            print(dataManager.favorites)
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
@@ -84,11 +87,13 @@ struct SerieDetail: View {
                         Button(action: {
                             conteudo.watched.toggle()
                             if conteudo.watched {
-                                DataManager.shared.saveContentToWatched(content: WatchedContent(date: Date(), content: .serie(conteudo)))
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.addWatched(watchedContent)
                             } else {
-                                DataManager.shared.removeContentFromWatched(content: WatchedContent(date: Date(), content: .serie(conteudo)))
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.removeWatched(watchedContent)
                             }
-                            print(DataManager.shared.getContentsFromWatched())
+                            print(dataManager.watched)
                         }, label: {
                             if !conteudo.watched {
                                 Image("Olhozin")

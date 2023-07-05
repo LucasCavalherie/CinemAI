@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @State private var history = DataManager.shared.getWatchedContent()
+    
+    @ObservedObject private var dataManager = DataManager.shared
     
     var body: some View {
         NavigationStack{
@@ -10,28 +11,23 @@ struct HistoryView: View {
                     let domain = Bundle.main.bundleIdentifier!
                     UserDefaults.standard.removePersistentDomain(forName: domain)
                     UserDefaults.standard.synchronize()
-                    print(DataManager.shared.getWatchedContent())
-
+                    print(dataManager.allContent)
+                    
                 } label: {
                     Text("RESET")
                 }
                 ScrollView{
                     LazyVGrid(columns: [GridItem(.flexible())]) {
-                        ForEach(history) { history in
+                        ForEach(dataManager.allContent) { history in
                             ContentCard(watchedContent: history)
                         }.padding(.vertical, 8)
                     }
                 }
-                
             }
-        }.onAppear(perform: reload)
-    }
-    
-    func reload(){
-        self.history = DataManager.shared.getWatchedContent()
-        print(history)
+        }
     }
 }
+
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {

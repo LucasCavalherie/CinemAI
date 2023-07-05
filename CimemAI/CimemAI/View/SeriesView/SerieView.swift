@@ -7,6 +7,7 @@ struct SerieView: View {
     @State var findAllData: [SerieData] = []
     @State var otherData: [SerieData] = []
     @State var load : Bool = false
+    @ObservedObject var dataManager = DataManager.shared
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -120,7 +121,7 @@ struct SerieView: View {
                     if !repetido {
                         if count < 3 {
                             datas.append(serie)
-                            DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .serie(serie)))
+                            dataManager.addContent(WatchedContent(date: Date(), content: .serie(serie)))
                         } else {
                             otherData.append(serie)
                         }
