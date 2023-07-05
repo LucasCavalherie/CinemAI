@@ -14,10 +14,16 @@ struct MethodScreen: View {
     var body: some View {
         NavigationStack {
             VStack (alignment: .center, spacing: 8) {
-                Text("Qual método você prefere usar para encontrar qual \(type) assistir?")
+                Image("pipoco_pesquisando")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 230)
+                
+                Text("Como você prefere procurar qual \(type) assistir?")
                     .font(.system(size: 32))
                     .fontWeight(.bold)
                     .foregroundColor(Color("Azul_Quase_Preto"))
+                    .padding(.bottom)
                 NavigationLink {
                     SearchView(type: type)
                 } label: {

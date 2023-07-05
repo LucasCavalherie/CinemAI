@@ -40,7 +40,11 @@ struct CategoriesView: View {
         Category(name: "Aventura"),
         Category(name: "História"),
         Category(name: "Brasileiro"),
-        Category(name: "Anime")
+        Category(name: "Anime"),
+        Category(name: "Biografia"),
+        Category(name: "Motivador"),
+        Category(name: "Esportes"),
+        Category(name: "Noir"),
     ]
     
     @State private var selectedScript: [Category] = []
@@ -61,6 +65,12 @@ struct CategoriesView: View {
         Category(name: "Super Herói"),
         Category(name: "Faroeste"),
         Category(name: "Besteirol"),
+        Category(name: "Teen"),
+        Category(name: "Histórico"),
+        Category(name: "Enigma"),
+        Category(name: "Fim do mundo"),
+        Category(name: "LGBTQIA+"),
+        Category(name: "Clichê"),
     ]
     
     @State private var selectedMood: [Category] = []
@@ -72,13 +82,16 @@ struct CategoriesView: View {
         }
     }
     let mood = [
-        Category(name: "Triste"),
-        Category(name: "Feliz"),
-        Category(name: "Quero rir"),
-        Category(name: "Inspirador"),
-        Category(name: "Mistério"),
-        Category(name: "Relaxante"),
-        Category(name: "Profundo"),
+        Category(name: "Apaixonado"),
+        Category(name: "Querendo chorar"),
+        Category(name: "Curtindo com os amigos"),
+        Category(name: "Inspirado"),
+        Category(name: "Buscando altas risadas"),
+        Category(name: "Pensando na vida"),
+        Category(name: "Buscando evoluir"),
+        Category(name: "Solucionando mistérios"),
+        Category(name: "Tranquilo e relaxado"),
+        Category(name: "A vida é uma só"),
     ]
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -118,10 +131,10 @@ struct CategoriesView: View {
                                 .padding(.horizontal, 12)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color("Arenito"), lineWidth: 2)
+                                        .stroke(Color("Abobora"), lineWidth: 2)
                                         .background(
                                             RoundedRectangle(cornerRadius: 20)
-                                                .fill(selectedGenre.contains { $0.id == category.id } ? Color("Arenito") : Color.white.opacity(0))
+                                                .fill(selectedGenre.contains { $0.id == category.id } ? Color("Abobora") : Color.white.opacity(0))
                                         )
                                 )
                                 
