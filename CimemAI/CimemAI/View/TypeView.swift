@@ -12,6 +12,11 @@ struct TypeView: View {
     var body: some View {
         NavigationStack {
             VStack (alignment: .center) {
+                Image("pipoco_com_duvida")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 230)
+                
                 VStack (alignment: .leading) {
                     Text("Qual tipo de conteúdo você procura agora?")
                         .font(.system(size: 32))
