@@ -7,16 +7,16 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Button {
-                    let domain = Bundle.main.bundleIdentifier!
-                    UserDefaults.standard.removePersistentDomain(forName: domain)
-                    UserDefaults.standard.synchronize()
-                    print(dataManager.allContent)
-                    
-                } label: {
-                    Text("RESET")
-                }
                 ScrollView{
+                    Button {
+                        let domain = Bundle.main.bundleIdentifier!
+                        UserDefaults.standard.removePersistentDomain(forName: domain)
+                        UserDefaults.standard.synchronize()
+                        print(dataManager.allContent)
+                        
+                    } label: {
+                        Text("RESET")
+                    }
                     LazyVGrid(columns: [GridItem(.flexible())]) {
                         ForEach(dataManager.allContent) { history in
                             ContentCard(watchedContent: history)
