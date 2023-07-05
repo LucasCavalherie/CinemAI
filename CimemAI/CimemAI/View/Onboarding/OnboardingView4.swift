@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingView4: View {
+    @Binding var showOnboarding : Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -84,8 +85,8 @@ struct OnboardingView4: View {
                         
                     }
                     
-                    NavigationLink {
-                        MainView()
+                    Button {
+                        showOnboarding = false
                     } label: {
                         
                         HStack {
@@ -114,6 +115,6 @@ struct OnboardingView4: View {
 
 struct OnboardingView4_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView4()
+        OnboardingView4(showOnboarding: .constant(true))
     }
 }
