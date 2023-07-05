@@ -7,6 +7,7 @@ struct FilmView: View {
     @State var load : Bool = false
 
     @State var findAllData: [FilmData] = []
+    @State var otherData: [FilmData] = []
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -36,7 +37,26 @@ struct FilmView: View {
                                         FilmDetail(conteudo: data)
                                         
                                     } label: {
-                                        FilmCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            FilmCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeMovie(oldMovie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -59,6 +79,17 @@ struct FilmView: View {
         .onAppear(perform: loadData)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
+    }
+    
+    func changeMovie(oldMovie: FilmData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldMovie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
     }
     
     func loadData() {
@@ -87,10 +118,14 @@ struct FilmView: View {
             for await filme in group {
                 if let filme = filme {
                     let repetido = DataManager.shared.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
-                    if !repetido && count < 3 {
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(filme)
+                            DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
+                        } else {
+                            otherData.append(filme)
+                        }
                         count = count + 1
-                        datas.append(filme)
-                        DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
                     }
                 }
             }
@@ -160,6 +195,6 @@ struct FilmView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "filme")
     }
 }
