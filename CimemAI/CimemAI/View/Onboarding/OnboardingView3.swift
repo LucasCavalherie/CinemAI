@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingView3: View {
+    @Binding var showOnboarding : Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -84,7 +85,7 @@ struct OnboardingView3: View {
                     }
                     
                     NavigationLink {
-                        OnboardingView4()
+                        OnboardingView4(showOnboarding: $showOnboarding)
                         
                     } label: {
                         
@@ -115,6 +116,6 @@ struct OnboardingView3: View {
 }
 struct OnboardingView3_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView3()
+        OnboardingView3(showOnboarding: .constant(true))
     }
 }

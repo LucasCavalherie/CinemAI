@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @Binding var showOnboarding : Bool
+    
     var body: some View {
         NavigationStack() {
             VStack(alignment: .center) {
@@ -50,7 +52,7 @@ struct OnboardingView: View {
                 
                 Spacer()
                 NavigationLink {
-                    OnboardingView2()
+                    OnboardingView2(showOnboarding: $showOnboarding)
                 } label: {
                     
                     HStack {
@@ -81,6 +83,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(showOnboarding: .constant(true))
     }
 }
