@@ -88,9 +88,9 @@ class DataManager {
             print("Erro ao codificar conteúdos assistidos: \(error)")
         }
     }
-    func checkFilmesAlreadyInToWatched(filme: FilmData) -> Bool {
-        var filmes = getFilmesFromFavorites()
-        if !filmes.contains(where: { $0.idFilme == filme.idFilme }) {
+    func checkContentsAlreadyInToWatched(filme: WatchedContent) -> Bool {
+        var contents = getContentsFromWatched()
+        if !contents.contains(where: { $0.content.idFilme == filme.content.idFilme }) {
             return false
         }
         return true

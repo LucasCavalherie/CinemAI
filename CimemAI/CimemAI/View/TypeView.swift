@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct TypeView: View {
-    @State var filterMovies = DataManager.shared.getFilmesFromFavorites()
-    @State var filterSeries = DataManager.shared.getSeriesFromFavorites()
+    @State var filterContents = DataManager.shared.getContentsFromWatched()
     
     var body: some View {
         NavigationStack {
@@ -25,7 +24,7 @@ struct TypeView: View {
                 
                 HStack {
                     NavigationLink {
-                        if filterMovies.count < 10 {
+                        if filterContents.count < 10 {
                             MethodScreen(type: "filme", onlyRepeated: false)
                         }
                     } label: {
@@ -43,7 +42,7 @@ struct TypeView: View {
                     Spacer()
                     
                     NavigationLink {
-                        if filterSeries.count < 10 {
+                        if filterContents.count < 10 {
                             MethodScreen(type: "série", onlyRepeated: false)
                         }
                     } label: {

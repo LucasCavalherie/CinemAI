@@ -86,7 +86,7 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    let repetido = DataManager.shared.checkFilmesAlreadyInToWatched(filme: filme)
+                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
                     if !repetido && count < 3 {
                         count = count + 1
                         datas.append(filme)

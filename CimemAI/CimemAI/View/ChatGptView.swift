@@ -4,8 +4,7 @@ struct ChatGptView: View {
     var type: String
     @State var inputText: String
     @State var response: [String]?
-    @State var filterMovies = DataManager.shared.getFilmesFromFavorites()
-    @State var filterSeries = DataManager.shared.getSeriesFromFavorites()
+    @State var filterContent = DataManager.shared.getContentsFromWatched()
         
     var body: some View {
         VStack {
@@ -52,14 +51,17 @@ struct ChatGptView: View {
         
         var alreadyRecomended : String = ""
         
-        if type == "filme" {
-            filterMovies.forEach() { movieWatched in
-                print(movieWatched.title)
-                alreadyRecomended = alreadyRecomended + movieWatched.title + ", "
-            }
-        } else if type == "série" {
-            filterSeries.forEach() { serieWatched in
-                alreadyRecomended = alreadyRecomended + serieWatched.title + ", "
+        filterContent.forEach() { movieWatched in
+            switch movieWatched.content {
+            case .filme(let film):
+                if type == "filme" {
+                    alreadyRecomended = alreadyRecomended + film.title + ", "
+                }
+                
+            case .serie(let serie):
+                if type == "série" {
+                    alreadyRecomended = alreadyRecomended + serie.title + ", "
+                }
             }
         }
         
