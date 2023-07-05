@@ -17,69 +17,75 @@ class DataManager {
     
     // MARK: - Filmes
     
-    func saveFilmeToFavorites(filme: FilmData) {
-        var filmes = getFilmesFromFavorites()
-        if !filmes.contains(where: { $0.idFilme == filme.idFilme }) {
-            filmes.append(filme)
-            saveFilmesToFavorites(filmes: filmes)
+    func saveContentToFavorites(content: WatchedContent) {
+        var contents = getContentsFromFavorites()
+        if !contents.contains(where: { $0.content.idFilme == content.content.idFilme }) {
+            contents.append(content)
+            saveContentsToFavorites(contents: contents)
         }
     }
-    func removeFilmeFromFavorites(filme: FilmData) {
-        var filmes = getFilmesFromFavorites()
-        filmes.removeAll { $0.idFilme == filme.idFilme }
-        saveFilmesToFavorites(filmes: filmes)
+
+    func removeContentFromFavorites(content: WatchedContent) {
+        var contents = getContentsFromFavorites()
+        contents.removeAll { $0.content.idFilme == content.content.idFilme }
+        saveContentsToFavorites(contents: contents)
     }
-    func getFilmesFromFavorites() -> [FilmData] {
+
+    func getContentsFromFavorites() -> [WatchedContent] {
         guard let data = defaults.data(forKey: favoritesKey) else {
             return []
         }
         do {
-            let filmes = try JSONDecoder().decode([FilmData].self, from: data)
-            return filmes
+            let contents = try JSONDecoder().decode([WatchedContent].self, from: data)
+            return contents
         } catch {
-            print("Erro ao decodificar filmes favoritos: \(error)")
+            print("Erro ao decodificar conteúdos favoritos: \(error)")
             return []
         }
     }
-    private func saveFilmesToFavorites(filmes: [FilmData]) {
+
+    private func saveContentsToFavorites(contents: [WatchedContent]) {
         do {
-            let data = try JSONEncoder().encode(filmes)
+            let data = try JSONEncoder().encode(contents)
             defaults.set(data, forKey: favoritesKey)
         } catch {
-            print("Erro ao codificar filmes favoritos: \(error)")
+            print("Erro ao codificar conteúdos favoritos: \(error)")
         }
     }
-    
-    func saveFilmeToWatched(filme: FilmData) {
-        var filmes = getFilmesFromWatched()
-        if !filmes.contains(where: { $0.idFilme == filme.idFilme }) {
-            filmes.append(filme)
-            saveFilmesToWatched(filmes: filmes)
+
+    func saveContentToWatched(content: WatchedContent) {
+        var contents = getContentsFromWatched()
+        if !contents.contains(where: { $0.content.idFilme == content.content.idFilme }) {
+            contents.append(content)
+            saveContentsToWatched(contents: contents)
         }
     }
-    func removeFilmeFromWatched(filme: FilmData) {
-        var filmes = getFilmesFromWatched()
-        filmes.removeAll { $0.idFilme == filme.idFilme }
-        saveFilmesToWatched(filmes: filmes)
+
+    func removeContentFromWatched(content: WatchedContent) {
+        var contents = getContentsFromWatched()
+        contents.removeAll { $0.content.idFilme == content.content.idFilme }
+        saveContentsToWatched(contents: contents)
     }
-    func getFilmesFromWatched() -> [FilmData] {
+
+    func getContentsFromWatched() -> [WatchedContent] {
         guard let data = defaults.data(forKey: watchedKey) else {
             return []
         }
         do {
-            let filmes = try JSONDecoder().decode([FilmData].self, from: data)
-            return filmes
+            let contents = try JSONDecoder().decode([WatchedContent].self, from: data)
+            return contents
         } catch {
-            print("Erro ao decodificar filmes assistidos: \(error)")
+            print("Erro ao decodificar conteúdos assistidos: \(error)")
             return []
         }
     }
-    private func saveFilmesToWatched(filmes: [FilmData]) {
+
+    private func saveContentsToWatched(contents: [WatchedContent]) {
         do {
-            let data = try JSONEncoder().encode(filmes)
+            let data = try JSONEncoder().encode(contents)
             defaults.set(data, forKey: watchedKey)
         } catch {
-            print("Erro ao codificar filmes assistidos: \(error)")
+            print("Erro ao codificar conteúdos assistidos: \(error)")
         }
     }
     func checkFilmesAlreadyInToWatched(filme: FilmData) -> Bool {
@@ -89,115 +95,7 @@ class DataManager {
         }
         return true
     }
-    
-    // MARK: - Séries
-    
-    func saveSerieToFavorites(serie: SerieData) {
-        var series = getSeriesFromFavorites()
-        if !series.contains(where: { $0.idFilme == serie.idFilme }) {
-            series.append(serie)
-            saveSeriesToFavorites(series: series)
-        }
-    }
-    func removeSerieFromFavorites(serie: SerieData) {
-        var series = getSeriesFromFavorites()
-        series.removeAll { $0.idFilme == serie.idFilme }
-        saveSeriesToFavorites(series: series)
-    }
-    func getSeriesFromFavorites() -> [SerieData] {
-        guard let data = defaults.data(forKey: favoritesKey) else {
-            return []
-        }
-        do {
-            let series = try JSONDecoder().decode([SerieData].self, from: data)
-            return series
-        } catch {
-            print("Erro ao decodificar séries favoritas: \(error)")
-            return []
-        }
-    }
-    private func saveSeriesToFavorites(series: [SerieData]) {
-        do {
-            let data = try JSONEncoder().encode(series)
-            defaults.set(data, forKey: favoritesKey)
-        } catch {
-            print("Erro ao codificar séries favoritas: \(error)")
-        }
-    }
-    
-    func saveSerieToWatched(serie: SerieData) {
-        var series = getSeriesFromWatched()
-        if !series.contains(where: { $0.idFilme == serie.idFilme }) {
-            series.append(serie)
-            saveSeriesToWatched(series: series)
-        }
-    }
-    func removeSerieFromWatched(serie: SerieData) {
-        var series = getSeriesFromWatched()
-        series.removeAll { $0.idFilme == serie.idFilme }
-        saveSeriesToWatched(series: series)
-    }
-    func getSeriesFromWatched() -> [SerieData] {
-        guard let data = defaults.data(forKey: watchedKey) else {
-            return []
-        }
-        do {
-            let series = try JSONDecoder().decode([SerieData].self, from: data)
-            return series
-        } catch {
-            print("Erro ao decodificar séries assistidas: \(error)")
-            return []
-        }
-    }
-    private func saveSeriesToWatched(series: [SerieData]) {
-        do {
-            let data = try JSONEncoder().encode(series)
-            defaults.set(data, forKey: watchedKey)
-        } catch {
-            print("Erro ao codificar séries assistidas: \(error)")
-        }
-    }
-    
-    // MARK: - Custom
-    
-    func createCustomList(name: String, filmes: [FilmData], series: [SerieData]) {
-        var customLists = getCustomLists()
-    
-        let filmeIds = Set(filmes.map { $0.idFilme })
-        let existingFilmeIds = customLists.flatMap { $0.filmes }.map { $0.idFilme }
-        let newFilmes = filmes.filter { !existingFilmeIds.contains($0.idFilme) }
-        
-        let newList = CustomList(name: name, filmes: newFilmes, series: series)
-        customLists.append(newList)
-        saveCustomLists(customLists)
-    }
-    func removeCustomList(at index: Int) {
-        var customLists = getCustomLists()
-        if index >= 0 && index < customLists.count {
-            customLists.remove(at: index)
-            saveCustomLists(customLists)
-        }
-    }
-    func getCustomLists() -> [CustomList] {
-        guard let data = defaults.data(forKey: customListsKey) else {
-            return []
-        }
-        do {
-            let customLists = try JSONDecoder().decode([CustomList].self, from: data)
-            return customLists
-        } catch {
-            print("Erro ao decodificar listas personalizadas: \(error)")
-            return []
-        }
-    }
-    private func saveCustomLists(_ customLists: [CustomList]) {
-        do {
-            let data = try JSONEncoder().encode(customLists)
-            defaults.set(data, forKey: customListsKey)
-        } catch {
-            print("Erro ao codificar listas personalizadas: \(error)")
-        }
-    }
+
     
     // MARK: - History
     
@@ -233,5 +131,26 @@ class DataManager {
             print("Erro ao codificar conteúdo assistido: \(error)")
         }
     }
-}
+    func getFilm(by id: Int32) -> FilmData? {
+        let watchedContent = getWatchedContent()
+        
+        for content in watchedContent {
+            if let film = content as? FilmData, film.idFilme == id {
+                return film
+            }
+        }
+        
+        return nil
+    }
+    func getSerie(by id: Int32) -> SerieData? {
+        let watchedContent = getWatchedContent()
 
+        for content in watchedContent {
+            if let serie = content as? SerieData, serie.idFilme == id {
+                return serie
+            }
+        }
+        
+        return nil
+    }
+}

@@ -1,13 +1,11 @@
 import SwiftUI
 
-struct FilmDetail: View {
-    @State var conteudo: FilmData
-    @State private var favoriteFilms = DataManager.shared.getFilmesFromFavorites()
+struct SerieDetail: View {
+    @State var conteudo: SerieData
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
         Button(action: {
@@ -15,6 +13,7 @@ struct FilmDetail: View {
         }){
             BackButton()
     }}
+
     
     var body: some View {
         ScrollView{
@@ -24,9 +23,18 @@ struct FilmDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Color.red
+                        Image("pipocotriste")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
                     } else {
-                        Color.blue
+                        Image("pipoco")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
+                        
                     }
                 }
                 VStack(alignment: .leading, spacing: 19){
@@ -52,16 +60,17 @@ struct FilmDetail: View {
                             }
                         }
                         Button(action: {
-                            conteudo.favorite!.toggle()
-                            if conteudo.favorite! {
-                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
-                                
+                            conteudo.favorite.toggle()
+                            if conteudo.favorite {
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                DataManager.shared.saveContentToFavorites(content: watchedContent)
                             } else {
-                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                DataManager.shared.removeContentFromFavorites(content: watchedContent)
                             }
-                            print(DataManager.shared.getFilmesFromFavorites())
+                            print(DataManager.shared.getContentsFromFavorites())
                         }, label: {
-                            if !conteudo.favorite! {
+                            if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
                                     .foregroundColor(Color("Azul_Quase_Preto"))
@@ -71,16 +80,36 @@ struct FilmDetail: View {
                                     .foregroundColor(.red)
                             }
                         })
-                        
+
+                        Button(action: {
+                            conteudo.watched.toggle()
+                            if conteudo.watched {
+                                DataManager.shared.saveContentToWatched(content: WatchedContent(date: Date(), content: .serie(conteudo)))
+                            } else {
+                                DataManager.shared.removeContentFromWatched(content: WatchedContent(date: Date(), content: .serie(conteudo)))
+                            }
+                            print(DataManager.shared.getContentsFromWatched())
+                        }, label: {
+                            if !conteudo.watched {
+                                Image("Olhozin")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            } else {
+                                Image("Olhozin.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            }
+                        })
                     }
                     .padding(.horizontal, 30)
                     HStack(spacing: 10){
                         HStack{
                             Text(.init(systemName: "clock"))
                                 .font(Font.custom("SF Pro", size: 14))
-                            Text("\(conteudo.duration) min")
+                            Text("\(conteudo.duration) temporadas")
                                 .font(Font.custom("SF Pro", size: 14))
-                            
                                 .multilineTextAlignment(.center)
                             
                         }
@@ -107,7 +136,6 @@ struct FilmDetail: View {
                                         .inset(by: 0.5)
                                         .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -121,17 +149,14 @@ struct FilmDetail: View {
                     .cornerRadius(28))
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea([.top])
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
     }
-    
-    
 }
 
-
-struct FilmDetail_Previews: PreviewProvider {
+struct SerieDetail_Previews: PreviewProvider {
     static var previews: some View {
-        FilmDetail(conteudo: FilmData(idFilme: 19995, title: "Avatar", image: "/iNMP8uzV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571, favorite: false, watched: false))
+        SerieDetail(conteudo: SerieData(idFilme: 19995, title: "Dark", image: "/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg", releaseDate: "2017-12-01", originalTitle: nil, duration: 3, plot: "Quatro famílias iniciam uma desesperada busca por respostas quando uma criança desaparece e um complexo mistério envolvendo três gerações começa a se revelar.", rating: 8.427, favorite: false, watched: false))
     }
 }
