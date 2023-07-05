@@ -8,15 +8,12 @@ struct HistoryView: View {
         NavigationStack{
             VStack{
                 ScrollView{
-                    Button {
-                        let domain = Bundle.main.bundleIdentifier!
-                        UserDefaults.standard.removePersistentDomain(forName: domain)
-                        UserDefaults.standard.synchronize()
-                        print(dataManager.allContent)
-                        
-                    } label: {
-                        Text("RESET")
+                    Button(action: {
+                        clearUserDefaults()
+                    }) {
+                        Text("Limpar UserDefaults")
                     }
+
                     LazyVGrid(columns: [GridItem(.flexible())]) {
                         ForEach(dataManager.allContent) { history in
                             ContentCard(watchedContent: history)
@@ -26,7 +23,16 @@ struct HistoryView: View {
             }
         }
     }
+    func clearUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "favorites")
+        UserDefaults.standard.removeObject(forKey: "watched")
+        UserDefaults.standard.removeObject(forKey: "allContent")
+        UserDefaults.standard.synchronize()
+        print(dataManager.allContent)
+    }
+
 }
+
 
 
 struct HistoryView_Previews: PreviewProvider {

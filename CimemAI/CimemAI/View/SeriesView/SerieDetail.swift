@@ -25,16 +25,12 @@ struct SerieDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Image("pipocotriste")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipped()
+                        Rectangle()
+                            .opacity(0)
                             .frame(width: 390, height: 600)
                     } else {
-                        Image("pipoco")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipped()
+                        Rectangle()
+                            .opacity(0)
                             .frame(width: 390, height: 600)
                         
                     }
@@ -72,6 +68,7 @@ struct SerieDetail: View {
                                 dataManager.removeFavorite(watchedContent)
                             }
                             print(dataManager.favorites)
+                            dataManager.saveToUserDefaults()
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
@@ -94,6 +91,7 @@ struct SerieDetail: View {
                                 dataManager.removeWatched(watchedContent)
                             }
                             print(dataManager.watched)
+                            dataManager.saveToUserDefaults()
                         }, label: {
                             if !conteudo.watched {
                                 Image("Olhozin")

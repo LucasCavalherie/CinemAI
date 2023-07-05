@@ -42,13 +42,11 @@ struct ChatGptView: View {
     }
 
     func search(message: String, completion: @escaping ([String]) -> Void) {
+        
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
-        
         let promptUser = Prompt(role: "user", content: message)
-        
         let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 9 nomes de \(type) no seguinte formato: nome1;nome2;nome3. Não faça nenhum comentário. Voce retornara apenas os nomes dos \(type) no formato indicado.")
-        
         var alreadyRecomended : String = ""
         
         dataMananger.allContent.forEach() { movieWatched in

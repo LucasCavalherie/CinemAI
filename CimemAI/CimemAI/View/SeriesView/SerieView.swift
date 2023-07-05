@@ -117,7 +117,7 @@ struct SerieView: View {
             
             for await serie in group {
                 if let serie = serie {
-                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .serie(serie)))
+                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(content: WatchedContent(date: Date(), content: .serie(serie)))
                     if !repetido {
                         if count < 3 {
                             datas.append(serie)

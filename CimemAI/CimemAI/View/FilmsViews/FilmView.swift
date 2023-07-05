@@ -36,7 +36,6 @@ struct FilmView: View {
                                 ForEach(findAllData) { data in
                                     NavigationLink {
                                         FilmDetail(conteudo: data)
-                                        
                                     } label: {
                                         ZStack (alignment: .topTrailing) {
                                             FilmCard(conteudo: data)
@@ -118,11 +117,12 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    let repetido = dataMananger.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
+                    let repetido = dataMananger.checkContentsAlreadyInToWatched(content: WatchedContent(date: Date(), content: .filme(filme)))
+                    dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
                     if !repetido {
                         if count < 3 {
                             datas.append(filme)
-                            dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
+                            
                         } else {
                             otherData.append(filme)
                         }
