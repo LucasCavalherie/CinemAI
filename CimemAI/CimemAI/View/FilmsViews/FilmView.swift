@@ -5,6 +5,7 @@ struct FilmView: View {
     var contents : [String]
     var type : String
     @State var load : Bool = false
+    @ObservedObject var dataMananger = DataManager.shared
 
     @State var findAllData: [FilmData] = []
     
@@ -85,8 +86,8 @@ struct FilmView: View {
             for await filme in group {
                 if let filme = filme {
                     datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+                    dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
+                    print(dataMananger.allContent.count)
                 }
             }
             

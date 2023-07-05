@@ -6,6 +6,7 @@ struct SerieView: View {
     @State var findData: SerieData?
     @State var findAllData: [SerieData] = []
     @State var load : Bool = false
+    @ObservedObject var dataManager = DataManager.shared
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -85,8 +86,8 @@ struct SerieView: View {
             for await filme in group {
                 if let filme = filme {
                     datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .serie(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+                    dataManager.addContent(WatchedContent(date: Date(), content: .serie(filme)))
+                    print(dataManager.allContent.count)
                 }
             }
             

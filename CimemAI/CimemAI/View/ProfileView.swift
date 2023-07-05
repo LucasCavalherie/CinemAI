@@ -1,16 +1,8 @@
-//
-//  HistoryView.swift
-//  CimemAI
-//
-//  Created by Júlia Savaris on 29/06/23.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
     
-    @State var favorites = DataManager.shared.getContentsFromFavorites()
-    @State var watched = DataManager.shared.getContentsFromWatched()
+    @ObservedObject private var dataManager = DataManager.shared
     
     var body: some View {
         NavigationStack{
@@ -31,7 +23,7 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     FavoriteViews()
                 }, label: {
-                    ProfileListCard(title: "Favoritos", contents: favorites)
+                    ProfileListCard(title: "Favoritos", contents: dataManager.favorites)
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)
@@ -43,14 +35,13 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     WatchedView()
                 }, label: {
-                    ProfileListCard(title: "Assistidos", contents: watched)
+                    ProfileListCard(title: "Assistidos", contents: dataManager.watched)
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)
                     .frame(width: 350, height: 230)
                     .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.3))
                     .cornerRadius(16))
-                
                 .padding(.bottom, 40)
                 
             }

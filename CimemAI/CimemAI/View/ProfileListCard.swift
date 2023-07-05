@@ -64,7 +64,7 @@ struct ProfileListCard: View {
 
 struct ProfileListCard_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleContents = Array(DataManager.shared.getContentsFromFavorites().prefix(3))
+        let sampleContents = Array(DataManager.shared.allContent.prefix(3))
         return ProfileListCard(title: "Favoritos", contents: sampleContents)
     }
 }
