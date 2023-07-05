@@ -1,14 +1,21 @@
 import Foundation
 
-struct WatchedContent: Codable {
+struct WatchedContent: Codable, Identifiable {
+    let id = UUID()
     let date: Date
     let content: Content
 
     enum Content: Codable {
+        var idFilme: Int32 {
+            switch self {
+            case .filme(let filmData):
+                return filmData.idFilme
+            case .serie(let serieData):
+                return serieData.idFilme
+            }
+        }
         case filme(FilmData)
         case serie(SerieData)
-
-        // Codificação e decodificação personalizadas para lidar com casos associados
         enum CodingKeys: CodingKey {
             case filme, serie
         }

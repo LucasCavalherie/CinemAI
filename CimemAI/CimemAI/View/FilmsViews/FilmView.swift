@@ -1,12 +1,15 @@
 import SwiftUI
+import CoreData
 
-struct SerieView: View {
+struct FilmView: View {
     var contents : [String]
     var type : String
-    @State var findData: SerieData?
-    @State var findAllData: [SerieData] = []
     @State var load : Bool = false
+    @ObservedObject var dataMananger = DataManager.shared
 
+    @State var findAllData: [FilmData] = []
+    @State var otherData: [FilmData] = []
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
         Button(action: {
@@ -20,7 +23,7 @@ struct SerieView: View {
             VStack(alignment: .leading, spacing: 16) {
                 if load {
                     if findAllData.count > 0 {
-                        Text("Estes são as séries mais compatíveis com você hoje:")
+                        Text("Estes são os três filmes mais compatíveis com você hoje:")
                             .font(
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
@@ -32,20 +35,43 @@ struct SerieView: View {
                             HStack(spacing: 20){
                                 ForEach(findAllData) { data in
                                     NavigationLink {
-                                        SerieDetail(conteudo: data)
+                                        FilmDetail(conteudo: data)
+                                        
                                     } label: {
-                                        SerieCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            FilmCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeMovie(oldMovie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
+                        
                     } else {
                         ErrorView()
                     }
                 } else {
-                    Text("Carregando...")
+                    LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                            .frame(width: 250, height: 112.0)
+                            .scaleEffect(0.8)
+                            .padding(.bottom, 60)
                 }
-                
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
@@ -54,6 +80,17 @@ struct SerieView: View {
         .onAppear(perform: loadData)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
+    }
+    
+    func changeMovie(oldMovie: FilmData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldMovie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
     }
     
     func loadData() {
@@ -67,23 +104,30 @@ struct SerieView: View {
             }
         }
     }
-
     
-    func findAll () async -> [SerieData] {
-        return await withTaskGroup(of: SerieData?.self, body: { group in
-            var datas = [SerieData]()
+    func findAll () async -> [FilmData] {
+        return await withTaskGroup(of: FilmData?.self, body: { group in
+            var datas = [FilmData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
-                    return await self.findSeries(message: content)
+                    return await self.findFilmes(message: content)
                 }
             }
             
             for await filme in group {
                 if let filme = filme {
-                    datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .serie(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+                    let repetido = dataMananger.checkContentsAlreadyInToWatched(filme: WatchedContent(date: Date(), content: .filme(filme)))
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(filme)
+                            dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
+                        } else {
+                            otherData.append(filme)
+                        }
+                        count = count + 1
+                    }
                 }
             }
             
@@ -91,12 +135,12 @@ struct SerieView: View {
         })
     }
     
-    func findSeries(message: String) async -> SerieData? {
+    func findFilmes(message: String) async -> FilmData? {
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
-        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/movie?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "accept")
-    
+        
         request.httpMethod = "GET"
         
         guard let (data, _) = try? await URLSession.shared.data(for: request) else {
@@ -114,10 +158,11 @@ struct SerieView: View {
         guard response.results.count > 0 else {
             print("Reponse.count == 0")
             return nil
+            
         }
         let id = response.results[0].id
         
-        var urlFind = URLRequest(url: URL(string: "https://api.themoviedb.org/3/tv/\(id)?language=pt-BR")!,timeoutInterval: Double.infinity)
+        var urlFind = URLRequest(url: URL(string: "https://api.themoviedb.org/3/movie/\(id)?language=pt-BR")!,timeoutInterval: Double.infinity)
         urlFind.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         urlFind.httpMethod = "GET"
         
@@ -126,12 +171,12 @@ struct SerieView: View {
             return nil
         }
         
-        guard let response = try? decoder.decode(SerieFindResponse.self, from: data) else {
+        guard let response = try? decoder.decode(FindResponse.self, from: data) else {
             print("deu pau na response")
             return nil
         }
         
-        let conteudo = SerieData(
+        let conteudo = FilmData(
             idFilme: response.id,
             title: response.title,
             image: response.image,
@@ -141,16 +186,16 @@ struct SerieView: View {
             plot: response.plot,
             rating: response.rating,
             favorite: false,
-            saved: false,
             watched: false
+            
         )
         return conteudo
     }
     
 }
 
-struct SerieView_Previews: PreviewProvider {
+struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        SerieView(contents: ["dark", "black-Mirror", "suits"], type: "série")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "filme")
     }
 }

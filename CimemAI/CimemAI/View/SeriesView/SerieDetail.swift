@@ -2,13 +2,12 @@ import SwiftUI
 
 struct SerieDetail: View {
     @State var conteudo: SerieData
-
-    @State private var favoriteSeries = DataManager.shared.getSeriesFromFavorites()
-
+    @ObservedObject private var dataManager = DataManager.shared
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
         Button(action: {
@@ -26,9 +25,18 @@ struct SerieDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Color.red
+                        Image("pipocotriste")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
                     } else {
-                        Color.blue
+                        Image("pipoco")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
+                        
                     }
                 }
                 VStack(alignment: .leading, spacing: 19){
@@ -54,15 +62,18 @@ struct SerieDetail: View {
                             }
                         }
                         Button(action: {
-                            conteudo.favorite!.toggle()
-                            if conteudo.favorite! {
-                                DataManager.shared.saveSerieToFavorites(serie: conteudo)
+                            conteudo.favorite.toggle()
+                            if conteudo.favorite {
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.addFavorite(watchedContent)
                             } else {
-                                DataManager.shared.removeSerieFromFavorites(serie: conteudo)
+                                
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.removeFavorite(watchedContent)
                             }
-                            print(DataManager.shared.getFilmesFromFavorites())
+                            print(dataManager.favorites)
                         }, label: {
-                            if !conteudo.favorite! {
+                            if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
                                     .foregroundColor(Color("Azul_Quase_Preto"))
@@ -70,6 +81,30 @@ struct SerieDetail: View {
                                 Text(.init(systemName: "heart.fill"))
                                     .font(Font.custom("SF Pro", size: 30))
                                     .foregroundColor(.red)
+                            }
+                        })
+
+                        Button(action: {
+                            conteudo.watched.toggle()
+                            if conteudo.watched {
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.addWatched(watchedContent)
+                            } else {
+                                let watchedContent = WatchedContent(date: Date(), content: .serie(conteudo))
+                                dataManager.removeWatched(watchedContent)
+                            }
+                            print(dataManager.watched)
+                        }, label: {
+                            if !conteudo.watched {
+                                Image("Olhozin")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            } else {
+                                Image("Olhozin.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
                             }
                         })
                     }
@@ -106,7 +141,6 @@ struct SerieDetail: View {
                                         .inset(by: 0.5)
                                         .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -120,7 +154,7 @@ struct SerieDetail: View {
                     .cornerRadius(28))
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea([.top])
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
     }
@@ -128,6 +162,6 @@ struct SerieDetail: View {
 
 struct SerieDetail_Previews: PreviewProvider {
     static var previews: some View {
-        SerieDetail(conteudo: SerieData(idFilme: 19995, title: "Dark", image: "/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg", releaseDate: "2017-12-01", originalTitle: nil, duration: 3, plot: "Quatro famílias iniciam uma desesperada busca por respostas quando uma criança desaparece e um complexo mistério envolvendo três gerações começa a se revelar.", rating: 8.427, favorite: false))
+        SerieDetail(conteudo: SerieData(idFilme: 19995, title: "Dark", image: "/5LoHuHWA4H8jElFlZDvsmU2n63b.jpg", releaseDate: "2017-12-01", originalTitle: nil, duration: 3, plot: "Quatro famílias iniciam uma desesperada busca por respostas quando uma criança desaparece e um complexo mistério envolvendo três gerações começa a se revelar.", rating: 8.427, favorite: false, watched: false))
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FilmDetail: View {
     @State var conteudo: FilmData
-    @State private var favoriteFilms = DataManager.shared.getFilmesFromFavorites()
+    @ObservedObject private var dataManager = DataManager.shared
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
@@ -24,9 +24,18 @@ struct FilmDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Color.red
+                        Image("pipocotriste")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
                     } else {
-                        Color.blue
+                        Image("pipoco")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .frame(width: 390, height: 600)
+                        
                     }
                 }
                 VStack(alignment: .leading, spacing: 19){
@@ -52,16 +61,16 @@ struct FilmDetail: View {
                             }
                         }
                         Button(action: {
-                            conteudo.favorite!.toggle()
-                            if conteudo.favorite! {
-                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
-                                
+                            conteudo.favorite.toggle()
+                            if conteudo.favorite {
+                                let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
+                                dataManager.addFavorite(watchedContent)
                             } else {
-                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
+                                let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
+                                dataManager.removeFavorite(watchedContent)
                             }
-                            print(DataManager.shared.getFilmesFromFavorites())
                         }, label: {
-                            if !conteudo.favorite! {
+                            if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
                                     .foregroundColor(Color("Azul_Quase_Preto"))
@@ -71,6 +80,28 @@ struct FilmDetail: View {
                                     .foregroundColor(.red)
                             }
                         })
+
+                        Button(action: {
+                            conteudo.watched.toggle()
+                            if conteudo.watched {
+                                dataManager.addWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
+                            } else {
+                                dataManager.removeWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
+                            }
+                        }, label: {
+                            if !conteudo.watched {
+                                Image("Olhozin")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            } else {
+                                Image("Olhozin.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            }
+                        })
+
                         
                     }
                     .padding(.horizontal, 30)
@@ -121,7 +152,7 @@ struct FilmDetail: View {
                     .cornerRadius(28))
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea([.top])
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
     }

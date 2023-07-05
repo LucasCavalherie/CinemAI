@@ -22,7 +22,7 @@ struct InicialLoading: View {
                 }
         }
         .onAppear() {
-            withAnimation(.easeInOut(duration: 2.5)) {
+            withAnimation(.easeInOut(duration: 1.3)) {
                 introOpacity = 0.0
                 viewOpacity = 1.0
             }
