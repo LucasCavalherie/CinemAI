@@ -1,13 +1,13 @@
 //
-//  OnboardingView2.swift
+//  OnboardingView6.swift
 //  CimemAI
 //
-//  Created by Júlia Savaris on 03/07/23.
+//  Created by Júlia Savaris on 06/07/23.
 //
 
 import SwiftUI
 
-struct OnboardingView2: View {
+struct OnboardingView6: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Binding var showOnboarding : Bool
@@ -19,19 +19,19 @@ struct OnboardingView2: View {
                     Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
                     Image(systemName: "circle.fill")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
                     
@@ -40,32 +40,31 @@ struct OnboardingView2: View {
                 
                 Spacer()
                 
-                Text("Modo descrição")
+                Text("Assistidos")
                     .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
-                    .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                    .foregroundColor(Color("Azul_Escuro"))
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 1)
                 
-                Text("Escreva como se você fosse \npedir sugestões a um amigo!")
+                Text("Já assistiu algum dos filmes \nque foram sugeridos?")
                     .font(.system(size: 22))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                Image("pipoco_falando")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 320)
-                    .padding(.bottom)
-                    
-                
-                Text("Descreva gêneros, duração, características do roteiro, diretores, atores participantes e muito mais!")
+                Text("Clique no ícone de Assistido e o filme não será sugerido novamente!")
                     .font(.system(size: 18))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
+                    .padding(.top, 1)
                 
-                Spacer()
+                
+                Image("pipoco_watched")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 340)
+                    .padding(.bottom, 20)
                 
                 HStack {
                     Button {
@@ -95,12 +94,12 @@ struct OnboardingView2: View {
                     }
                     
                     NavigationLink {
-                        OnboardingView3(showOnboarding: $showOnboarding)
+                        OnboardingView4(showOnboarding: $showOnboarding)
                         
                     } label: {
                         
                         HStack {
-                            Text("Próximo")
+                            Text("Concluir")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
@@ -113,27 +112,20 @@ struct OnboardingView2: View {
                             
                             
                         }
-                        .frame(width: 150, height: 60, alignment: .center)
-                        // .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                        .cornerRadius(16)
-                        .padding(.vertical, 8)
-                        
                     }
+                    .frame(width: 150, height: 60, alignment: .center)
+                    // .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+                    .cornerRadius(16)
+                    .padding(.vertical, 8)
                 }
-                
             }
-            
-            
         }
         .navigationBarBackButtonHidden(true)
-        
-        
     }
 }
-    
 
-struct OnboardingView2_Previews: PreviewProvider {
+struct OnboardingView6_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView2(showOnboarding: .constant(true))
+        OnboardingView6(showOnboarding: .constant(true))
     }
 }

@@ -214,10 +214,10 @@ struct CategoriesView: View {
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
+                            .frame(width: 300, height: 60, alignment: .center)
+                            .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+                            .cornerRadius(16)
                     }
-                    .frame(width: 300, height: 60, alignment: .center)
-                    .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                    .cornerRadius(16)
                     .padding(.vertical, 8)
                 }
             }

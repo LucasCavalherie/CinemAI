@@ -1,13 +1,13 @@
 //
-//  OnboardingView2.swift
+//  OnboardingView5.swift
 //  CimemAI
 //
-//  Created by Júlia Savaris on 03/07/23.
+//  Created by Júlia Savaris on 06/07/23.
 //
 
 import SwiftUI
 
-struct OnboardingView2: View {
+struct OnboardingView5: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Binding var showOnboarding : Bool
@@ -19,13 +19,13 @@ struct OnboardingView2: View {
                     Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
                     Image(systemName: "circle.fill")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
                     Image(systemName: "circle")
@@ -40,32 +40,30 @@ struct OnboardingView2: View {
                 
                 Spacer()
                 
-                Text("Modo descrição")
+                Text("Favoritos")
                     .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
-                    .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                    .foregroundColor(Color("Vermelho"))
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 1)
                 
-                Text("Escreva como se você fosse \npedir sugestões a um amigo!")
+                Text("Salve suas sugestões favoritas!")
                     .font(.system(size: 22))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                Image("pipoco_falando")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 320)
-                    .padding(.bottom)
-                    
-                
-                Text("Descreva gêneros, duração, características do roteiro, diretores, atores participantes e muito mais!")
+                Text("Selecione o coração e guarde seus filmes favoritos!")
                     .font(.system(size: 18))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
+                    .padding(.top, 1)
                 
-                Spacer()
+                Image("coracao_favoritos")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 340)
+                    .padding(.bottom, 40)
                 
                 HStack {
                     Button {
@@ -95,7 +93,7 @@ struct OnboardingView2: View {
                     }
                     
                     NavigationLink {
-                        OnboardingView3(showOnboarding: $showOnboarding)
+                        OnboardingView6(showOnboarding: $showOnboarding)
                         
                     } label: {
                         
@@ -113,27 +111,20 @@ struct OnboardingView2: View {
                             
                             
                         }
-                        .frame(width: 150, height: 60, alignment: .center)
-                        // .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-                        .cornerRadius(16)
-                        .padding(.vertical, 8)
-                        
                     }
+                    .frame(width: 150, height: 60, alignment: .center)
+                    // .background(Color(red: 0.15, green: 0.36, blue: 0.44))
+                    .cornerRadius(16)
+                    .padding(.vertical, 8)
                 }
-                
             }
-            
-            
         }
         .navigationBarBackButtonHidden(true)
-        
-        
     }
 }
-    
 
-struct OnboardingView2_Previews: PreviewProvider {
+struct OnboardingView5_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView2(showOnboarding: .constant(true))
+        OnboardingView5(showOnboarding: .constant(true))
     }
 }

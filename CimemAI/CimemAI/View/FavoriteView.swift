@@ -2,6 +2,14 @@ import SwiftUI
 
 struct FavoriteViews: View {
     @ObservedObject var dataManager = DataManager.shared
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
 
     var body: some View {
         NavigationStack{
@@ -47,6 +55,8 @@ struct FavoriteViews: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: btnBack)
     }
 }
 

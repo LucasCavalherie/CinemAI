@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct OnboardingView3: View {
-    @Binding var showOnboarding : Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @Binding var showOnboarding : Bool
     
     var body: some View {
         NavigationStack() {
@@ -27,6 +28,13 @@ struct OnboardingView3: View {
                     Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    
                     
                 }
                 .padding(.top, 12)
@@ -34,7 +42,7 @@ struct OnboardingView3: View {
                 Spacer()
                 
                 Text("Modo Seleção")
-                    .font(Font.custom("Poppins", size: 32) .weight(.bold))
+                    .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
                     .foregroundColor(Color("Arenito"))
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 1)
@@ -85,7 +93,7 @@ struct OnboardingView3: View {
                     }
                     
                     NavigationLink {
-                        OnboardingView4(showOnboarding: $showOnboarding)
+                        OnboardingView5(showOnboarding: $showOnboarding)
                         
                     } label: {
                         

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
     @Binding var showOnboarding : Bool
     
     var body: some View {
@@ -26,25 +27,29 @@ struct OnboardingView: View {
                     Image(systemName: "circle")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
                     
                 }
                 .padding(.top, 12)
                 
                 Spacer()
                 
+                Image("bichinhos")
+                    .resizable()
+                    .scaledToFit()
                 
-                Text("Sem travar na hora \nde escolher o que \nassistir!")
-                    .font(Font.custom("Poppins", size: 28) .weight(.bold))
+                Text("Sem travar na hora de\n escolher o que assistir!")
+                    .font(Font.custom("Poppins-Regular", size: 28) .weight(.bold))
                     .foregroundColor(Color(red: 0.61, green: 0.13, blue: 0.15))
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 8)
                 
-                Image("bichinhos")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.bottom)
-                
-                Text("Encontre os filmes ou séries que \nmais combinam com você, de forma \ncustomizada e rápida!")
+                Text("Encontre os filmes ou séries que mais \ncombinam com você, de forma \ncustomizada e rápida!")
                     .font(.system(size: 19))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)

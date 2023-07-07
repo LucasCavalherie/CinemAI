@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OnboardingView4: View {
-    @Binding var showOnboarding : Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Binding var showOnboarding : Bool
     
     var body: some View {
         NavigationStack() {
@@ -27,6 +27,12 @@ struct OnboardingView4: View {
                     Image(systemName: "circle.fill")
                         .font(.system(size: 12))
                         .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
+                    Image(systemName: "circle")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .systemGray))
                     
                 }
                 .padding(.top, 12)
@@ -34,7 +40,7 @@ struct OnboardingView4: View {
                 Spacer()
                 
                 Text("Histórico e Perfil")
-                    .font(Font.custom("Poppins", size: 32) .weight(.bold))
+                    .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
                     .foregroundColor(Color("Azul"))
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 1)
@@ -45,14 +51,14 @@ struct OnboardingView4: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                Text("Veja também sua lista de assistidos e favoritos na aba perfil!\n")
+                Text("Veja também sua lista de Assistidos e Favoritos na aba perfil!\n")
                     .font(.system(size: 18))
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
                     .padding(.top, 1)
                 
-                Image("pipoco_selecionando")
+                Image("pipoco_tab_bar")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 320, height: 340)

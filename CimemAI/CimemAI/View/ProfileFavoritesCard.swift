@@ -4,6 +4,7 @@ struct ProfileFavoriteCard: View {
     
     var contents : [WatchedContent]
     let title : String
+    
 
     var body: some View {
         VStack {
@@ -25,14 +26,8 @@ struct ProfileFavoriteCard: View {
                         .fill(Color.gray)
                         .frame(width: 95, height: 143)
                         .cornerRadius(8)
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(width: 95, height: 143)
-                        .cornerRadius(8)
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(width: 95, height: 143)
-                        .cornerRadius(8)
+                        .opacity(0)
+                    
                 }
             } else {
                 HStack {

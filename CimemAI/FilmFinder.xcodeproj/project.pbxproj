@@ -11,10 +11,6 @@
 		73139CF82A4E1A810050D1D0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73139CF72A4E1A810050D1D0 /* LottieView.swift */; };
 		73139CFA2A4E1AE30050D1D0 /* pipocascertasmesmo.json in Resources */ = {isa = PBXBuildFile; fileRef = 73139CF92A4E1AE30050D1D0 /* pipocascertasmesmo.json */; };
 		731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CBD902A4A13C0004FF08E /* CategoriesView.swift */; };
-		736D95002A55F8130064C6DB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D94FC2A55F8130064C6DB /* OnboardingView.swift */; };
-		736D95012A55F8130064C6DB /* OnboardingView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D94FD2A55F8130064C6DB /* OnboardingView2.swift */; };
-		736D95022A55F8130064C6DB /* OnboardingView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D94FE2A55F8130064C6DB /* OnboardingView4.swift */; };
-		736D95032A55F8130064C6DB /* OnboardingView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D94FF2A55F8130064C6DB /* OnboardingView3.swift */; };
 		7383DF342A4F57E100193055 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7383DF332A4F57E100193055 /* MainView.swift */; };
 		7383DF362A4F648500193055 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7383DF352A4F648500193055 /* BackButton.swift */; };
 		73B5BFA12A54A0DB0077BDC4 /* FlexStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B5BFA02A54A0DB0077BDC4 /* FlexStack.swift */; };
@@ -35,6 +31,12 @@
 		AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */; };
 		AF0091102A4B8BC300CB4530 /* SerieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */; };
 		AF2C61342A549CD2000A66F1 /* ProfileFavoritesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C61332A549CD2000A66F1 /* ProfileFavoritesCard.swift */; };
+		AF2C613E2A5855F8000A66F1 /* OnboardingView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C61382A5855F8000A66F1 /* OnboardingView3.swift */; };
+		AF2C613F2A5855F8000A66F1 /* OnboardingView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C61392A5855F8000A66F1 /* OnboardingView4.swift */; };
+		AF2C61402A5855F8000A66F1 /* OnboardingView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C613A2A5855F8000A66F1 /* OnboardingView2.swift */; };
+		AF2C61412A5855F8000A66F1 /* OnboardingView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C613B2A5855F8000A66F1 /* OnboardingView5.swift */; };
+		AF2C61422A5855F8000A66F1 /* OnboardingView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C613C2A5855F8000A66F1 /* OnboardingView6.swift */; };
+		AF2C61432A5855F8000A66F1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2C613D2A5855F8000A66F1 /* OnboardingView.swift */; };
 		AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482622A423B40001C9628 /* CimemAIApp.swift */; };
 		AF4482652A423B40001C9628 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4482642A423B40001C9628 /* FilmView.swift */; };
 		AF4482672A423B41001C9628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4482662A423B41001C9628 /* Assets.xcassets */; };
@@ -73,10 +75,6 @@
 		73139CF72A4E1A810050D1D0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LottieView.swift; path = CimemAi/Animation/LottieView.swift; sourceTree = SOURCE_ROOT; };
 		73139CF92A4E1AE30050D1D0 /* pipocascertasmesmo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = pipocascertasmesmo.json; path = CimemAi/Animation/pipocascertasmesmo.json; sourceTree = SOURCE_ROOT; };
 		731CBD902A4A13C0004FF08E /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		736D94FC2A55F8130064C6DB /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = CimemAi/View/Onboarding/OnboardingView.swift; sourceTree = SOURCE_ROOT; };
-		736D94FD2A55F8130064C6DB /* OnboardingView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView2.swift; path = CimemAi/View/Onboarding/OnboardingView2.swift; sourceTree = SOURCE_ROOT; };
-		736D94FE2A55F8130064C6DB /* OnboardingView4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView4.swift; path = CimemAi/View/Onboarding/OnboardingView4.swift; sourceTree = SOURCE_ROOT; };
-		736D94FF2A55F8130064C6DB /* OnboardingView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView3.swift; path = CimemAi/View/Onboarding/OnboardingView3.swift; sourceTree = SOURCE_ROOT; };
 		7383DF332A4F57E100193055 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = CimemAi/View/MainView.swift; sourceTree = SOURCE_ROOT; };
 		7383DF352A4F648500193055 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BackButton.swift; path = CimemAi/View/BackButton.swift; sourceTree = SOURCE_ROOT; };
 		73B5BFA02A54A0DB0077BDC4 /* FlexStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlexStack.swift; path = CimemAi/Source/FlexStack.swift; sourceTree = SOURCE_ROOT; };
@@ -97,6 +95,12 @@
 		AF00910D2A4B8B7D00CB4530 /* SerieCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieCard.swift; sourceTree = "<group>"; };
 		AF00910F2A4B8BC300CB4530 /* SerieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieDetail.swift; sourceTree = "<group>"; };
 		AF2C61332A549CD2000A66F1 /* ProfileFavoritesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesCard.swift; sourceTree = "<group>"; };
+		AF2C61382A5855F8000A66F1 /* OnboardingView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView3.swift; sourceTree = "<group>"; };
+		AF2C61392A5855F8000A66F1 /* OnboardingView4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView4.swift; sourceTree = "<group>"; };
+		AF2C613A2A5855F8000A66F1 /* OnboardingView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView2.swift; sourceTree = "<group>"; };
+		AF2C613B2A5855F8000A66F1 /* OnboardingView5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView5.swift; sourceTree = "<group>"; };
+		AF2C613C2A5855F8000A66F1 /* OnboardingView6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView6.swift; sourceTree = "<group>"; };
+		AF2C613D2A5855F8000A66F1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AF44825F2A423B40001C9628 /* FilmFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4482622A423B40001C9628 /* CimemAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CimemAIApp.swift; sourceTree = "<group>"; };
 		AF4482642A423B40001C9628 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
@@ -157,10 +161,12 @@
 		736D94FB2A55F7B50064C6DB /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				736D94FC2A55F8130064C6DB /* OnboardingView.swift */,
-				736D94FD2A55F8130064C6DB /* OnboardingView2.swift */,
-				736D94FF2A55F8130064C6DB /* OnboardingView3.swift */,
-				736D94FE2A55F8130064C6DB /* OnboardingView4.swift */,
+				AF2C613D2A5855F8000A66F1 /* OnboardingView.swift */,
+				AF2C613A2A5855F8000A66F1 /* OnboardingView2.swift */,
+				AF2C61382A5855F8000A66F1 /* OnboardingView3.swift */,
+				AF2C613B2A5855F8000A66F1 /* OnboardingView5.swift */,
+				AF2C613C2A5855F8000A66F1 /* OnboardingView6.swift */,
+				AF2C61392A5855F8000A66F1 /* OnboardingView4.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -171,6 +177,17 @@
 				73B5BFA02A54A0DB0077BDC4 /* FlexStack.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		AF2C61372A585460000A66F1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				73F7B26B2A4E5A7800FE9E22 /* ProfileView.swift */,
+				AF2C61332A549CD2000A66F1 /* ProfileFavoritesCard.swift */,
+				AF4B5AE32A548C6000FE32BD /* FavoriteView.swift */,
+				AF4B5AE52A54971C00FE32BD /* WatchedView.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		AF4482562A423B40001C9628 = {
@@ -255,6 +272,7 @@
 				736D94FB2A55F7B50064C6DB /* Onboarding */,
 				AF4B5ADE2A533C5F00FE32BD /* FilmsViews */,
 				AF4B5ADD2A533C5000FE32BD /* SeriesView */,
+				AF2C61372A585460000A66F1 /* Profile */,
 				73E6D0EC2A438D910084DB3C /* ChatGptView.swift */,
 				AF4B5AE12A5358BF00FE32BD /* CardListView.swift */,
 				73CF55542A44BC33008D0AD8 /* MethodScreen.swift */,
@@ -262,10 +280,6 @@
 				73CF555A2A44C820008D0AD8 /* SearchView.swift */,
 				731CBD902A4A13C0004FF08E /* CategoriesView.swift */,
 				AF57F2382A4E0277009D1373 /* HistoryView.swift */,
-				73F7B26B2A4E5A7800FE9E22 /* ProfileView.swift */,
-				AF2C61332A549CD2000A66F1 /* ProfileFavoritesCard.swift */,
-				AF4B5AE32A548C6000FE32BD /* FavoriteView.swift */,
-				AF4B5AE52A54971C00FE32BD /* WatchedView.swift */,
 				73F7B2672A4E5A2700FE9E22 /* ErrorView.swift */,
 				73F7B2692A4E5A5300FE9E22 /* InitialLoading.swift */,
 				7383DF332A4F57E100193055 /* MainView.swift */,
@@ -397,9 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB114EA2A43F5FD00A30D4A /* FilmCard.swift in Sources */,
-				736D95032A55F8130064C6DB /* OnboardingView3.swift in Sources */,
 				AF4B5ADC2A4F8BE500FE32BD /* Secrets.swift in Sources */,
 				7383DF342A4F57E100193055 /* MainView.swift in Sources */,
+				AF2C61412A5855F8000A66F1 /* OnboardingView5.swift in Sources */,
 				AF0091102A4B8BC300CB4530 /* SerieDetail.swift in Sources */,
 				73139CF82A4E1A810050D1D0 /* LottieView.swift in Sources */,
 				AF00910A2A4B81D800CB4530 /* SerieData.swift in Sources */,
@@ -410,16 +424,17 @@
 				73CF55592A44C6B0008D0AD8 /* TypeView.swift in Sources */,
 				73F7B26A2A4E5A5300FE9E22 /* InitialLoading.swift in Sources */,
 				AFEFB8B72A44E95D0040C6B4 /* FilmDetail.swift in Sources */,
+				AF2C613F2A5855F8000A66F1 /* OnboardingView4.swift in Sources */,
 				73F7B2682A4E5A2700FE9E22 /* ErrorView.swift in Sources */,
 				73E6D0ED2A438D910084DB3C /* ChatGptView.swift in Sources */,
-				736D95002A55F8130064C6DB /* OnboardingView.swift in Sources */,
+				AF2C61402A5855F8000A66F1 /* OnboardingView2.swift in Sources */,
 				AF7B8E662A4CBACB00A6E91C /* UserDefaultsManenger.swift in Sources */,
 				73F7B26C2A4E5A7800FE9E22 /* ProfileView.swift in Sources */,
-				736D95022A55F8130064C6DB /* OnboardingView4.swift in Sources */,
+				AF2C613E2A5855F8000A66F1 /* OnboardingView3.swift in Sources */,
 				731CBD912A4A13C0004FF08E /* CategoriesView.swift in Sources */,
-				736D95012A55F8130064C6DB /* OnboardingView2.swift in Sources */,
 				73CF555F2A44E126008D0AD8 /* FilmResponseModel.swift in Sources */,
 				AF00910E2A4B8B7D00CB4530 /* SerieCard.swift in Sources */,
+				AF2C61432A5855F8000A66F1 /* OnboardingView.swift in Sources */,
 				7383DF362A4F648500193055 /* BackButton.swift in Sources */,
 				73C0D4EA2A451FCE004A46A4 /* ChatGptResponseModel.swift in Sources */,
 				AF57F2372A4DFD64009D1373 /* History.swift in Sources */,
@@ -430,6 +445,7 @@
 				AF00910C2A4B88CC00CB4530 /* SerieView.swift in Sources */,
 				AF4B5AE22A5358BF00FE32BD /* CardListView.swift in Sources */,
 				AF4B5AE62A54971C00FE32BD /* WatchedView.swift in Sources */,
+				AF2C61422A5855F8000A66F1 /* OnboardingView6.swift in Sources */,
 				73CF55552A44BC33008D0AD8 /* MethodScreen.swift in Sources */,
 				AF4B5AE42A548C6000FE32BD /* FavoriteView.swift in Sources */,
 				AF4482632A423B40001C9628 /* CimemAIApp.swift in Sources */,

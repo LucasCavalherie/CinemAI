@@ -164,4 +164,9 @@ class DataManager: ObservableObject {
         
         saveToUserDefaults()
     }
+    func clearHistory() {
+        allContent.removeAll()
+        saveToUserDefaults()
+    }
+
 }
