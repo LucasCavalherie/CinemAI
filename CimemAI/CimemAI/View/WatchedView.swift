@@ -3,6 +3,14 @@ import SwiftUI
 struct WatchedView: View {
     @ObservedObject var dataManager = DataManager.shared
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
+    
     var body: some View {
         ScrollView {
             VStack(alignment:.center) {
@@ -16,7 +24,7 @@ struct WatchedView: View {
                     
                     Spacer()
                     
-                    Image("coração mascotinho")
+                    Image("reloginho")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 70)
@@ -51,7 +59,8 @@ struct WatchedView: View {
 
 
 
-        }
+        }.navigationBarBackButtonHidden()
+            .navigationBarItems(leading: btnBack)
     }
 }
 

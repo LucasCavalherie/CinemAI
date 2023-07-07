@@ -33,10 +33,11 @@ struct SerieCard: View {
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
                             } else if phase.error != nil {
-                                Image("pipocotriste")
+                                Rectangle()
+                                    .foregroundColor(Color(uiColor: .red))
                             } else {
-                                Image("pipoco")
-                                    .aspectRatio(contentMode: .fit)
+                                Rectangle()
+                                    .foregroundColor(Color(uiColor: .gray))
                             }
                         }
                             .frame(width: 290, height: 416)

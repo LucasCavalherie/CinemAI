@@ -24,16 +24,12 @@ struct FilmDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Image("pipocotriste")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipped()
+                        Rectangle()
+                            .opacity(0)
                             .frame(width: 390, height: 600)
                     } else {
-                        Image("pipoco")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipped()
+                        Rectangle()
+                            .opacity(0)
                             .frame(width: 390, height: 600)
                         
                     }
@@ -65,10 +61,14 @@ struct FilmDetail: View {
                             if conteudo.favorite {
                                 let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
                                 dataManager.addFavorite(watchedContent)
+                                
                             } else {
                                 let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
                                 dataManager.removeFavorite(watchedContent)
                             }
+                            print(dataManager.favorites.count)
+                            
+                            
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
@@ -88,6 +88,7 @@ struct FilmDetail: View {
                             } else {
                                 dataManager.removeWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
                             }
+                            printTitles(from: dataManager.watched)
                         }, label: {
                             if !conteudo.watched {
                                 Image("Olhozin")
@@ -156,8 +157,19 @@ struct FilmDetail: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: btnBack)
     }
-    
-    
+    func printTitles(from contents: [WatchedContent]) {
+
+        contents.forEach { content in
+            switch content.content {
+            case .filme(let film):
+                print(film.title)
+            case .serie(let serie):
+                print(serie.title)
+            }
+        }
+        print("------------------------")
+        print("")
+    }
 }
 
 

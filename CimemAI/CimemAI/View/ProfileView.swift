@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject private var dataManager = DataManager.shared
+    @ObservedObject var dataManager = DataManager.shared
     
     var body: some View {
         NavigationStack{
@@ -23,7 +23,7 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     FavoriteViews()
                 }, label: {
-                    ProfileListCard(title: "Favoritos", contents: dataManager.favorites)
+                    ProfileFavoriteCard(contents: dataManager.favorites, title: "Favoritos")
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)
@@ -35,7 +35,7 @@ struct ProfileView: View {
                 NavigationLink(destination: {
                     WatchedView()
                 }, label: {
-                    ProfileListCard(title: "Assistidos", contents: dataManager.watched)
+                    ProfileFavoriteCard(contents: dataManager.watched, title: "Assistidos")
                 })
                 .background( Rectangle()
                     .foregroundColor(.clear)

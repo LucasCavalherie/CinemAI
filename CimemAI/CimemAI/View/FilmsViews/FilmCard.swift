@@ -34,16 +34,17 @@ struct FilmCard: View {
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
                             } else if phase.error != nil {
-                                Image("pipocotriste")
+                                Rectangle()
+                                    .foregroundColor(Color(uiColor: .red))
                             } else {
-                                Image("pipoco")
-                                    .aspectRatio(contentMode: .fit)
+                                Rectangle()
+                                    .foregroundColor(Color(uiColor: .gray))
                             }
                         }
                             .frame(width: 290, height: 416)
                             .clipped()
                     ).cornerRadius(17))
-            VStack(alignment: .center){
+            VStack{
                 Spacer()
                 Text(conteudo.title)
                   .font(
@@ -54,7 +55,8 @@ struct FilmCard: View {
                   .padding(.bottom, 0.5)
 
                 
-                HStack {
+                HStack(alignment: .center) {
+                    Spacer()
                     ForEach(0..<ratingAsStars, id: \.self) { _ in
                         Text(.init(systemName: "star.fill"))
                             .foregroundColor(.white)
@@ -65,17 +67,31 @@ struct FilmCard: View {
                             .foregroundColor(.white)
                             .font(.system(size: 14))
                     }
+                    Spacer()
                 }
-                .padding(.bottom)
-                  
+                HStack(spacing: 5){
+                    Spacer()
+                    Text(.init(systemName: "ellipsis.circle"))
+                        .foregroundColor(.white)
+                        .font(.system(size: 24))
+                        .bold()
+                        .padding(.trailing)
+//                    Text("Ver mais")
+//                        .foregroundColor(.white)
+//                        .font(.system(size: 14))
+//                        .bold()
+                        
+                    
+                }.padding(.bottom)
+                    
+                
             }.frame(width: 290, height: 416)
                 
         }.ignoresSafeArea()
     }
 }
-
 struct FilmCard_Previews: PreviewProvider {
     static var previews: some View {
-        FilmCard(conteudo: FilmData(idFilme: 19995, title: "Avatar", image: "/iNMP8uzV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571, favorite: false, watched: false))
+        FilmCard(conteudo: FilmData(idFilme: 19995, title: "Fantástica Fábrica de Chocolate", image: "/iNMP8uzV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571, favorite: false, watched: false))
     }
 }
