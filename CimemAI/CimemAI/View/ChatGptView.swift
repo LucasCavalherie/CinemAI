@@ -4,6 +4,7 @@ struct ChatGptView: View {
     var type: String
     @State var inputText: String
     @State var response: [String]?
+    @ObservedObject var dataMananger = DataManager.shared
         
     var body: some View {
         VStack {
@@ -25,10 +26,14 @@ struct ChatGptView: View {
                         .scaleEffect(0.8)
                         .padding(.bottom, 60)
             }
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
     }
     func loadData() {
-        print(inputText)
+        if response != nil {
+            return
+        }
         search(message: inputText) { fetchedConteudo in
             DispatchQueue.main.async {
                 self.response = fetchedConteudo
@@ -37,13 +42,36 @@ struct ChatGptView: View {
     }
 
     func search(message: String, completion: @escaping ([String]) -> Void) {
+        
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
-        
-        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 3 nomes de filmes no seguinte formato: filme1;filme2;filme3. Não faça nenhum comentário. Voce retornara apenas os nomes dos filmes no formato indicado.")
         let promptUser = Prompt(role: "user", content: message)
+        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 9 nomes de \(type) no seguinte formato: nome1;nome2;nome3. Não faça nenhum comentário. Voce retornara apenas os nomes dos \(type) no formato indicado.")
+        var alreadyRecomended : String = ""
         
-        let requestJson = Request(model: model, messages: [promptSys,promptUser])
+        dataMananger.allContent.forEach() { movieWatched in
+            switch movieWatched.content {
+            case .filme(let film):
+                if type == "filme" {
+                    alreadyRecomended = alreadyRecomended + film.title + ", "
+                }
+                
+            case .serie(let serie):
+                if type == "série" {
+                    alreadyRecomended = alreadyRecomended + serie.title + ", "
+                }
+            }
+        }
+        
+        var prompts = [promptSys,promptUser]
+        if alreadyRecomended != "" {
+            let filterMovies = Prompt(role: "system", content: "Existem alguns \(type) que já foram recomendados que são esses: \(alreadyRecomended). Não recomende esses \(type), recomende outros.")
+            prompts = [promptSys,filterMovies,promptUser]
+        }
+        
+        print(prompts)
+        
+        let requestJson = Request(model: model, messages: prompts)
         let encoder = JSONEncoder()
         let jsonData = try? encoder.encode(requestJson)
         
@@ -85,6 +113,6 @@ struct ChatGptView: View {
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView(type: "filme", inputText: "Uma filme de comedia com romance com carros")
+        ChatGptView(type: "filme", inputText: "Uma filme com musica e romance cliche")
     }
 }

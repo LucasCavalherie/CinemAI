@@ -5,8 +5,18 @@ struct FilmView: View {
     var contents : [String]
     var type : String
     @State var load : Bool = false
+    @ObservedObject var dataMananger = DataManager.shared
 
     @State var findAllData: [FilmData] = []
+    @State var otherData: [FilmData] = []
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         NavigationStack{
@@ -18,7 +28,7 @@ struct FilmView: View {
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
                         
                         ScrollView(.horizontal, showsIndicators: false){
@@ -26,24 +36,60 @@ struct FilmView: View {
                                 ForEach(findAllData) { data in
                                     NavigationLink {
                                         FilmDetail(conteudo: data)
-                                        
                                     } label: {
-                                        IMDbCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            FilmCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeMovie(oldMovie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
+                        
                     } else {
                         ErrorView()
                     }
                 } else {
-                    Text("Carregando...")
+                    LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                            .frame(width: 250, height: 112.0)
+                            .scaleEffect(0.8)
+                            .padding(.bottom, 60)
                 }
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
             .ignoresSafeArea()
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+    }
+    
+    func changeMovie(oldMovie: FilmData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldMovie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
     }
     
     func loadData() {
@@ -61,6 +107,7 @@ struct FilmView: View {
     func findAll () async -> [FilmData] {
         return await withTaskGroup(of: FilmData?.self, body: { group in
             var datas = [FilmData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
@@ -70,9 +117,17 @@ struct FilmView: View {
             
             for await filme in group {
                 if let filme = filme {
-                    datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .filme(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+                    let repetido = dataMananger.checkContentsAlreadyInToWatched(content: WatchedContent(date: Date(), content: .filme(filme)))
+                    dataMananger.addContent(WatchedContent(date: Date(), content: .filme(filme)))
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(filme)
+                            
+                        } else {
+                            otherData.append(filme)
+                        }
+                        count = count + 1
+                    }
                 }
             }
             
@@ -131,7 +186,6 @@ struct FilmView: View {
             plot: response.plot,
             rating: response.rating,
             favorite: false,
-            saved: false,
             watched: false
             
         )
@@ -142,6 +196,6 @@ struct FilmView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun"], type: "filme")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "filme")
     }
 }

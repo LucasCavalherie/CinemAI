@@ -2,11 +2,19 @@ import SwiftUI
 
 struct FilmDetail: View {
     @State var conteudo: FilmData
+    @ObservedObject private var dataManager = DataManager.shared
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating) ) / 2.0 + 0.5)
     }
-
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         ScrollView{
@@ -16,9 +24,14 @@ struct FilmDetail: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } else if phase.error != nil {
-                        Color.red
+                        Rectangle()
+                            .opacity(0)
+                            .frame(width: 390, height: 600)
                     } else {
-                        Color.blue
+                        Rectangle()
+                            .opacity(0)
+                            .frame(width: 390, height: 600)
+                        
                     }
                 }
                 VStack(alignment: .leading, spacing: 19){
@@ -33,54 +46,63 @@ struct FilmDetail: View {
                             HStack {
                                 ForEach(0..<ratingAsStars, id: \.self) { _ in
                                     Text(.init(systemName: "star.fill"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                                 ForEach(0..<(5-ratingAsStars), id: \.self) { _ in
                                     Text(.init(systemName: "star"))
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color("Azul_Quase_Preto"))
                                         .font(.system(size: 14))
                                 }
                             }
                         }
-//                        Button(action: {
-//                            conteudo.watched!.toggle()
-//                            if conteudo.favorite! {
-//                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
-//                            } else {
-//                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
-//                            }
-//                        }, label: {
-//                            if !conteudo.watched! {
-//                                Text(.init(systemName: "plus.circle"))
-//                                    .font(Font.custom("SF Pro", size 36))
-//                                    .foregroundColor(.black)
-//                            } else {
-//                                Text(.init(systemName: "plus.circle.fill"))
-//                                    .font(Font.custom("SF Pro", size: 36))
-//                                    .foregroundColor(.black)
-//                            }
-//                        })
                         Button(action: {
-                            conteudo.favorite!.toggle()
-                            if conteudo.favorite! {
-                                DataManager.shared.saveFilmeToFavorites(filme: conteudo)
+                            conteudo.favorite.toggle()
+                            if conteudo.favorite {
+                                let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
+                                dataManager.addFavorite(watchedContent)
                                 
                             } else {
-                                DataManager.shared.removeFilmeFromFavorites(filme: conteudo)
+                                let watchedContent = WatchedContent(date: Date(), content: .filme(conteudo))
+                                dataManager.removeFavorite(watchedContent)
                             }
-                            print(DataManager.shared.getFilmesFromFavorites())
+                            print(dataManager.favorites.count)
+                            
+                            
                         }, label: {
-                            if !conteudo.favorite! {
+                            if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
                                     .font(Font.custom("SF Pro", size: 30))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(Color("Azul_Quase_Preto"))
                             } else {
                                 Text(.init(systemName: "heart.fill"))
                                     .font(Font.custom("SF Pro", size: 30))
                                     .foregroundColor(.red)
                             }
                         })
+
+                        Button(action: {
+                            conteudo.watched.toggle()
+                            if conteudo.watched {
+                                dataManager.addWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
+                            } else {
+                                dataManager.removeWatched(WatchedContent(date: Date(), content: .filme(conteudo)))
+                            }
+                            printTitles(from: dataManager.watched)
+                        }, label: {
+                            if !conteudo.watched {
+                                Image("Olhozin")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            } else {
+                                Image("Olhozin.fill")
+                                    .resizable()
+                                    .frame(width: 50, height: 32)
+                                    .scaledToFit()
+                            }
+                        })
+
                         
                     }
                     .padding(.horizontal, 30)
@@ -90,9 +112,9 @@ struct FilmDetail: View {
                                 .font(Font.custom("SF Pro", size: 14))
                             Text("\(conteudo.duration) min")
                                 .font(Font.custom("SF Pro", size: 14))
-                                
+                            
                                 .multilineTextAlignment(.center)
-                                
+                            
                         }
                         .padding(.vertical, 9)
                         .padding(.horizontal, 10)
@@ -102,7 +124,7 @@ struct FilmDetail: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .inset(by: 0.5)
-                                    .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                    .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                             ))
                         Text(conteudo.releaseDate)
                             .font(Font.custom("SF Pro", size: 14))
@@ -115,9 +137,9 @@ struct FilmDetail: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .inset(by: 0.5)
-                                        .stroke(Color(red: 0, green: 0.07, blue: 0.1), lineWidth: 1)
+                                        .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
                                 ))
-                            
+                        
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
@@ -125,14 +147,31 @@ struct FilmDetail: View {
                         .padding(.horizontal, 30)
                     
                     
-                Spacer()
+                    Spacer()
                 }.background(Rectangle()
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("Branco"))
                     .cornerRadius(28))
             }
-        }.ignoresSafeArea()
+        }
+        .edgesIgnoringSafeArea([.top])
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+    }
+    func printTitles(from contents: [WatchedContent]) {
+
+        contents.forEach { content in
+            switch content.content {
+            case .filme(let film):
+                print(film.title)
+            case .serie(let serie):
+                print(serie.title)
+            }
+        }
+        print("------------------------")
+        print("")
     }
 }
+
 
 struct FilmDetail_Previews: PreviewProvider {
     static var previews: some View {

@@ -5,8 +5,17 @@ struct SerieView: View {
     var type : String
     @State var findData: SerieData?
     @State var findAllData: [SerieData] = []
+    @State var otherData: [SerieData] = []
     @State var load : Bool = false
+    @ObservedObject var dataManager = DataManager.shared
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            BackButton()
+    }}
     
     var body: some View {
         NavigationStack{
@@ -18,7 +27,7 @@ struct SerieView: View {
                                 Font.custom("Poppins", size: 24)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
                         
                         ScrollView(.horizontal, showsIndicators: false){
@@ -27,7 +36,26 @@ struct SerieView: View {
                                     NavigationLink {
                                         SerieDetail(conteudo: data)
                                     } label: {
-                                        SerieCard(conteudo: data)
+                                        ZStack (alignment: .topTrailing) {
+                                            SerieCard(conteudo: data)
+                                            if otherData.count >= 1 {
+                                                Button {
+                                                    changeSerie(oldSerie: data)
+                                                } label: {
+                                                    HStack {
+                                                        Image(systemName: "arrow.clockwise")
+                                                            .font(.system(size: 20))
+                                                            .fontWeight(.bold)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(.gray)
+                                                    .opacity(0.7)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -36,14 +64,31 @@ struct SerieView: View {
                         ErrorView()
                     }
                 } else {
-                    Text("Carregando...")
+                    LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                            .frame(width: 250, height: 112.0)
+                            .scaleEffect(0.8)
+                            .padding(.bottom, 60)
                 }
                 
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)
             .ignoresSafeArea()
-        }.onAppear(perform: loadData)
+        }
+        .onAppear(perform: loadData)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
+    }
+    
+    func changeSerie(oldSerie: SerieData){
+        if let index = findAllData.firstIndex(where: { $0.id == oldSerie.id }) {
+            findAllData.remove(at: index)
+        }
+        if otherData.count > 0 {
+            findAllData.append(otherData.first!)
+            otherData.removeFirst()
+        }
+        
     }
     
     func loadData() {
@@ -62,6 +107,7 @@ struct SerieView: View {
     func findAll () async -> [SerieData] {
         return await withTaskGroup(of: SerieData?.self, body: { group in
             var datas = [SerieData]()
+            var count = 0
             
             for content in contents {
                 group.addTask {
@@ -69,11 +115,18 @@ struct SerieView: View {
                 }
             }
             
-            for await filme in group {
-                if let filme = filme {
-                    datas.append(filme)
-                    DataManager.shared.saveWatchedContent(WatchedContent(date: Date(), content: .serie(filme)))
-                    print(DataManager.shared.getWatchedContent().count)
+            for await serie in group {
+                if let serie = serie {
+                    let repetido = DataManager.shared.checkContentsAlreadyInToWatched(content: WatchedContent(date: Date(), content: .serie(serie)))
+                    if !repetido {
+                        if count < 3 {
+                            datas.append(serie)
+                            dataManager.addContent(WatchedContent(date: Date(), content: .serie(serie)))
+                        } else {
+                            otherData.append(serie)
+                        }
+                        count = count + 1
+                    }
                 }
             }
             
@@ -131,7 +184,6 @@ struct SerieView: View {
             plot: response.plot,
             rating: response.rating,
             favorite: false,
-            saved: false,
             watched: false
         )
         return conteudo
@@ -141,6 +193,6 @@ struct SerieView: View {
 
 struct SerieView_Previews: PreviewProvider {
     static var previews: some View {
-        SerieView(contents: ["dark", "black-Mirror", "suits"], type: "série")
+        SerieView(contents: ["dark", "black-Mirror", "suits", "stranger things"], type: "série")
     }
 }
