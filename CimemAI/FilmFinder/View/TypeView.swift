@@ -1,36 +1,36 @@
 //
-//  RepeatedView.swift
-//  FilmFinder
+//  TypeView.swift
+//  CimemAI
 //
-//  Created by Lucas Cavalherie on 04/07/23.
+//  Created by Lucas Cavalherie on 22/06/23.
 //
 
 import SwiftUI
 
-struct RepeatedView: View {
-    var type: String
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var btnBack : some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }){
-            BackButton()
-    }}
+struct TypeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack (alignment: .center, spacing: 8) {
-                Text("Você deseja filtrar por filmes não repetidos?")
-                    .font(.system(size: 32))
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("Azul_Quase_Preto"))
+            VStack (alignment: .center) {
+                Image("pipoco_com_duvida")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 320, height: 230)
+                
+                VStack (alignment: .leading) {
+                    Text("Qual tipo de conteúdo você procura agora?")
+                        .font(.system(size: 32))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("Azul_Quase_Preto"))
+                }
+                .padding(.horizontal)
+                
                 
                 HStack {
                     NavigationLink {
                         MethodScreen(type: "filme")
                     } label: {
-                        Text("Sim")
+                        Text("Filme")
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -40,13 +40,13 @@ struct RepeatedView: View {
                     }
                     
                     .padding(.vertical, 8)
-                    
+
                     Spacer()
                     
                     NavigationLink {
-                        MethodScreen(type: "série", onlyRepeated: false)
+                        MethodScreen(type: "série")
                     } label: {
-                        Text("Não")
+                        Text("Série")
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -54,20 +54,18 @@ struct RepeatedView: View {
                             .background(Color("Azul"))
                             .cornerRadius(16)
                     }
-                    .padding(.vertical, 8)
                     
+                    .padding(.vertical, 8)
                 }
                 .padding(.horizontal, 32)
-        
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
+        
     }
 }
 
-struct RepeatedView_Previews: PreviewProvider {
+struct TypeView_Previews: PreviewProvider {
     static var previews: some View {
-        RepeatedView(type: "filme")
+        TypeView()
     }
 }
