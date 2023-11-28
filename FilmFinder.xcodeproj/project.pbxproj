@@ -88,7 +88,7 @@
 		73E6D0EC2A438D910084DB3C /* ChatGptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptView.swift; sourceTree = "<group>"; };
 		73F7B2672A4E5A2700FE9E22 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = CimemAI/View/ErrorView.swift; sourceTree = SOURCE_ROOT; };
 		73F7B2692A4E5A5300FE9E22 /* InitialLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitialLoading.swift; path = CimemAI/View/InitialLoading.swift; sourceTree = SOURCE_ROOT; };
-		73F7B26B2A4E5A7800FE9E22 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = CimemAI/View/ProfileView.swift; sourceTree = SOURCE_ROOT; };
+		73F7B26B2A4E5A7800FE9E22 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "CimemAI/View/New Group/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
 		AF0091072A4B7FDD00CB4530 /* SerieResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieResponseModel.swift; sourceTree = "<group>"; };
 		AF0091092A4B81D800CB4530 /* SerieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieData.swift; sourceTree = "<group>"; };
 		AF00910B2A4B88CC00CB4530 /* SerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieView.swift; sourceTree = "<group>"; };
@@ -164,9 +164,9 @@
 				AF2C613D2A5855F8000A66F1 /* OnboardingView.swift */,
 				AF2C613A2A5855F8000A66F1 /* OnboardingView2.swift */,
 				AF2C61382A5855F8000A66F1 /* OnboardingView3.swift */,
+				AF2C61392A5855F8000A66F1 /* OnboardingView4.swift */,
 				AF2C613B2A5855F8000A66F1 /* OnboardingView5.swift */,
 				AF2C613C2A5855F8000A66F1 /* OnboardingView6.swift */,
-				AF2C61392A5855F8000A66F1 /* OnboardingView4.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		AF2C61372A585460000A66F1 /* Profile */ = {
+		AF2E6F6F2B1674FC0023345C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				73F7B26B2A4E5A7800FE9E22 /* ProfileView.swift */,
@@ -187,7 +187,7 @@
 				AF4B5AE32A548C6000FE32BD /* FavoriteView.swift */,
 				AF4B5AE52A54971C00FE32BD /* WatchedView.swift */,
 			);
-			name = Profile;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		AF4482562A423B40001C9628 = {
@@ -271,8 +271,8 @@
 			children = (
 				736D94FB2A55F7B50064C6DB /* Onboarding */,
 				AF4B5ADE2A533C5F00FE32BD /* FilmsViews */,
+				AF2E6F6F2B1674FC0023345C /* Profile */,
 				AF4B5ADD2A533C5000FE32BD /* SeriesView */,
-				AF2C61372A585460000A66F1 /* Profile */,
 				73E6D0EC2A438D910084DB3C /* ChatGptView.swift */,
 				AF4B5AE12A5358BF00FE32BD /* CardListView.swift */,
 				73CF55542A44BC33008D0AD8 /* MethodScreen.swift */,
