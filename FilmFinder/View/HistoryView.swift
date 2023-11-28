@@ -31,7 +31,7 @@ struct HistoryView: View {
                     }
                     .padding(.bottom, 10)
                     LazyVGrid(columns: [GridItem(.flexible())]) {
-                        ForEach(dataManager.allContent) { history in
+                        ForEach(dataManager.history) { history in
                             ContentCard(watchedContent: history)
                         }.padding(.vertical, 8)
                     }
