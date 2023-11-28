@@ -6,6 +6,8 @@ struct FilmView: View {
     var type : String
     @State var load : Bool = false
     @ObservedObject var dataMananger = DataManager.shared
+    @State private var currentIndex: Int = 0
+    @GestureState private var dragOffset: CGFloat = 0
 
     @State var findAllData: [FilmData] = []
     @State var otherData: [FilmData] = []
@@ -30,37 +32,35 @@ struct FilmView: View {
                             )
                             .foregroundColor(Color("Azul_Quase_Preto"))
                             .frame(width: 290, height: 110, alignment: .topLeading)
+                            .scaleEffect(CGSize(width: 0.85, height: 0.85))
                         
-                        ScrollView(.horizontal, showsIndicators: false){
-                            HStack(spacing: 20){
-                                ForEach(findAllData) { data in
-                                    NavigationLink {
-                                        FilmDetail(conteudo: data)
-                                    } label: {
-                                        ZStack (alignment: .topTrailing) {
-                                            FilmCard(conteudo: data)
-                                            if otherData.count >= 1 {
-                                                Button {
-                                                    changeMovie(oldMovie: data)
-                                                } label: {
-                                                    HStack {
-                                                        Image(systemName: "arrow.clockwise")
-                                                            .font(.system(size: 20))
-                                                            .fontWeight(.bold)
-                                                            .foregroundColor(.white)
-                                                    }
-                                                    .padding(8)
-                                                    .background(.gray)
-                                                    .opacity(0.7)
-                                                    .cornerRadius(10)
-                                                    .padding()
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                        ZStack{
+                            ForEach(0..<findAllData.count, id: \.self) { index in
+                                FilmCard(conteudo: findAllData[index])
+                                    .frame(width: 250, height: 416.67)
+                                    .scaleEffect(0.9)
+                                    .opacity(currentIndex == index ? 1.0 : 0.5)
+                                    .scaleEffect(currentIndex == index ? 1.2 : 0.8)
+                                    .offset(x: CGFloat(index - currentIndex) * 260 + dragOffset, y: 0)
                             }
                         }
+                        .gesture(
+                            DragGesture()
+                                .onEnded({ value in
+                                    let threshold: CGFloat = 50
+                                    if value.translation.width > threshold {
+                                        withAnimation {
+                                            currentIndex = max(0, currentIndex - 1)
+                                        }
+                                    } else if value.translation.width < -threshold {
+                                        withAnimation {
+                                            currentIndex = min(findAllData.count - 1, currentIndex + 1)
+                                        }
+                                    }
+                                })
+                        )
+                        .padding()
+                    
                         
                     } else {
                         ErrorView()
