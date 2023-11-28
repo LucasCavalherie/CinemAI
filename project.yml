@@ -1,0 +1,26 @@
+name: FilmFinder
+options:
+  bundleIdPrefix: com.andre
+  deploymentTarget:
+    iOS: '16.5'
+    
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: '16.5' # O target de deploy para iOS
+    
+packages:
+  Lottie:
+    url: 'https://github.com/airbnb/lottie-ios.git'
+    from: '4.2.0' # A versão que você está usando
+
+targets:
+  FilmFinder:
+    type: application
+    platform: iOS
+    settings:
+      INFO_PLIST_FILE: 'FilmFinder/Info.plist' # Atualize este caminho conforme necessário
+      PRODUCT_BUNDLE_IDENTIFIER: 'com.andre.filmfinder'
+    sources:
+      - path: 'FilmFinder'
+    dependencies:
+      - package: Lottie
