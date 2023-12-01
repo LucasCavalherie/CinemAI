@@ -16,7 +16,6 @@ struct InicialLoading: View {
                     } else {
                         MainView().opacity(viewOpacity)
                     }
-                    
                     ZStack{
                         LinearGradient(colors: [Color(red: 0.15, green: 0.36, blue: 0.44), Color(red: 0.26, green: 0.57, blue: 0.58)], startPoint: .top, endPoint: .bottom)
                             .ignoresSafeArea()

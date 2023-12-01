@@ -25,14 +25,20 @@ struct FilmView: View {
             VStack(alignment: .leading, spacing: 16) {
                 if load {
                     if findAllData.count > 0 {
-                        Text("Estes são os três filmes mais compatíveis com você hoje:")
-                            .font(
-                                Font.custom("Poppins", size: 24)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(Color("Azul_Quase_Preto"))
-                            .frame(width: 290, height: 110, alignment: .topLeading)
-                            .scaleEffect(CGSize(width: 0.85, height: 0.85))
+                        HStack {
+                            Text("Estes são os filmes \n")
+                                .foregroundColor(.black)
+                                .fontWeight(.semibold)
+                            + Text("mais compatíveis ")
+                                .foregroundColor(.orange)
+                                .bold()
+                            + Text("com \nvocê agora:")
+                                .foregroundColor(.black)
+                                .fontWeight(.semibold)
+                        }
+                        .font(.system(size: 24))
+                        .fontWidth(.expanded)
+                        
                         
                         ZStack{
                             ForEach(0..<findAllData.count, id: \.self) { index in

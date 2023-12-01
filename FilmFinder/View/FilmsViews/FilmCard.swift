@@ -13,19 +13,19 @@ struct FilmCard: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: width, height: height)
-                .background(
-                    LinearGradient(
+            .foregroundColor(.clear)
+            .frame(width: width, height: height)
+            .background(
+                LinearGradient(
                         stops: [
-                            Gradient.Stop(color: Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0), location: 0.00),
-                            Gradient.Stop(color: .black, location: 0.98),
+                            Gradient.Stop(color: Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0), location: 0.51),
+                            Gradient.Stop(color: Color(red: 0.29, green: 0.01, blue: 0.46), location: 0.98),
                         ],
-                        startPoint: UnitPoint(x: 0.65, y: 0.5),
+                        startPoint: UnitPoint(x: 0.5, y: 0),
                         endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
                 )
-                .cornerRadius(13).opacity(0.3)
+            )
+            .cornerRadius(14.1655)
                 .background(Rectangle()
                     .foregroundColor(.clear)
                     .frame(width: width, height: height)
@@ -45,6 +45,20 @@ struct FilmCard: View {
                             .clipped()
                     ).cornerRadius(17))
             VStack{
+                HStack{
+                    Spacer()
+                    NavigationLink {
+                        FilmDetail(conteudo: conteudo)
+                    } label: {
+                        Text(.init(systemName: "plus"))
+                            .foregroundStyle(.white)
+                            .font(.system(size: 25))
+                            .bold()
+                    }
+
+
+                }
+                .padding()
                 Spacer()
                 Text(conteudo.title)
                     .font(.system(size: 20))
