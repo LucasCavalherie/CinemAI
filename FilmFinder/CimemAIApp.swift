@@ -6,6 +6,7 @@ struct CimemAIApp: App {
     var body: some Scene {
         WindowGroup {
             InicialLoading()
+                .preferredColorScheme(.dark)
         }
     }
 }
