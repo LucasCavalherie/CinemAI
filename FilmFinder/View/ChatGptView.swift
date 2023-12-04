@@ -15,7 +15,6 @@ struct ChatGptView: View {
                     SerieView(contents: response, type: type)
                 }
             } else {
-                
 
                 VStack {
                     VStack {
@@ -62,11 +61,10 @@ struct ChatGptView: View {
     }
 
     func search(message: String, completion: @escaping ([String]) -> Void) {
-        
         let apiKey = Secrets.CHATGPT_API_KEY
         let model = "gpt-3.5-turbo"
         let promptUser = Prompt(role: "user", content: message)
-        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica somente os nomes de \(type) a partir de uma descrição do usuário sem a necessidade de qualquer outro tipo de texto ou explicação antes ou depois dos nomes indicados. Voce sempre retorna somente os 9 nomes de \(type) no seguinte formato: nome1;nome2;nome3. Não faça nenhum comentário. Voce retornara apenas os nomes dos \(type) no formato indicado.")
+        let promptSys = Prompt(role: "system", content: "Você é um sistema que indica \(type). O usuário ira passar um descrição e você indicara SOMENTE os nomes de \(type)s. Você indicara 9 \(type)s. Devera responder no seguinte formato: nome1;nome2;nome3;nome4;nome5;nome6;nome7;nome8;nome9. Não é necessário nenhum texto adicional ou mensagem explicando, retorne SOMENTE os NOMES")
         var alreadyRecomended : String = ""
         
         dataMananger.allContent.forEach() { movieWatched in
@@ -85,7 +83,7 @@ struct ChatGptView: View {
         
         var prompts = [promptSys,promptUser]
         if alreadyRecomended != "" {
-            let filterMovies = Prompt(role: "system", content: "Existem alguns \(type) que já foram recomendados que são esses: \(alreadyRecomended). Não recomende esses \(type), recomende outros.")
+            let filterMovies = Prompt(role: "system", content: "Existem alguns \(type) que já foram recomendados que são esses: \(alreadyRecomended). Não recomende esses, recomende outros.")
             prompts = [promptSys,filterMovies,promptUser]
         }
         
