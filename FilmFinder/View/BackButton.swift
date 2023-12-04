@@ -11,16 +11,14 @@ struct BackButton: View {
     var body: some View {
         HStack {
             Image(systemName: "chevron.left")
-                .font(.system(size: 16))
+                .font(.system(size: 20))
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(Color("laranja"))
             Text("Voltar")
-                .font(.system(size: 16))
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+                .font(.system(size: 17))
+                .foregroundColor(Color("laranja"))
         }
         .padding(8)
-        .background(Color("Azul"))
         .cornerRadius(16)
     }
 }

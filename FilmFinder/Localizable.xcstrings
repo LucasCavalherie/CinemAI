@@ -13,16 +13,13 @@
     "Assitidos" : {
 
     },
-    "Carregando as melhores escolhas..." : {
+    "Carregando as \nmelhores escolhas..." : {
 
     },
     "Clique no ícone de Assistido e o filme não será sugerido novamente!" : {
 
     },
     "com \nvocê agora:" : {
-
-    },
-    "Como você prefere procurar qual %@ assistir?" : {
 
     },
     "Como você se sente hoje:" : {
@@ -34,7 +31,10 @@
     "Descreva gêneros, duração, características do roteiro, diretores, atores participantes e muito mais!" : {
 
     },
-    "Descreva tipo de entretenimento que você busca." : {
+    "Descreva o tipo de filme que você está a fim de assistir agora" : {
+
+    },
+    "Descrição" : {
 
     },
     "Encontre os filmes ou séries que mais \ncombinam com você, de forma \ncustomizada e rápida!" : {
@@ -43,10 +43,10 @@
     "Escolha entre opções de gêneros, aspectos da história e duração.\n" : {
 
     },
-    "Escreva como se você fosse \npedir sugestões a um amigo!" : {
+    "Escolha um método de busca:" : {
 
     },
-    "Escrever uma descrição" : {
+    "Escreva como se você fosse \npedir sugestões a um amigo!" : {
 
     },
     "Estes são as séries mais compatíveis com você hoje:" : {
@@ -58,7 +58,7 @@
     "Favoritos" : {
 
     },
-    "Filme" : {
+    "Filmes" : {
 
     },
     "Genêro:" : {
@@ -94,34 +94,31 @@
     "Navegue pela barra inferior para acessar o Histórico de Recomendações e o seu Perfil" : {
 
     },
-    "Pesquisar" : {
+    "Pesquisar %@" : {
 
     },
     "Próximo" : {
 
     },
-    "Qual tipo de conteúdo você procura agora?" : {
+    "Salve suas sugestões favoritas!" : {
 
     },
-    "Salve suas sugestões favoritas!" : {
+    "Selecionar categorias" : {
 
     },
     "Selecione as categorias que \nvocê mais gostar para gerar indicações de filmes!" : {
 
     },
-    "Selecione entre opções" : {
-
-    },
     "Selecione o coração e guarde seus filmes favoritos!" : {
 
     },
-    "Selecione o que você quer ver hoje:" : {
+    "Selecione o tipo de conteúdo que você está procurando:" : {
 
     },
     "Sem travar na hora de\n escolher o que assistir!" : {
 
     },
-    "Série" : {
+    "Series" : {
 
     },
     "Tema:" : {
