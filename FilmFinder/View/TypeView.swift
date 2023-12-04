@@ -28,7 +28,7 @@ struct TypeView: View {
                 
                 HStack {
                     NavigationLink {
-                        MethodScreen(type: "filme")
+                        MethodScreen(type: "Filmes")
                     } label: {
                         Text("Filme")
                             .font(.system(size: 20))

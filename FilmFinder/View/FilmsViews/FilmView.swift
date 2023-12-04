@@ -217,6 +217,6 @@ struct FilmView: View {
 
 struct IMDBView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "filme")
+        FilmView(contents: ["Forest-Gump", "Vingadores", "Top-Gun", "Procurando Nemo"], type: "Filmes")
     }
 }
