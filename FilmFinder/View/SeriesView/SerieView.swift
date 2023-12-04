@@ -135,8 +135,22 @@ struct SerieView: View {
     }
     
     func findSeries(message: String) async -> SerieData? {
+        let idioma = Locale.current.language.languageCode
+        var len = ""
+        switch idioma {
+        case "en":
+            len = "en-US"
+        case "pt":
+            len = "pt-BR"
+        case "fr":
+            len = "fr-FR"
+        case .none:
+            len = "en-US"
+        case .some(_):
+            len = "en-US"
+        }
         let mensagem = message.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? message
-        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=pt-BR&page=1")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "https://api.themoviedb.org/3/search/tv?query=\(mensagem)&include_adult=false&language=\(len)&page=1")!,timeoutInterval: Double.infinity)
         request.addValue("Bearer \(Secrets.TMDB_API_KEY)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "accept")
     
