@@ -77,14 +77,15 @@ struct ContentCardMiniView: View {
                     .font(.system(size: 16))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color("Azul_Quase_Preto"))
+                    .foregroundColor(.branco)
                 Text(releaseDate)
                     .font(.system(size: 13))
-                    .foregroundColor(Color("Azul_Quase_Preto"))
+                    .foregroundColor(.branco)
                 Text(dateFormatter.string(from: date))
                     .font(.system(size: 10))
                     .foregroundColor(Color(uiColor: .gray))
             }
+            .padding()
             Spacer()
         }
         .padding(.leading)

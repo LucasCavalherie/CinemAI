@@ -30,7 +30,7 @@ struct FilmView: View {
                                 .foregroundColor(.white)
                                 .fontWeight(.semibold)
                             + Text("mais compatíveis ")
-                                .foregroundColor(.orange)
+                                .foregroundColor(Color.laranja)
                                 .bold()
                             + Text("com \nvocê agora:")
                                 .foregroundColor(.white)
