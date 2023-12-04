@@ -14,7 +14,6 @@ extension View {
 }
 
 struct SearchView: View {
-    var type: String
     @State var message = ""
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -121,6 +120,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(type: "Filmes")
+        SearchView()
     }
 }

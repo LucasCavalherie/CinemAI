@@ -15,16 +15,35 @@ struct ChatGptView: View {
                     SerieView(contents: response, type: type)
                 }
             } else {
-                Text("Carregando as \nmelhores escolhas...")
-                    .fontWeight(.heavy)
-                    .font(.title)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 30)
+                
 
-                LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
-                        .frame(width: 250, height: 112.0)
-                        .scaleEffect(0.8)
-                        .padding(.bottom, 60)
+                VStack {
+                    VStack {
+                        Text("Encontrando as opções mais")
+                            .foregroundColor(Color("branco"))
+                            .fontWidth(.expanded)
+                            .font(.title)
+                        
+                        + Text(" compatíveis ")
+                            .foregroundColor(Color("laranja"))
+                            .fontWidth(.expanded)
+                            .font(.title)
+                        
+                        + Text("com você")
+                            .foregroundColor(Color("branco"))
+                            .fontWidth(.expanded)
+                            .font(.title)
+                    }
+                    .fontWeight(.bold)
+                    .padding(.horizontal, 32)
+                    
+                    
+                    LottieView(name: "pipocascertasmesmo", loopMode: .loop, animationSpeed: 2)
+                            .frame(width: 250, height: 112.0)
+                            .scaleEffect(0.8)
+                            .padding(.bottom, 60)
+                }
+                
             }
         }
         .onAppear(perform: loadData)
