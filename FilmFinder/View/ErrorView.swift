@@ -13,44 +13,46 @@ struct ErrorView: View {
     var body: some View {
         
         VStack(alignment: .center) {
-            Spacer(minLength: 100)
+            Spacer()
             
-            Image("pipocotriste")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 120)
+            Image("onboardingTop")
+                .padding()
+            
+            Image("error")
                 .padding(.bottom, 2)
                 .padding(.top, 20)
-            
-            Text("Infelizmente não \nfuncionou desta vez.")
-                .multilineTextAlignment(.center)
-                .font(Font.custom("Poppins-regular", size: 28))
-                .fontWeight(.bold)
-                .padding(.bottom, 1)
 
-            Text("Tente novamente mais tarde \nou descreva algo diferente.")
-                .font(Font.custom("Poppins-regular", size: 18))
-                .multilineTextAlignment(.center)
-                .padding(.bottom)
+            VStack {
+                Text("Não encontramos nada...")
+                    .foregroundColor(Color("branco"))
+                    .fontWeight(.bold)
+                    .padding(.bottom)
+                
+                Text("Tente novamente mais tarde ou descreva algo diferente")
+                    .foregroundColor(Color("branco"))
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom)
+            }
+            .padding(.vertical)
+            .padding(.horizontal, 32)
+            
 
             Button{
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack {
-                    Image(systemName: "chevron.backward.circle")
+                    Image(systemName: "chevron.backward")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("laranja"))
 
                     Text("Voltar")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("laranja"))
                 }
             }
-            .frame(width: 150, height: 60, alignment: .center)
-            .background(Color(red: 0.15, green: 0.36, blue: 0.44))
-            .cornerRadius(16)
             .padding(.vertical, 8)
             
             Spacer()
