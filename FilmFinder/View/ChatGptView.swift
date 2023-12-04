@@ -9,9 +9,9 @@ struct ChatGptView: View {
     var body: some View {
         VStack {
             if let response = response {
-                if type == "filme" {
+                if type == "Filmes" {
                     FilmView(contents: response, type: type)
-                } else if type == "série" {
+                } else if type == "Séries" {
                     SerieView(contents: response, type: type)
                 }
             } else {
@@ -31,6 +31,7 @@ struct ChatGptView: View {
         .navigationBarBackButtonHidden(true)
     }
     func loadData() {
+        print(inputText)
         if response != nil {
             return
         }
@@ -52,12 +53,12 @@ struct ChatGptView: View {
         dataMananger.allContent.forEach() { movieWatched in
             switch movieWatched.content {
             case .filme(let film):
-                if type == "filme" {
+                if type == "Filmes" {
                     alreadyRecomended = alreadyRecomended + film.title + ", "
                 }
                 
             case .serie(let serie):
-                if type == "série" {
+                if type == "Séries" {
                     alreadyRecomended = alreadyRecomended + serie.title + ", "
                 }
             }
@@ -69,7 +70,7 @@ struct ChatGptView: View {
             prompts = [promptSys,filterMovies,promptUser]
         }
         
-        print(prompts)
+//        print(prompts)
         
         let requestJson = Request(model: model, messages: prompts)
         let encoder = JSONEncoder()
@@ -88,7 +89,7 @@ struct ChatGptView: View {
                 let decoder = JSONDecoder()
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(jsonObject)
+//                    print(jsonObject)
                     
                     let response = try decoder.decode(ChatGptResponse.self, from: data)
                     var text = response.choices[0].message.content
@@ -102,7 +103,7 @@ struct ChatGptView: View {
                         .map { String($0.trimmingCharacters(in: .whitespacesAndNewlines)) }
                     completion(filmes)
                 } catch {
-                    print("Erro na decodificação: \(error)")
+//                    print("Erro na decodificação: \(error)")
                 }
             }
         }
@@ -113,6 +114,6 @@ struct ChatGptView: View {
 
 struct ChatGpt_Previews: PreviewProvider {
     static var previews: some View {
-        ChatGptView(type: "filme", inputText: "Uma filme com musica e romance cliche")
+        ChatGptView(type: "Séries", inputText: "Uma filme com musica e romance cliche")
     }
 }

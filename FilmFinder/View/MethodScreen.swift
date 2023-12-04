@@ -37,7 +37,7 @@ struct MethodScreen: View {
                 }
                 
                 NavigationLink {
-                    CategoriesView(type: type)
+                    //CategoriesView()
                 } label: {
                     Text("Selecione entre opções")
                         .font(.system(size: 20))
@@ -58,6 +58,6 @@ struct MethodScreen: View {
 
 struct MethodScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MethodScreen(type: "filme")
+        MethodScreen(type: "Filmes")
     }
 }

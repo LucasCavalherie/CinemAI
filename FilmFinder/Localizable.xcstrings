@@ -45,6 +45,16 @@
         }
       }
     },
+    "%@, me recomende um que seja de %@ e com um tema de %@" : {
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, me recomende um que seja de %2$@ e com um tema de %3$@"
+          }
+        }
+      }
+    },
     "Assistidos" : {
       "localizations" : {
         "en" : {
@@ -251,7 +261,11 @@
         }
       }
     },
+    "Descreva o tipo de filme que você está a fim de assistir agora" : {
+
+    },
     "Descreva tipo de entretenimento que você busca." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -272,6 +286,9 @@
           }
         }
       }
+    },
+    "Descrição" : {
+
     },
     "Encontre os filmes ou séries que mais \ncombinam com você, de forma \ncustomizada e rápida!" : {
 
@@ -324,6 +341,9 @@
           }
         }
       }
+    },
+    "Escolha um método de busca:" : {
+
     },
     "Escreva como se você fosse \npedir sugestões a um amigo!" : {
 
@@ -464,6 +484,9 @@
           }
         }
       }
+    },
+    "Filmes" : {
+
     },
     "Genêro:" : {
       "localizations" : {
@@ -716,6 +739,7 @@
       }
     },
     "Pesquisar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -736,6 +760,9 @@
           }
         }
       }
+    },
+    "Pesquisar filmes" : {
+
     },
     "Próximo" : {
       "localizations" : {
@@ -802,6 +829,9 @@
           }
         }
       }
+    },
+    "Selecionar categorias" : {
+
     },
     "Selecione as categorias que \nvocê mais gostar para gerar indicações de filmes!" : {
 
@@ -874,6 +904,7 @@
       }
     },
     "Selecione o que você quer ver hoje:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -894,6 +925,9 @@
           }
         }
       }
+    },
+    "Selecione o tipo de conteúdo que você está procurando:" : {
+
     },
     "Sem travar na hora de\n escolher o que assistir!" : {
 
@@ -942,6 +976,9 @@
           }
         }
       }
+    },
+    "Series" : {
+
     },
     "Tema:" : {
       "localizations" : {
