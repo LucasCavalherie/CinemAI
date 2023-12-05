@@ -49,13 +49,19 @@
     "Escreva como se você fosse \npedir sugestões a um amigo!" : {
 
     },
-    "Estes são as séries mais compatíveis com você hoje:" : {
+    "Escreva como se você fosse \npedir sugestões a um amigo!" : {
+
+    },
+    "Estes são as séries \n" : {
 
     },
     "Estes são os filmes \n" : {
 
     },
     "Favoritos" : {
+
+    },
+    "Filmes" : {
 
     },
     "Filmes" : {
@@ -74,9 +80,6 @@
 
     },
     "Já assistiu algum dos filmes \nque foram sugeridos?" : {
-
-    },
-    "Limpar Histórico" : {
 
     },
     "mais compatíveis " : {
@@ -121,10 +124,16 @@
     "Series" : {
 
     },
+    "Series" : {
+
+    },
     "Tema:" : {
 
     },
     "Tente novamente mais tarde \nou descreva algo diferente." : {
+
+    },
+    "The right path to your perfect movie match" : {
 
     },
     "Veja também sua lista de Assistidos e Favoritos na aba perfil!\n" : {

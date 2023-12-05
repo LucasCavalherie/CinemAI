@@ -3,6 +3,8 @@ import SwiftUI
 
 struct SerieCard: View {
     let conteudo : SerieData
+    let width : CGFloat = 265
+    let height : CGFloat = 375
     
     var ratingAsStars: Int {
         return Int((Double(conteudo.rating)) / 2.0 + 0.5)
@@ -11,22 +13,22 @@ struct SerieCard: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .foregroundColor(.clear)
-                .frame(width: 290, height: 416)
-                .background(
-                    LinearGradient(
+            .foregroundColor(.clear)
+            .frame(width: width, height: height)
+            .background(
+                LinearGradient(
                         stops: [
-                            Gradient.Stop(color: Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0), location: 0.00),
-                            Gradient.Stop(color: .black, location: 0.98),
+                            Gradient.Stop(color: Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0), location: 0.51),
+                            Gradient.Stop(color: Color(red: 0.29, green: 0.01, blue: 0.46), location: 0.98),
                         ],
                         startPoint: UnitPoint(x: 0.5, y: 0),
                         endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
                 )
-                .cornerRadius(13).opacity(0.3)
+            )
+            .cornerRadius(14.1655)
                 .background(Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 290, height: 416)
+                    .frame(width: width, height: height)
                     .background(
                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(conteudo.image)")) { phase in
                             if let image = phase.image {
@@ -36,25 +38,40 @@ struct SerieCard: View {
                                 Rectangle()
                                     .foregroundColor(Color(uiColor: .red))
                             } else {
-                                Rectangle()
-                                    .foregroundColor(Color(uiColor: .gray))
+                                ProgressView()
                             }
                         }
-                            .frame(width: 290, height: 416)
+                            .frame(width: width, height: height)
                             .clipped()
                     ).cornerRadius(17))
-            VStack(alignment: .leading){
+            VStack{
+                HStack{
+                    Spacer()
+                    NavigationLink {
+                        SerieDetail(conteudo: conteudo)
+                    } label: {
+                        Text(.init(systemName: "plus"))
+                            .foregroundStyle(.white)
+                            .font(.system(size: 25))
+                            .bold()
+                            .shadow(color: .preto, radius: 5)
+                    }
+
+
+                }
+                .padding()
                 Spacer()
                 Text(conteudo.title)
-                  .font(
-                    Font.custom("Poppins-Regular", size: 23)
-                        .weight(.bold)
-                  )
+                    .font(.system(size: 20))
+                    .bold()
                   .foregroundColor(.white)
-                  .padding(.bottom, 0.5)
+                  .multilineTextAlignment(.center)
+                  .padding(.horizontal, 16)
+                  .padding(.bottom, 8)
 
                 
-                HStack {
+                HStack(alignment: .center) {
+                    Spacer()
                     ForEach(0..<ratingAsStars, id: \.self) { _ in
                         Text(.init(systemName: "star.fill"))
                             .foregroundColor(.white)
@@ -65,12 +82,13 @@ struct SerieCard: View {
                             .foregroundColor(.white)
                             .font(.system(size: 14))
                     }
+                    Spacer()
                 }
-                .padding(.bottom)
-                  
-            }.frame(width: 290, height: 416)
+                .padding(.bottom, 22)
+            }
+            .frame(width: width, height: height)
                 
-        }.ignoresSafeArea()
+        }
     }
 }
 

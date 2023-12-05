@@ -54,6 +54,7 @@ struct FilmCard: View {
                             .foregroundStyle(.white)
                             .font(.system(size: 25))
                             .bold()
+                            .shadow(color: .preto, radius: 5)
                     }
 
 

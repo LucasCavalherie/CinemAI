@@ -8,6 +8,8 @@ struct SerieView: View {
     @State var otherData: [SerieData] = []
     @State var load : Bool = false
     @ObservedObject var dataManager = DataManager.shared
+    @State private var currentIndex: Int = 0
+    @GestureState private var dragOffset: CGFloat = 0
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var btnBack : some View {
@@ -22,44 +24,50 @@ struct SerieView: View {
             VStack(alignment: .leading, spacing: 16) {
                 if load {
                     if findAllData.count > 0 {
-                        Text("Estes são as séries mais compatíveis com você hoje:")
-                            .font(
-                                Font.custom("Poppins", size: 24)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(Color("Azul_Quase_Preto"))
-                            .frame(width: 290, height: 110, alignment: .topLeading)
+                        HStack {
+                            Text("Estes são as séries \n")
+                                .foregroundColor(Color.branco)
+                                .fontWeight(.semibold)
+                            + Text("mais compatíveis ")
+                                .foregroundColor(.laranja)
+                                .bold()
+                            + Text("com \nvocê agora:")
+                                .foregroundColor(.branco)
+                                .fontWeight(.semibold)
+                        }
+                        .font(.system(size: 24))
+                        .fontWidth(.expanded)
                         
-                        ScrollView(.horizontal, showsIndicators: false){
-                            HStack(spacing: 20){
-                                ForEach(findAllData) { data in
-                                    NavigationLink {
-                                        SerieDetail(conteudo: data)
-                                    } label: {
-                                        ZStack (alignment: .topTrailing) {
-                                            SerieCard(conteudo: data)
-                                            if otherData.count >= 1 {
-                                                Button {
-                                                    changeSerie(oldSerie: data)
-                                                } label: {
-                                                    HStack {
-                                                        Image(systemName: "arrow.clockwise")
-                                                            .font(.system(size: 20))
-                                                            .fontWeight(.bold)
-                                                            .foregroundColor(.white)
-                                                    }
-                                                    .padding(8)
-                                                    .background(.gray)
-                                                    .opacity(0.7)
-                                                    .cornerRadius(10)
-                                                    .padding()
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                        
+                        ZStack{
+                            ForEach(0..<findAllData.count, id: \.self) { index in
+                                SerieCard(conteudo: findAllData[index])
+                                    .frame(width: 250, height: 416.67)
+                                    .scaleEffect(0.9)
+                                    .opacity(currentIndex == index ? 1.0 : 0.5)
+                                    .scaleEffect(currentIndex == index ? 1.2 : 0.8)
+                                    .offset(x: CGFloat(index - currentIndex) * 260 + dragOffset, y: 0)
                             }
                         }
+                        .gesture(
+                            DragGesture()
+                                .onEnded({ value in
+                                    let threshold: CGFloat = 50
+                                    if value.translation.width > threshold {
+                                        withAnimation {
+                                            currentIndex = max(0, currentIndex - 1)
+                                        }
+                                    } else if value.translation.width < -threshold {
+                                        withAnimation {
+                                            currentIndex = min(findAllData.count - 1, currentIndex + 1)
+                                        }
+                                    }
+                                })
+                        )
+                        .padding()
+                        .padding(.leading)
+                    
+                        
                     } else {
                         ErrorView()
                     }
@@ -69,7 +77,6 @@ struct SerieView: View {
                             .scaleEffect(0.8)
                             .padding(.bottom, 60)
                 }
-                
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 0)

@@ -38,20 +38,20 @@ struct FilmDetail: View {
                     HStack{
                         VStack(alignment: .leading, spacing: 5){
                             Text(conteudo.title)
-                                .font(Font.custom("Poppins-Regular", size: 24))
-                                .foregroundColor(Color("Azul_Escuro"))
+                                .font(.system(size: 24))
+                                .foregroundColor(.branco)
                                 .fontWeight(.semibold)
                                 .padding(.top)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             HStack {
                                 ForEach(0..<ratingAsStars, id: \.self) { _ in
                                     Text(.init(systemName: "star.fill"))
-                                        .foregroundColor(Color("Azul_Quase_Preto"))
+                                        .foregroundColor(.laranja)
                                         .font(.system(size: 14))
                                 }
                                 ForEach(0..<(5-ratingAsStars), id: \.self) { _ in
                                     Text(.init(systemName: "star"))
-                                        .foregroundColor(Color("Azul_Quase_Preto"))
+                                        .foregroundColor(.laranja)
                                         .font(.system(size: 14))
                                 }
                             }
@@ -72,12 +72,12 @@ struct FilmDetail: View {
                         }, label: {
                             if !conteudo.favorite {
                                 Text(.init(systemName: "heart"))
-                                    .font(Font.custom("SF Pro", size: 30))
-                                    .foregroundColor(Color("Azul_Quase_Preto"))
+                                    .font(.system(size: 23))
+                                    .foregroundColor(.branco)
                             } else {
                                 Text(.init(systemName: "heart.fill"))
-                                    .font(Font.custom("SF Pro", size: 30))
-                                    .foregroundColor(.red)
+                                    .font(.system(size: 23))
+                                    .foregroundColor(.laranja)
                             }
                         })
 
@@ -91,14 +91,14 @@ struct FilmDetail: View {
                             printTitles(from: dataManager.watched)
                         }, label: {
                             if !conteudo.watched {
-                                Image("Olhozin")
-                                    .resizable()
-                                    .frame(width: 50, height: 32)
-                                    .scaledToFit()
-                            } else {
                                 Image("Olhozin.fill")
                                     .resizable()
-                                    .frame(width: 50, height: 32)
+                                    .frame(width: 40, height: 25)
+                                    .scaledToFit()
+                            } else {
+                                Image("Olhozin")
+                                    .resizable()
+                                    .frame(width: 40, height: 25)
                                     .scaledToFit()
                             }
                         })
@@ -124,7 +124,7 @@ struct FilmDetail: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .inset(by: 0.5)
-                                    .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
+                                    .stroke(Color.branco, lineWidth: 1)
                             ))
                         Text(conteudo.releaseDate)
                             .font(Font.custom("SF Pro", size: 14))
@@ -137,19 +137,19 @@ struct FilmDetail: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .inset(by: 0.5)
-                                        .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
+                                        .stroke(Color.branco, lineWidth: 1)
                                 ))
                         
                         Spacer()
                     }.padding(.leading, 30)
                     Text(conteudo.plot)
-                        .font(Font.custom("SF Pro", size: 16))
+                        .font(.system(size: 16))
                         .padding(.horizontal, 30)
                     
                     
                     Spacer()
                 }.background(Rectangle()
-                    .foregroundColor(Color("Branco"))
+                    .foregroundColor(.preto)
                     .cornerRadius(28))
             }
         }
