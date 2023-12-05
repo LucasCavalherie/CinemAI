@@ -1,146 +1,646 @@
 {
   "sourceLanguage" : "pt-BR",
   "strings" : {
+    " %@ Filmes Favoritos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Favorite movies"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %@ Filmes Favoritos"
+          }
+        }
+      }
+    },
+    " compatíveis " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "compatible"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " compatíveis "
+          }
+        }
+      }
+    },
+    "%@ Filmes Assistidos |" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Movies Watched |"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Filmes Assistidos |"
+          }
+        }
+      }
+    },
     "%@ min" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ min"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ min"
+          }
+        }
+      }
     },
     "%@ temporadas" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ seasons"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ temporadas"
+          }
+        }
+      }
     },
     "Assistidos" : {
-
-    },
-    "Assitidos" : {
-
-    },
-    "Carregando as \nmelhores escolhas..." : {
-
-    },
-    "Clique no ícone de Assistido e o filme não será sugerido novamente!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watched"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assistidos"
+          }
+        }
+      }
     },
     "com \nvocê agora:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "with you now:"
+          }
+        }
+      }
+    },
+    "com \\nvocê agora:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "with\\nyou now:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "com \\nvocê agora:"
+          }
+        }
+      }
+    },
+    "com você" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "like you"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "com você"
+          }
+        }
+      }
     },
     "Como você se sente hoje:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How do you feel today:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Como você se sente hoje:"
+          }
+        }
+      }
     },
     "Concluir" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conclude"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Concluir"
+          }
+        }
+      }
     },
-    "Descreva gêneros, duração, características do roteiro, diretores, atores participantes e muito mais!" : {
-
+    "Descreva as características que estiver procurando como um passe de mágica" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Describe the characteristics you are looking for like magic"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descreva as características que estiver procurando como um passe de mágica"
+          }
+        }
+      }
     },
     "Descreva o tipo de filme que você está a fim de assistir agora" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Describe the type of film you want to watch right now"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descreva o tipo de filme que você está a fim de assistir agora"
+          }
+        }
+      }
     },
     "Descrição" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição"
+          }
+        }
+      }
     },
-    "Encontre os filmes ou séries que mais \ncombinam com você, de forma \ncustomizada e rápida!" : {
-
+    "Encontrando as opções mais" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finding the most options"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontrando as opções mais"
+          }
+        }
+      }
     },
-    "Escolha entre opções de gêneros, aspectos da história e duração.\n" : {
-
+    "Encontre um filme ou série baseado na sua preferência, de forma rápida e simples!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a movie or series based on your preference, quickly and simply!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontre um filme ou série baseado na sua preferência, de forma rápida e simples!"
+          }
+        }
+      }
     },
     "Escolha um método de busca:" : {
-
-    },
-    "Escreva como se você fosse \npedir sugestões a um amigo!" : {
-
-    },
-    "Escreva como se você fosse \npedir sugestões a um amigo!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a search method:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha um método de busca:"
+          }
+        }
+      }
     },
     "Estes são as séries \n" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are the series"
+          }
+        }
+      }
+    },
+    "Estes são as séries \\n" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are the series"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estes são as séries \\n"
+          }
+        }
+      }
     },
     "Estes são os filmes \n" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are the movies"
+          }
+        }
+      }
+    },
+    "Estes são os filmes \\n" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are the movies"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estes são os filmes \\n"
+          }
+        }
+      }
     },
     "Favoritos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        }
+      }
     },
     "Filmes" : {
-
-    },
-    "Filmes" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Films"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filmes"
+          }
+        }
+      }
     },
     "Genêro:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genre:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genêro:"
+          }
+        }
+      }
     },
     "Histórico" : {
-
-    },
-    "Histórico e Perfil" : {
-
-    },
-    "Infelizmente não \nfuncionou desta vez." : {
-
-    },
-    "Já assistiu algum dos filmes \nque foram sugeridos?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historic"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Histórico"
+          }
+        }
+      }
     },
     "mais compatíveis " : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "more compatible"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mais compatíveis "
+          }
+        }
+      }
     },
     "Meu Perfil" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My profile"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meu Perfil"
+          }
+        }
+      }
     },
-    "Modo descrição" : {
-
+    "Não encontramos nada..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We didn't find anything..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não encontramos nada..."
+          }
+        }
+      }
     },
-    "Modo Seleção" : {
-
-    },
-    "Navegue pela barra inferior para acessar o Histórico de Recomendações e o seu Perfil" : {
-
+    "Ou descreva o que está procurando" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or describe what you are looking for"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou descreva o que está procurando"
+          }
+        }
+      }
     },
     "Pesquisar %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar %@"
+          }
+        }
+      }
+    },
+    "Pesquise com nossas sugestões" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search with our suggestions"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquise com nossas sugestões"
+          }
+        }
+      }
     },
     "Próximo" : {
-
-    },
-    "Salve suas sugestões favoritas!" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximo"
+          }
+        }
+      }
     },
     "Selecionar categorias" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select categories"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecionar categorias"
+          }
+        }
+      }
     },
-    "Selecione as categorias que \nvocê mais gostar para gerar indicações de filmes!" : {
-
-    },
-    "Selecione o coração e guarde seus filmes favoritos!" : {
-
+    "Selecione nas nossas categorias o que está procurando " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select what you are looking for from our categories"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione nas nossas categorias o que está procurando "
+          }
+        }
+      }
     },
     "Selecione o tipo de conteúdo que você está procurando:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the type of content you are looking for:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione o tipo de conteúdo que você está procurando:"
+          }
+        }
+      }
     },
-    "Sem travar na hora de\n escolher o que assistir!" : {
-
+    "Sem travar na hora de escolher o que assistir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Without getting stuck when choosing what to watch"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem travar na hora de escolher o que assistir"
+          }
+        }
+      }
     },
     "Series" : {
-
-    },
-    "Series" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Series"
+          }
+        }
+      }
     },
     "Tema:" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema:"
+          }
+        }
+      }
     },
-    "Tente novamente mais tarde \nou descreva algo diferente." : {
-
+    "Tente novamente mais tarde ou descreva algo diferente" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again later or describe something different"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tente novamente mais tarde ou descreva algo diferente"
+          }
+        }
+      }
     },
     "The right path to your perfect movie match" : {
-
-    },
-    "Veja também sua lista de Assistidos e Favoritos na aba perfil!\n" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The right path to your perfect movie match"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The right path to your perfect movie match"
+          }
+        }
+      }
     },
     "Voltar" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltar"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

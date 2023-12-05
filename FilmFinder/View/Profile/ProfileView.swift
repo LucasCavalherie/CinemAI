@@ -7,49 +7,54 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack{
             VStack(alignment: .center){
+                Image("FilmFinder_logoPB")
+                    .resizable()
+                    .frame(width: 54, height: 29)
                 
                 Image("perfil")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 128)
-                    .padding(.top, 40)
+                    .frame(width: 94)
+                    .padding(.top, 20)
                 
                 Text("Meu Perfil")
-                    .font(Font.custom("Poppins-regular", size: 25))
+                    .font(.system(size: 20))
+                    .fontWidth(.expanded)
                     .fontWeight(.bold)
-                    .padding(.bottom, 30)
-                    .foregroundColor(Color(red: 0.22, green: 0.48, blue: 0.53))
+                    .padding(.bottom, 5)
+                    .foregroundColor(.laranja)
+                HStack{
+                    Text("\(dataManager.watched.count) Filmes Assistidos |") +
+                    Text(" \(dataManager.favorites.count) Filmes Favoritos")
+                }
+                .font(.system(size: 15))
+                .fontWeight(.medium)
+                .foregroundColor(.branco)
                 
-                NavigationLink(destination: {
-                    FavoriteViews()
-                }, label: {
-                    ProfileFavoriteCard(contents: dataManager.favorites, title: "Favoritos")
-                })
-                .background( Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 350, height: 230)
-                    .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.3))
-                    .cornerRadius(16))
-                
-                .padding(.bottom, 40)
-                NavigationLink(destination: {
-                    WatchedView()
-                }, label: {
-                    ProfileFavoriteCard(contents: dataManager.watched, title: "Assistidos")
-                })
-                .background( Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 350, height: 230)
-                    .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0.3))
-                    .cornerRadius(16))
-                .padding(.bottom, 40)
+                VStack{
+                    NavigationLink {
+                        FavoriteViews()
+                    } label: {
+                        FavoriteRectangle()
+                        
+                    }
+                    NavigationLink {
+                        WatchedView()
+                    } label: {
+                        WatchedRectangle()
+                        
+                    }
+                    
+                }
                 
             }
-            
             .padding(.vertical)
-            Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.cinza1)
         }
+        
     }
+    
     
 }
 

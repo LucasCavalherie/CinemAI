@@ -39,11 +39,17 @@ struct InicialLoading: View {
             // Slogan
             Text("The right path to your perfect movie match")
                 .font(.system(size: 13))
+                .fontWeight(.semibold)
+                .fontWidth(.expanded)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .frame(width: 309, height: 60, alignment: .center)
-                .padding(.top, 200)
+                .padding(.top, 195)
                 .opacity(sloganOpacity)
+            
+            ProgressView()
+                .opacity(introOpacity)
+                .padding(.top, 280)
         }
         .onAppear() {
             withAnimation(.easeInOut(duration: 1.3)) {

@@ -12,29 +12,33 @@ struct HistoryView: View {
         NavigationStack {
             VStack {
                 // Logo no topo
-                Image("FilmFinder_logo") // Assegure-se que o nome da imagem está correto
+                Image("FilmFinder_logo")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 25) // Ajuste o tamanho conforme necessário
+                    .frame(height: 25)
                     .padding(5)
                 HistoryHeader()
                 List {
                     ForEach(dataManager.history) { history in
                         ContentCard(watchedContent: history)
+                            .listRowBackground(Color.cinza1)
                     }
                     .onDelete(perform: deleteItems)
                 }
-                .frame(width: .infinity)
-                .listStyle(.plain) // Utilize o estilo plain para evitar linhas adicionais e padding da List padrão
+                
+
+                .listStyle(.plain)
                 .navigationTitle("")
-                .navigationBarHidden(true) // Esconde a barra de navegação padrão para customizar
+                .navigationBarHidden(true)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                             .foregroundColor(.laranja)
                     }
                 }
+                
             }
+            .background(Color.cinza1)
         }
     }
     
@@ -64,8 +68,9 @@ struct HistoryHeader: View {
         VStack{
             HStack {
                 Text("Histórico")
+                    .fontWidth(.expanded)
                     .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                     .foregroundColor(.laranja)
                 
                 Spacer()
@@ -74,7 +79,7 @@ struct HistoryHeader: View {
                     .foregroundColor(.laranja)
             }
             CustomDivider(color: .laranja, width: 2)
-                .frame(width: .infinity) // O tamanho pode ser ajustado conforme necessário
+                .frame(width: .infinity)
         }
         .padding()
     }

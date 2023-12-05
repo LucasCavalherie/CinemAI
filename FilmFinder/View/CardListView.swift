@@ -19,6 +19,7 @@ struct ContentCard: View {
                                         releaseDate: serie.releaseDate,
                                         imageUrl: serie.image,
                                         date: watchedContent.date)
+                    
                 }
             }
         }
@@ -55,23 +56,30 @@ struct ContentCardMiniView: View {
                     )
                 )
                 .opacity(0.3)
+            
                 .background(Rectangle()
                     .foregroundColor(.clear)
-                    .frame(width: 70, height: 105)
+                    .frame(width: 95, height: 142)
                     .background(
                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/original\(imageUrl)")) { phase in
                             if let image = phase.image {
                                 image.resizable()
                                     .aspectRatio(contentMode: .fill)
+                                
                             } else if phase.error != nil {
-                                Color.red
+                                Image("error")
+                                    .resizable()
+                                    .scaledToFit()
                             } else {
-                                Color.blue
+                                ProgressView()
+                                
                             }
                         }
                             .frame(width: 70, height: 105)
                             .clipped()
                     ))
+                
+
             VStack(alignment: .leading, spacing: 8){
                 Text(title)
                     .font(.system(size: 16))
@@ -90,6 +98,7 @@ struct ContentCardMiniView: View {
         }
         .padding(.leading)
         .frame(maxWidth: .infinity)
+        .background(Color.clear)
     }
 }
 
@@ -97,6 +106,6 @@ struct ContentCardMiniView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentCard(watchedContent: WatchedContent(date: Date(), content: .filme(FilmData(idFilme: 19995, title: "Avatar", image: "/iNMP8uzV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571, favorite: false, watched: false))))
+        ContentCard(watchedContent: WatchedContent(date: Date(), content: .filme(FilmData(idFilme: 19995, title: "Avatar", image: "/iNMP8uzaV2Ing6ZCw0IICgEFVNfC.jpg", releaseDate: "2009-12-15", originalTitle: nil, duration: 162, plot: "Apesar de confinado a uma cadeira de rodas, Jake Sully, um ex-marine, continua a ser um combatente. Assim, é recrutado para uma missão a Pandora, um corpo celeste que orbita um enorme planeta gasoso, para explorar um mineral alternativo chamado Unobtainium, usado na Terra como recurso energético. Porém, devido ao facto de a atmosfera de Pandora ser altamente tóxica para os humanos, é usado um programa de avatares híbridos, que possibilita a transferência da mente de qualquer humano para um corpo nativo.", rating: 7.571, favorite: false, watched: false))))
     }
 }

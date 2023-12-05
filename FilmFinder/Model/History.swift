@@ -1,7 +1,7 @@
 import Foundation
 
 struct WatchedContent: Codable, Identifiable {
-    let id = UUID()
+    var id = UUID()
     let date: Date
     let content: Content
 

@@ -68,18 +68,23 @@ struct FilmView: View {
                         .padding()
                         .padding(.leading)
                         
-                        HStack{
-                            Spacer()
-                            Button {
-                                print("ok")
-                                changeMovie(oldMovie: findAllData[currentIndex])
-                            } label: {
-                                RoundedRectangle(cornerRadius: 14, style: .circular)
-                                    .foregroundStyle(Color.laranja)
-                                    .frame(width: 50, height: 35, alignment: .center)
-                                    
+                        if findAllData.count >= 3 {
+                            HStack{
+                                Spacer()
+                                Button {
+                                    changeMovie(oldMovie: findAllData[currentIndex])
+                                } label: {
+                                    Text(Image(systemName: "arrow.triangle.2.circlepath"))
+                                        .foregroundStyle(Color.branco)
+                                        .padding(.vertical, 10)
+                                        .padding(.horizontal, 16)
+                                        .background(content: {
+                                            RoundedRectangle(cornerRadius: 14, style: .circular)
+                                                .foregroundStyle(Color.laranja)
+                                        })
+                                }
+                                Spacer()
                             }
-                            Spacer()
                         }
 
                         
@@ -124,7 +129,6 @@ struct FilmView: View {
             }
         }
     }
-    
     func findAll () async -> [FilmData] {
         return await withTaskGroup(of: FilmData?.self, body: { group in
             var datas = [FilmData]()
@@ -155,7 +159,6 @@ struct FilmView: View {
             return datas
         })
     }
-    
     func findFilmes(message: String) async -> FilmData? {
         let idioma = Locale.current.language.languageCode
         var len = ""

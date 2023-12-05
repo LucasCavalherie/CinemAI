@@ -14,6 +14,7 @@ extension View {
 }
 
 struct SearchView: View {
+    
     @State var message = ""
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -33,6 +34,12 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Image("FilmFinder_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 35)
+                    .padding(5)
+                
                 ScrollView (showsIndicators: false) {
                     VStack (alignment: .leading){
                         Text("Selecione o tipo de conteúdo que você está procurando:")
@@ -83,7 +90,7 @@ struct SearchView: View {
                                 .cornerRadius(10)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("Azul_Quase_Preto"), lineWidth: 1)
+                                        .stroke(Color.cinza1 , lineWidth: 1)
                                 )
                             
                                 NavigationLink {
