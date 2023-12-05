@@ -66,7 +66,22 @@ struct FilmView: View {
                                 })
                         )
                         .padding()
-                    
+                        .padding(.leading)
+                        
+                        HStack{
+                            Spacer()
+                            Button {
+                                print("ok")
+                                changeMovie(oldMovie: findAllData[currentIndex])
+                            } label: {
+                                RoundedRectangle(cornerRadius: 14, style: .circular)
+                                    .foregroundStyle(Color.laranja)
+                                    .frame(width: 50, height: 35, alignment: .center)
+                                    
+                            }
+                            Spacer()
+                        }
+
                         
                     } else {
                         ErrorView()
