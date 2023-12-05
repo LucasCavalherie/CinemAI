@@ -15,55 +15,42 @@ struct OnboardingView2: View {
     var body: some View {
         NavigationStack() {
             VStack(alignment: .center) {
+                Image("onboardingTop")
+                    .padding()
+                
                 HStack{
                     Image(systemName: "circle")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     Image(systemName: "circle.fill")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     Image(systemName: "circle")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     
                 }
                 .padding(.top, 12)
                 
                 Spacer()
                 
-                Text("Modo descrição")
-                    .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
-                    .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 1)
+                Image("onboarding2")
                 
-                Text("Escreva como se você fosse \npedir sugestões a um amigo!")
-                    .font(.system(size: 22))
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                
-                Image("pipoco_falando")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 320)
-                    .padding(.bottom)
+                VStack{
+                    Text("Pesquise com nossas sugestões")
+                        .font(.system(size: 20))
+                        .fontWidth(.expanded)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("laranja"))
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 8)
                     
-                
-                Text("Descreva gêneros, duração, características do roteiro, diretores, atores participantes e muito mais!")
-                    .font(.system(size: 18))
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                    Text("Selecione nas nossas categorias o que está procurando ")
+                        .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 32)
+                }
+                .padding()
                 
                 Spacer()
                 
@@ -78,17 +65,16 @@ struct OnboardingView2: View {
                             Image(systemName: "arrow.left")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0.26, green: 0.57, blue: 0.58))
+                                .foregroundColor(Color("branco"))
                             
                             Text("Voltar")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0.26, green: 0.57, blue: 0.58))
+                                .foregroundColor(Color("branco"))
                             
                             
                         }
                         .frame(width: 150, height: 60, alignment: .center)
-                        //  .background(Color(red: 0.26, green: 0.57, blue: 0.58))
                         .cornerRadius(16)
                         .padding(.vertical, 8)
                         
@@ -103,18 +89,17 @@ struct OnboardingView2: View {
                             Text("Próximo")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                                .foregroundColor(Color("laranja"))
                             
                             Image(systemName: "arrow.right")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                                .foregroundColor(Color("laranja"))
                             
                             
                             
                         }
                         .frame(width: 150, height: 60, alignment: .center)
-                        // .background(Color(red: 0.15, green: 0.36, blue: 0.44))
                         .cornerRadius(16)
                         .padding(.vertical, 8)
                         
@@ -122,6 +107,8 @@ struct OnboardingView2: View {
                 }
                 
             }
+            .frame(maxWidth: .infinity)
+            .background(Color("cinza1"))
             
             
         }

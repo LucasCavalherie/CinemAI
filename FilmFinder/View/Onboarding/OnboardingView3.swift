@@ -15,25 +15,19 @@ struct OnboardingView3: View {
     var body: some View {
         NavigationStack() {
             VStack(alignment: .center) {
+                Image("onboardingTop")
+                    .padding()
+                
                 HStack{
                     Image(systemName: "circle")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     Image(systemName: "circle")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     Image(systemName: "circle.fill")
                         .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Image(systemName: "circle")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(uiColor: .systemGray))
+                        .foregroundColor(Color("roxo-azulado"))
                     
                     
                 }
@@ -41,29 +35,25 @@ struct OnboardingView3: View {
                 
                 Spacer()
                 
-                Text("Modo Seleção")
-                    .font(Font.custom("Poppins-Regular", size: 32) .weight(.bold))
-                    .foregroundColor(Color("Arenito"))
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 1)
+                Image("onboarding3")
                 
-                Text("Selecione as categorias que \nvocê mais gostar para gerar indicações de filmes!")
-                    .font(.system(size: 22))
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+                VStack{
+                    Text("Ou descreva o que está procurando")
+                        .font(.system(size: 20))
+                        .fontWidth(.expanded)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("laranja"))
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 8)
+                    
+                    Text("Descreva as características que estiver procurando como um passe de mágica")
+                        .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 32)
+                }
+                .padding()
                 
-                Image("pipoco_selecionando")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 320, height: 340)
-                    .padding(.bottom)
-                
-                Text("Escolha entre opções de gêneros, aspectos da história e duração.\n")
-                    .font(.system(size: 18))
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                Spacer()
                 
                 HStack {
                     Button {
@@ -76,37 +66,35 @@ struct OnboardingView3: View {
                             Image(systemName: "arrow.left")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0.26, green: 0.57, blue: 0.58))
+                                .foregroundColor(Color("branco"))
                             
                             Text("Voltar")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0.26, green: 0.57, blue: 0.58))
+                                .foregroundColor(Color("branco"))
                             
                             
                         }
                         .frame(width: 150, height: 60, alignment: .center)
-                        //  .background(Color(red: 0.26, green: 0.57, blue: 0.58))
                         .cornerRadius(16)
                         .padding(.vertical, 8)
                         
                     }
                     
-                    NavigationLink {
-                        OnboardingView5(showOnboarding: $showOnboarding)
-                        
+                    Button {
+                        showOnboarding = false
                     } label: {
                         
                         HStack {
-                            Text("Próximo")
+                            Text("Concluir")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                                .foregroundColor(Color("laranja"))
                             
                             Image(systemName: "arrow.right")
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
-                                .foregroundColor(Color(red: 0, green: 0.37, blue: 0.45))
+                                .foregroundColor(Color("laranja"))
                             
                             
                             
@@ -118,6 +106,8 @@ struct OnboardingView3: View {
                     .padding(.vertical, 8)
                 }
             }
+            .frame(maxWidth: .infinity)
+            .background(Color("cinza1"))
         }
         .navigationBarBackButtonHidden(true)
     }
