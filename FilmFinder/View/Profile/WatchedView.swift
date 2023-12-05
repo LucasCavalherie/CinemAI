@@ -12,57 +12,66 @@ struct WatchedView: View {
     }}
     
     var body: some View {
-        ScrollView {
-            VStack(alignment:.center) {
+        NavigationStack {
+            VStack {
+                // Logo no topo
+                Image("FilmFinder_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 25)
+                    .padding(5)
                 
-                HStack(alignment: .bottom) {
-                    
-                    Text("Assitidos")
-                        .font(Font.custom("Poppins", size: 30) .weight(.bold))
-                        .foregroundColor(Color(red: 0.61, green: 0.13, blue: 0.15))
-                        .padding(.leading, 40)
-                    
-                    Spacer()
-                    
-                    Image("reloginho")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 70)
-                        .padding(.top)
-                        .padding(.bottom, 6)
-                        .padding(.trailing, 43)
-                }
+                WatchedReader()
                 
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 323, height: 1)
-                    .background(Color(red: 0.61, green: 0.13, blue: 0.15))
-            }
-            .padding(.bottom, 10)
-            
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible())]) {
-                    ForEach(dataManager.watched) { watchedItem in
-                        switch watchedItem.content {
-                        case .filme(let filmData):
-                            if filmData.watched {
-                                ContentCard(watchedContent: watchedItem)
-                            }
-                        case .serie(let serieData):
-                            if serieData.watched {
-                                ContentCard(watchedContent: watchedItem)
-                            }
-                        }
+                List {
+                    ForEach(dataManager.watched) { history in
+                        ContentCard(watchedContent: history)
+                            .listRowBackground(Color.cinza1)
                     }
-                }.padding(.vertical, 8)
+                    .onDelete(perform: deleteItems)
+                }
+                .listStyle(.plain)
+                .navigationTitle("")
             }
-
-
-
-        }.navigationBarBackButtonHidden()
+            .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: btnBack)
+            .background(Color.cinza1)
+        }
+    }
+    
+    private func deleteItems(at offsets: IndexSet) {
+        withAnimation {
+            offsets.forEach { index in
+                let content = dataManager.watched[index]
+                dataManager.removeWatched(content)
+            }
+        }
     }
 }
+
+struct WatchedReader: View {
+    var body: some View {
+        VStack{
+            HStack {
+                Text("Assistidos")
+                    .fontWidth(.expanded)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.laranja)
+                
+                Spacer()
+                
+                EditButton()
+                    .foregroundColor(.laranja)
+            }
+            CustomDivider(color: .laranja, width: 2)
+                .frame(width: .infinity)
+        }
+        .padding()
+    }
+
+}
+
 
 struct WatchedViews_Previews: PreviewProvider {
     static var previews: some View {

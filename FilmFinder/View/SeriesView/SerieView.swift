@@ -66,6 +66,25 @@ struct SerieView: View {
                         )
                         .padding()
                         .padding(.leading)
+                        
+                        if findAllData.count >= 3 {
+                            HStack{
+                                Spacer()
+                                Button {
+                                    changeSerie(oldSerie: findAllData[currentIndex])
+                                } label: {
+                                    Text(Image(systemName: "arrow.triangle.2.circlepath"))
+                                        .foregroundStyle(Color.branco)
+                                        .padding(.vertical, 10)
+                                        .padding(.horizontal, 16)
+                                        .background(content: {
+                                            RoundedRectangle(cornerRadius: 14, style: .circular)
+                                                .foregroundStyle(Color.laranja)
+                                        })
+                                }
+                                Spacer()
+                            }
+                        }
                     
                         
                     } else {

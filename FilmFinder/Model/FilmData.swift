@@ -1,10 +1,10 @@
 import Foundation
 
-class FilmData: Identifiable, Codable{
-    let id = UUID()
+class FilmData: Identifiable, Codable, ImageProvider{
+    var id = UUID()
     let idFilme: Int32
     let title: String
-    let image: String
+    var image: String
     let releaseDate: String
     let originalTitle: String?
     let duration: Int

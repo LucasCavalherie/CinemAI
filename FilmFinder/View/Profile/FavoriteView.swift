@@ -12,51 +12,60 @@ struct FavoriteViews: View {
     }}
 
     var body: some View {
-        NavigationStack{
-            ScrollView {
-                VStack(alignment:.center) {
-                    HStack(alignment: .bottom) {
-                        Text("Favoritos")
-                            .font(Font.custom("Poppins", size: 30) .weight(.bold))
-                            .foregroundColor(Color(red: 0.61, green: 0.13, blue: 0.15))
-                            .padding(.leading, 40)
-                        
-                        Spacer()
-                        Image("coração mascotinho")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 70)
-                            .padding(.top)
-                            .padding(.bottom, 6)
-                            .padding(.trailing, 43)
+        NavigationStack {
+            VStack {
+                // Logo no topo
+                Image("FilmFinder_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 25)
+                    .padding(5)
+                FavoriteReader()
+                List {
+                    ForEach(dataManager.favorites) { history in
+                        ContentCard(watchedContent: history)
+                            .listRowBackground(Color.cinza1)
                     }
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 323, height: 1)
-                        .background(Color(red: 0.61, green: 0.13, blue: 0.15))
+                    .onDelete(perform: deleteItems)
                 }
-                .padding(.bottom, 10)
-                
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.flexible())]) {
-                        ForEach(dataManager.favorites) { favoriteItem in
-                            switch favoriteItem.content {
-                            case .filme(let filmData):
-                                if filmData.favorite {
-                                    ContentCard(watchedContent: favoriteItem)
-                                }
-                            case .serie(let serieData):
-                                if serieData.favorite {
-                                    ContentCard(watchedContent: favoriteItem)
-                                }
-                            }
-                        }
-                    }.padding(.vertical, 8)
-                }
+                .listStyle(.plain)
+                .navigationTitle("")
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: btnBack)
+            .background(Color.cinza1)
+        }
+    }
+    
+    private func deleteItems(at offsets: IndexSet) {
+        withAnimation {
+            offsets.forEach { index in
+                let content = dataManager.favorites[index]
+                dataManager.removeFavorite(content)
             }
         }
-        .navigationBarBackButtonHidden()
-        .navigationBarItems(leading: btnBack)
+    }
+}
+
+struct FavoriteReader: View {
+    var body: some View {
+        VStack{
+            HStack {
+                Text("Favoritos")
+                    .fontWidth(.expanded)
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.laranja)
+                
+                Spacer()
+                
+                EditButton()
+                
+                    .foregroundColor(.laranja)
+            }
+            CustomDivider(color: .laranja, width: 2)
+        }
+        .padding()
     }
 }
 
