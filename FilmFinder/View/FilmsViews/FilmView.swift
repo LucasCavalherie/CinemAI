@@ -26,13 +26,13 @@ struct FilmView: View {
                 if load {
                     if findAllData.count > 0 {
                         HStack {
-                            Text("Estes são os filmes \n")
+                            Text("Estes são os filmes ")
                                 .foregroundColor(.white)
                                 .fontWeight(.semibold)
                             + Text("mais compatíveis ")
                                 .foregroundColor(Color.laranja)
                                 .bold()
-                            + Text("com \nvocê agora:")
+                            + Text("com você agora:")
                                 .foregroundColor(.white)
                                 .fontWeight(.semibold)
                         }
@@ -167,8 +167,6 @@ struct FilmView: View {
             len = "en-US"
         case "pt":
             len = "pt-BR"
-        case "fr":
-            len = "fr-FR"
         case .none:
             len = "en-US"
         case .some(_):

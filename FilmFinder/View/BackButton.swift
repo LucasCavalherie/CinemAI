@@ -13,10 +13,10 @@ struct BackButton: View {
             Image(systemName: "chevron.left")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
-                .foregroundColor(Color("laranja"))
+                .foregroundColor(Color.laranja)
             Text("Voltar")
                 .font(.system(size: 17))
-                .foregroundColor(Color("laranja"))
+                .foregroundColor(Color.laranja)
         }
         .padding(8)
         .cornerRadius(16)

@@ -105,7 +105,7 @@ struct ChatGptView: View {
             } else if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                    _ = try JSONSerialization.jsonObject(with: data, options: [])
 //                    print(jsonObject)
                     
                     let response = try decoder.decode(ChatGptResponse.self, from: data)
@@ -120,7 +120,7 @@ struct ChatGptView: View {
                         .map { String($0.trimmingCharacters(in: .whitespacesAndNewlines)) }
                     completion(filmes)
                 } catch {
-//                    print("Erro na decodificação: \(error)")
+                    print("Erro na decodificação: \(error)")
                 }
             }
         }

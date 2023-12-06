@@ -25,13 +25,13 @@ struct SerieView: View {
                 if load {
                     if findAllData.count > 0 {
                         HStack {
-                            Text("Estes são as séries \n")
+                            Text("Estas são as séries ")
                                 .foregroundColor(Color.branco)
                                 .fontWeight(.semibold)
-                            + Text("mais compatíveis ")
+                            + Text(" mais compatíveis ")
                                 .foregroundColor(.laranja)
                                 .bold()
-                            + Text("com \nvocê agora:")
+                            + Text(" com você agora:")
                                 .foregroundColor(.branco)
                                 .fontWeight(.semibold)
                         }
@@ -67,7 +67,7 @@ struct SerieView: View {
                         .padding()
                         .padding(.leading)
                         
-                        if findAllData.count >= 3 {
+                        if findAllData.count > 3 {
                             HStack{
                                 Spacer()
                                 Button {
