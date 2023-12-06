@@ -79,7 +79,6 @@ struct HistoryHeader: View {
                     .foregroundColor(.laranja)
             }
             CustomDivider(color: .laranja, width: 2)
-                .frame(width: .infinity)
         }
         .padding()
     }

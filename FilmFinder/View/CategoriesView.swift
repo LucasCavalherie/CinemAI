@@ -9,7 +9,14 @@ import SwiftUI
 
 struct Category: Identifiable {
     let id = UUID()
-    let name: String
+    let name : String
+    let nameLocalized: LocalizedStringKey
+    
+    
+    init(name: String) {
+        self.name = name
+        self.nameLocalized = LocalizedStringKey(name)
+    }
 }
 
 struct CategoriesView: View {
@@ -115,9 +122,9 @@ struct CategoriesView: View {
                         } label: {
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(.clear)
-                                .frame(width: 75, height: 26)
+                                .frame(width: 85, height: 26)
                                 .overlay(
-                                    Text(category.name)
+                                    Text(category.nameLocalized)
                                         .font(.system(size: 13))
                                         .fontWeight(.medium)
                                         .foregroundColor(selectedGenre.contains { $0.id == category.id } ? .white : Color("branco"))
@@ -152,12 +159,14 @@ struct CategoriesView: View {
                         } label: {
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(.clear)
-                                .frame(width: 75, height: 26)
+                                .frame(width: 85, height: 26)
                                 .overlay(
-                                    Text(category.name)
+                                    Text(category.nameLocalized)
                                         .font(.system(size: 13))
                                         .fontWeight(.medium)
                                         .foregroundColor(selectedScript.contains { $0.id == category.id } ? .white : Color("branco"))
+
+                                        
                                 )
                         }
                         .padding(.vertical, 8)
@@ -189,12 +198,16 @@ struct CategoriesView: View {
                         } label: {
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(.clear)
-                                .frame(width: 75, height: 26)
+                                .frame(width: 85, height: 26)
                                 .overlay(
-                                    Text(category.name)
-                                        .font(.system(size: 13))
+                                    Text(category.nameLocalized)
+                                        .font(.system(size: 11))
                                         .fontWeight(.medium)
                                         .foregroundColor(selectedMood.contains { $0.id == category.id } ? .white : Color("branco"))
+                                        .multilineTextAlignment(.center)
+                                        .lineLimit(2)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        
                                 )
                         }
                         .padding(.vertical, 8)
@@ -215,7 +228,8 @@ struct CategoriesView: View {
             .padding(.bottom)
             
             NavigationLink {
-                let inputText = "Estou querendo \(type) para me sentir \(selectedMood.map{$0.name}.joined(separator: ", ")), me recomende um que seja de \(selectedGenre.map{$0.name}.joined(separator: ", ")) e com um tema de \(selectedScript.map{$0.name}.joined(separator: ", "))"
+                let inputText = "Estou querendo \(type) para me sentir \(selectedMood.map{$0.name }.joined(separator: ", ")), me recomende um que seja de \(selectedGenre.map{$0.name}.joined(separator: ", ")) e com um tema de \(selectedScript.map{$0.name}.joined(separator: ", "))"
+                
                 ChatGptView(type: type, inputText: inputText)
             } label: {
                 HStack {
@@ -231,6 +245,11 @@ struct CategoriesView: View {
                 
             }
         }
+    }
+    
+    func joinedNames(from categories: [Category]) -> String {
+        categories.map { NSLocalizedString($0.name, comment: "") }
+                  .joined(separator: ", ")
     }
 }
 

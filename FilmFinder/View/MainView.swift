@@ -23,8 +23,7 @@ struct MainView: View {
                 }
                 .tag(2)
         }
-        .accentColor(Color("laranja"))
-//        .navigationBarHidden(true)
+        .accentColor(Color.laranja)
     }
 }
 

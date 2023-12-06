@@ -50,7 +50,7 @@ struct SearchView: View {
                         
                         Picker("Appearance", selection: $selectedType) {
                             Text("Filmes").tag("Filmes")
-                            Text("Series").tag("Series")
+                            Text("Séries").tag("Séries")
                         }
                         .colorMultiply(selectedType == "Filmes" ? Color("laranja") : .purple)
                         .pickerStyle(.segmented)
