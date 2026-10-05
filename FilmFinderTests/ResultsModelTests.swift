@@ -58,6 +58,7 @@ private func titles(_ ids: ClosedRange<Int>, type: MediaType = .movie) -> [Title
         #expect(sent.locale == "pt-BR")
         #expect(sent.region == "BR")
         #expect(sent.excludeTmdbIds == [50])
+        #expect(sent.excludeTitles == ["Sample (2020)"])
     }
 
     @Test func recordsAllTitlesButOnlyShownOnesEnterHistory() async throws {

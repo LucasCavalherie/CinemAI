@@ -66,6 +66,15 @@ final class LibraryStore {
 
     /// Ids do mesmo tipo de mídia: favoritos e assistidos primeiro, depois os mais recentes; máx. 200.
     func excludedIDs(for mediaType: MediaType) -> [Int] {
+        excludedItems(for: mediaType).map(\.tmdbId)
+    }
+
+    /// Mesmos itens e ordem de `excludedIDs`, como rótulos "Título original (ano)" para o prompt da IA.
+    func excludedTitles(for mediaType: MediaType) -> [String] {
+        excludedItems(for: mediaType).compactMap { $0.snapshot?.excludeLabel }
+    }
+
+    private func excludedItems(for mediaType: MediaType) -> [LibraryItem] {
         let raw = mediaType.rawValue
         let descriptor = FetchDescriptor<LibraryItem>(
             predicate: #Predicate { $0.mediaTypeRaw == raw },
@@ -74,7 +83,7 @@ final class LibraryStore {
         let items = (try? context.fetch(descriptor)) ?? []
         let pinned = items.filter { $0.isFavorite || $0.isWatched }
         let rest = items.filter { !($0.isFavorite || $0.isWatched) }
-        return Array((pinned + rest).prefix(Self.maxExcluded)).map(\.tmdbId)
+        return Array((pinned + rest).prefix(Self.maxExcluded))
     }
 
     func save() {

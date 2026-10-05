@@ -52,4 +52,9 @@ struct Title: Codable, Hashable, Sendable, Identifiable {
     }
 
     var stars: Int { Title.stars(for: rating) }
+
+    /// Rótulo usado para pedir à IA que não repita o título.
+    var excludeLabel: String {
+        year.map { "\(originalTitle) (\($0))" } ?? originalTitle
+    }
 }

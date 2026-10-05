@@ -6,6 +6,8 @@ struct RecommendationRequest: Encodable, Sendable {
     let excludeTmdbIds: [Int]
     let locale: String
     let region: String
+    /// Títulos já vistos ("Título original (ano)"): vão no prompt da IA; o filtro de verdade é por id no servidor.
+    var excludeTitles: [String] = []
 }
 
 struct Quota: Decodable, Equatable, Sendable {

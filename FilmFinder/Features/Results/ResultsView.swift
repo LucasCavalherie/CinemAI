@@ -10,7 +10,7 @@ struct ResultsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var model: ResultsModel?
     @State private var currentIndex = 0
-    @GestureState private var dragOffset: CGFloat = 0
+    @State private var dragOffset: CGFloat = 0
 
     var body: some View {
         Group {
@@ -78,15 +78,18 @@ struct ResultsView: View {
             .frame(maxWidth: .infinity)
             .gesture(
                 DragGesture()
-                    .updating($dragOffset) { value, state, _ in state = value.translation.width }
+                    .onChanged { dragOffset = $0.translation.width }
                     .onEnded { value in
                         let threshold: CGFloat = 50
-                        withAnimation {
+                        // O deslocamento do dedo volta a zero na MESMA animação da troca de card:
+                        // se voltasse sem animar, o card "pularia" antes de deslizar.
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                             if value.translation.width > threshold {
                                 currentIndex = max(0, index - 1)
                             } else if value.translation.width < -threshold {
                                 currentIndex = min(titles.count - 1, index + 1)
                             }
+                            dragOffset = 0
                         }
                     }
             )

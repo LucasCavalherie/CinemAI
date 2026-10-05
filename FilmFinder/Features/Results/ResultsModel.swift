@@ -99,7 +99,8 @@ final class ResultsModel {
             mediaType: mediaType,
             excludeTmdbIds: store.excludedIDs(for: mediaType),
             locale: localeInfo.locale,
-            region: localeInfo.region
+            region: localeInfo.region,
+            excludeTitles: store.excludedTitles(for: mediaType)
         )
         let response = try await service.recommend(request)
         if let quota = response.quota { onQuota?(quota) }

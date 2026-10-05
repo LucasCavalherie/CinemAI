@@ -46,6 +46,12 @@ import Testing
         #expect(decoded == original)
     }
 
+    @Test func excludeLabelIsOriginalTitleWithYear() {
+        #expect(Title.sample(title: "Interstellar").excludeLabel == "Interstellar (2020)")
+        let noYear = Title(tmdbId: 1, mediaType: .movie, title: "T", originalTitle: "Orig", year: nil, overview: "", posterPath: nil, backdropPath: nil, rating: 0, runtimeMinutes: nil, seasons: nil, genres: [], reason: "", providers: .empty(region: "BR"))
+        #expect(noYear.excludeLabel == "Orig")
+    }
+
     @Test func starsAreRoundedAndClamped() {
         #expect(Title.stars(for: 0) == 0)
         #expect(Title.stars(for: 7.571) == 4)
@@ -68,12 +74,13 @@ import Testing
 
     @Test func requestEncodesBackendFieldNames() throws {
         let request = RecommendationRequest(
-            query: "algo leve", mediaType: .tv, excludeTmdbIds: [1, 2], locale: "pt-BR", region: "BR"
+            query: "algo leve", mediaType: .tv, excludeTmdbIds: [1, 2], locale: "pt-BR", region: "BR", excludeTitles: ["Up (2009)"]
         )
         let json = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(request)) as? [String: Any])
         #expect(json["query"] as? String == "algo leve")
         #expect(json["mediaType"] as? String == "tv")
         #expect(json["excludeTmdbIds"] as? [Int] == [1, 2])
+        #expect(json["excludeTitles"] as? [String] == ["Up (2009)"])
         #expect(json["locale"] as? String == "pt-BR")
         #expect(json["region"] as? String == "BR")
     }

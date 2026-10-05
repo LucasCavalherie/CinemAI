@@ -76,6 +76,20 @@ import Testing
         #expect(item.snapshot?.title == "New")
     }
 
+    @Test func excludedTitlesUseOriginalTitleAndYearInTheSameOrderAsIDs() throws {
+        let h = try LibraryHarness()
+        let older = h.store.upsert(.sample(id: 1, title: "Up"))
+        older.recommendedAt = Date(timeIntervalSince1970: 100)
+        let newer = h.store.upsert(.sample(id: 2, type: .movie, title: "Dark"))
+        newer.recommendedAt = Date(timeIntervalSince1970: 200)
+        h.store.recordRecommended([.sample(id: 3, type: .tv, title: "Other")])
+        h.store.save()
+
+        #expect(h.store.excludedIDs(for: .movie) == [2, 1])
+        #expect(h.store.excludedTitles(for: .movie) == ["Dark (2020)", "Up (2020)"])
+        #expect(h.store.excludedTitles(for: .tv) == ["Other (2020)"])
+    }
+
     @Test func excludedIDsAreFilteredByMediaType() throws {
         let h = try LibraryHarness()
         h.store.recordRecommended([.sample(id: 1, type: .movie), .sample(id: 2, type: .tv)])
