@@ -14,6 +14,7 @@ export function createGeminiProvider(opts: {
   baseUrl: string
   model: string
   fetchFn?: FetchLike
+  extraHeaders?: Record<string, string>
 }): RecommendationProvider {
   // Wrapper evita "Illegal invocation" ao chamar o fetch global desacoplado no Workers.
   const fetchFn: FetchLike = opts.fetchFn ?? ((url, init) => fetch(url, init))
@@ -22,7 +23,7 @@ export function createGeminiProvider(opts: {
     async recommend(input, signal) {
       const res = await fetchFn(`${opts.baseUrl}/v1beta/models/${opts.model}:generateContent`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json', 'x-goog-api-key': opts.apiKey },
+        headers: { 'content-type': 'application/json', 'x-goog-api-key': opts.apiKey, ...opts.extraHeaders },
         signal,
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: buildSystemPrompt() }] },

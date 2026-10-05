@@ -7,14 +7,22 @@ const picksJson = JSON.stringify({ picks: [{ title: 'Up', originalTitle: 'Up', y
 const signal = new AbortController().signal
 const baseUrl = 'https://gw.example/google-ai-studio'
 
-function stub(body: unknown, status = 200) {
+function stub(body: unknown, status = 200, extraHeaders?: Record<string, string>) {
   const fetchFn = vi.fn(async (_url: string, _init?: RequestInit) => new Response(JSON.stringify(body), { status }))
-  return { fetchFn, provider: createGeminiProvider({ apiKey: 'k', baseUrl, model: 'gemini-x', fetchFn }) }
+  return { fetchFn, provider: createGeminiProvider({ apiKey: 'k', baseUrl, model: 'gemini-x', fetchFn, extraHeaders }) }
 }
 
 const okBody = { candidates: [{ finishReason: 'STOP', content: { parts: [{ text: picksJson }] } }] }
 
 describe('GeminiProvider', () => {
+  it('sends extra headers (AI Gateway token) when provided', async () => {
+    const { fetchFn, provider } = stub(okBody, 200, { 'cf-aig-authorization': 'Bearer t' })
+    await provider.recommend(input, signal)
+    const headers = fetchFn.mock.calls[0]![1]?.headers as Record<string, string>
+    expect(headers['cf-aig-authorization']).toBe('Bearer t')
+    expect(headers['x-goog-api-key']).toBe('k')
+  })
+
   it('calls generateContent with schema, system instruction, key header and signal', async () => {
     const { fetchFn, provider } = stub(okBody)
     const picks = await provider.recommend(input, signal)

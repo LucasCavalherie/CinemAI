@@ -28,6 +28,10 @@ export function gatewayBaseUrl(env: Env, provider: ProviderName): string {
   return `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_ID}/${GATEWAY_SLUG[provider]}`
 }
 
+export function gatewayHeaders(env: Env): Record<string, string> {
+  return env.CF_AIG_TOKEN ? { 'cf-aig-authorization': `Bearer ${env.CF_AIG_TOKEN}` } : {}
+}
+
 export function createDeps(env: Env): Deps {
   return {
     config: env.CONFIG,
@@ -35,16 +39,17 @@ export function createDeps(env: Env): Deps {
     tmdb: new TmdbClient(env.TMDB_TOKEN),
     provider(name, model) {
       if (name === 'anthropic') {
-        const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, baseURL: gatewayBaseUrl(env, 'anthropic'), maxRetries: 0 })
+        const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, baseURL: gatewayBaseUrl(env, 'anthropic'), defaultHeaders: gatewayHeaders(env), maxRetries: 0 })
         return createAnthropicProvider(client, model)
       }
       if (name === 'gemini') {
-        return createGeminiProvider({ apiKey: env.GEMINI_API_KEY ?? '', baseUrl: gatewayBaseUrl(env, 'gemini'), model })
+        return createGeminiProvider({ apiKey: env.GEMINI_API_KEY ?? '', baseUrl: gatewayBaseUrl(env, 'gemini'), model, extraHeaders: gatewayHeaders(env) })
       }
-      const client = new OpenAI({ apiKey: env.OPENAI_API_KEY ?? '', baseURL: gatewayBaseUrl(env, 'openai'), maxRetries: 0 })
+      const client = new OpenAI({ apiKey: env.OPENAI_API_KEY ?? '', baseURL: gatewayBaseUrl(env, 'openai'), defaultHeaders: gatewayHeaders(env), maxRetries: 0 })
       return createOpenAIProvider(client, model)
     },
     log(e) {
+      console.log(JSON.stringify({ event: 'ai_call', ...e }))
       env.AI_EVENTS?.writeDataPoint({
         indexes: [e.provider],
         blobs: [e.provider, e.ok ? 'ok' : 'fail', e.error ?? '', String(e.promptVersion)],

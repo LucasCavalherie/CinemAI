@@ -5,6 +5,7 @@ export interface Env {
   ANTHROPIC_API_KEY: string
   OPENAI_API_KEY?: string
   GEMINI_API_KEY?: string
+  CF_AIG_TOKEN?: string
   TMDB_TOKEN: string
   DEV_API_KEY: string
   CF_ACCOUNT_ID: string

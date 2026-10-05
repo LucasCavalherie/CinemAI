@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createDeps, gatewayBaseUrl } from '../src/deps'
+import { createDeps, gatewayBaseUrl, gatewayHeaders } from '../src/deps'
 import type { Env } from '../src/env'
 import { MemoryKV } from './helpers/memoryKV'
 
@@ -22,6 +22,13 @@ describe('gatewayBaseUrl', () => {
     expect(gatewayBaseUrl(env, 'anthropic')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/anthropic')
     expect(gatewayBaseUrl(env, 'openai')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/openai')
     expect(gatewayBaseUrl(env, 'gemini')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/google-ai-studio')
+  })
+})
+
+describe('gatewayHeaders', () => {
+  it('adds the AI Gateway token only when configured', () => {
+    expect(gatewayHeaders(env)).toEqual({})
+    expect(gatewayHeaders({ ...env, CF_AIG_TOKEN: 'tok' } as Env)).toEqual({ 'cf-aig-authorization': 'Bearer tok' })
   })
 })
 

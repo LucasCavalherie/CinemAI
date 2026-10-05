@@ -22,7 +22,7 @@
       "analytics_engine_datasets": [
         { "binding": "AI_EVENTS", "dataset": "filmfinder_ai_events_dev" }
       ],
-      "vars": { "AI_GATEWAY_ID": "filmfinder-dev" }
+      "vars": { "AI_GATEWAY_ID": "default" }
     }
   }
 }
