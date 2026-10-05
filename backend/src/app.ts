@@ -4,6 +4,7 @@ import type { AppEnv } from './context'
 import type { Deps } from './deps'
 import type { Env } from './env'
 import { ApiError, errorBody } from './lib/errors'
+import { publicAuthRoutes } from './routes/publicAuth'
 import { postRecommendations } from './routes/recommendations'
 
 export function createApp(makeDeps: (env: Env) => Deps) {
@@ -16,7 +17,8 @@ export function createApp(makeDeps: (env: Env) => Deps) {
 
   app.get('/health', (c) => c.json({ ok: true }))
 
-  // Rotas públicas de autenticação entram aqui (Task BE-7).
+  // Rotas públicas (sem token): desafio, registro de dispositivo e renovação.
+  app.route('/v1', publicAuthRoutes)
 
   const authed = new Hono<AppEnv>()
   authed.use('*', requireAuth)
