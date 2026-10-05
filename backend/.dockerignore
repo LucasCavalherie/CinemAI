@@ -1,9 +1,0 @@
-node_modules
-.wrangler
-.dev.vars
-.env
-scripts/out
-test
-*.md
-Dockerfile
-.dockerignore

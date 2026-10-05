@@ -14,7 +14,7 @@ The app also has a **Favorites** function, where you can save suggested films so
 
 ## Desenvolvimento
 
-O app depende de um backend (Cloudflare Worker em `backend/`).
+O app depende do backend em https://github.com/AndreWozniack/filmfinder-api (repositório separado; roda em Docker/Dokploy ou como Cloudflare Worker).
 
     brew install xcodegen
     cp Config/Local.xcconfig.example Config/Local.xcconfig   # ou crie o arquivo com DEVELOPMENT_TEAM = <seu Team ID>
