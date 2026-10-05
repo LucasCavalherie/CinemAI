@@ -19,9 +19,10 @@ export type ErrorCode =
   | 'apple_auth_failed'
   | 'apple_unavailable'
   | 'ai_unavailable'
+  | 'rate_limited'
   | 'internal'
 
-export type ErrorStatus = 400 | 401 | 402 | 403 | 500 | 502 | 503
+export type ErrorStatus = 400 | 401 | 402 | 403 | 429 | 500 | 502 | 503
 
 export class ApiError extends Error {
   override name = 'ApiError'

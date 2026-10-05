@@ -2,6 +2,14 @@
 
 Recebe um pedido em linguagem natural, obtém indicações de Gemini Flash-Lite ou Claude Haiku 4.5 (com fallback; GPT mini disponível, desligado por padrão) e devolve títulos resolvidos no TMDB com onde assistir.
 
+## Rodando fora da Cloudflare (VPS / Docker)
+
+O mesmo código roda como servidor Node (SQLite em arquivo). Guia completo para Dokploy: `docs/deploy/dokploy.md`.
+
+    npm run docker:build
+    docker run -p 3000:3000 -v ffdata:/data -e JWT_SECRET=... -e TMDB_TOKEN=... -e GEMINI_API_KEY=... \
+      -e APPLE_TEAM_ID=... -e APPLE_BUNDLE_ID=com.andre.filmfinder filmfinder-api
+
 ## Desenvolvimento
 
     npm install
