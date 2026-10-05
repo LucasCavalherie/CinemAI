@@ -98,3 +98,9 @@ iOSInjectionProject/
 .DS_Store
 Secrets.swift
 *.xcodeproj/
+
+# Backend
+backend/node_modules/
+backend/.wrangler/
+backend/.dev.vars
+backend/scripts/out/

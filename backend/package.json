@@ -1,0 +1,25 @@
+{
+  "name": "filmfinder-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy:dev": "wrangler deploy --env dev",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx scripts/smoke.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "hono": "^4.13.13",
+    "openai": "^7.28.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261005.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.147.0"
+  }
+}

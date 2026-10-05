@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "filmfinder-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    { "binding": "CACHE", "id": "local" },
+    { "binding": "CONFIG", "id": "local" }
+  ],
+  "analytics_engine_datasets": [
+    { "binding": "AI_EVENTS", "dataset": "filmfinder_ai_events" }
+  ],
+  "vars": { "AI_GATEWAY_ID": "filmfinder" },
+  "env": {
+    "dev": {
+      "name": "filmfinder-api-dev",
+      "kv_namespaces": [
+        { "binding": "CACHE", "id": "local" },
+        { "binding": "CONFIG", "id": "local" }
+      ],
+      "analytics_engine_datasets": [
+        { "binding": "AI_EVENTS", "dataset": "filmfinder_ai_events_dev" }
+      ],
+      "vars": { "AI_GATEWAY_ID": "filmfinder-dev" }
+    }
+  }
+}
