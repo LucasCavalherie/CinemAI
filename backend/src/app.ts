@@ -4,6 +4,7 @@ import type { AppEnv } from './context'
 import type { Deps } from './deps'
 import type { Env } from './env'
 import { ApiError, errorBody } from './lib/errors'
+import { accountRoutes } from './routes/account'
 import { publicAuthRoutes } from './routes/publicAuth'
 import { postRecommendations } from './routes/recommendations'
 
@@ -23,7 +24,7 @@ export function createApp(makeDeps: (env: Env) => Deps) {
   const authed = new Hono<AppEnv>()
   authed.use('*', requireAuth)
   authed.post('/recommendations', postRecommendations)
-  // Rotas de conta entram aqui (Task BE-8).
+  authed.route('/', accountRoutes)
   app.route('/v1', authed)
 
   app.onError((err, c) => {
