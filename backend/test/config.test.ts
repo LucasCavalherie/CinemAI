@@ -16,12 +16,21 @@ describe('loadConfig', () => {
       'ai.models.anthropic': 'claude-x',
       'ai.models.openai': 'gpt-y',
       'ai.models.gemini': 'gem-z',
+      'limits.free.daily': '3',
+      'limits.pro.daily': '50',
     })
     expect(await loadConfig(kv)).toEqual({
       primary: 'gemini',
       secondary: 'openai',
       models: { anthropic: 'claude-x', openai: 'gpt-y', gemini: 'gem-z' },
+      limits: { free: 3, pro: 50 },
     })
+  })
+
+  it('uses default limits for missing or invalid values', async () => {
+    expect((await loadConfig(new MemoryKV())).limits).toEqual({ free: 5, pro: 100 })
+    const bad = new MemoryKV({ 'limits.free.daily': 'abc', 'limits.pro.daily': '0' })
+    expect((await loadConfig(bad)).limits).toEqual({ free: 5, pro: 100 })
   })
 
   it('falls back to gemini for an invalid primary', async () => {
