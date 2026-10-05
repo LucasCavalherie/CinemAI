@@ -98,3 +98,7 @@ iOSInjectionProject/
 .DS_Store
 Secrets.swift
 *.xcodeproj/
+
+
+# App iOS
+Config/Local.xcconfig

@@ -2,12 +2,17 @@ name: FilmFinder
 options:
   bundleIdPrefix: com.andre
   deploymentTarget:
-    iOS: '16.5'
-    
+    iOS: '18.0'
+
+configFiles:
+  Debug: Config/Debug.xcconfig
+  Release: Config/Release.xcconfig
+
 settings:
   base:
-    IPHONEOS_DEPLOYMENT_TARGET: '16.5'
-    
+    IPHONEOS_DEPLOYMENT_TARGET: '18.0'
+    SWIFT_VERSION: '6.0'
+
 packages:
   Lottie:
     url: 'https://github.com/airbnb/lottie-ios.git'
@@ -18,9 +23,33 @@ targets:
     type: application
     platform: iOS
     settings:
-      INFO_PLIST_FILE: 'FilmFinder/Info.plist'
-      PRODUCT_BUNDLE_IDENTIFIER: 'com.andre.filmfinder'
+      base:
+        INFO_PLIST_FILE: 'FilmFinder/Info.plist'
+        PRODUCT_BUNDLE_IDENTIFIER: 'com.andre.filmfinder'
+        CODE_SIGN_ENTITLEMENTS: 'FilmFinder/FilmFinder.entitlements'
+        CODE_SIGN_STYLE: Automatic
     sources:
       - path: 'FilmFinder'
     dependencies:
       - package: Lottie
+  FilmFinderTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: 'com.andre.filmfinder.tests'
+        GENERATE_INFOPLIST_FILE: YES
+    sources:
+      - path: 'FilmFinderTests'
+    dependencies:
+      - target: FilmFinder
+
+schemes:
+  FilmFinder:
+    build:
+      targets:
+        FilmFinder: all
+        FilmFinderTests: [test]
+    test:
+      targets:
+        - FilmFinderTests

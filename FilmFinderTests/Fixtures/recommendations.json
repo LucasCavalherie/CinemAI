@@ -1,0 +1,47 @@
+{
+  "titles": [
+    {
+      "tmdbId": 157336,
+      "mediaType": "movie",
+      "title": "Interestelar",
+      "originalTitle": "Interstellar",
+      "year": 2014,
+      "overview": "As reservas naturais da Terra estão chegando ao fim.",
+      "posterPath": "/poster.jpg",
+      "backdropPath": "/backdrop.jpg",
+      "rating": 8.5,
+      "runtimeMinutes": 169,
+      "seasons": null,
+      "genres": ["Aventura", "Ficção científica"],
+      "reason": "Uma jornada espacial emocionante sobre o tempo.",
+      "providers": {
+        "region": "BR",
+        "link": "https://www.themoviedb.org/movie/157336/watch?locale=BR",
+        "flatrate": [
+          { "id": 119, "name": "Amazon Prime Video", "logoPath": "/prime.jpg" },
+          { "id": 384, "name": "Max", "logoPath": "/max.jpg" }
+        ],
+        "rent": [{ "id": 2, "name": "Apple TV", "logoPath": "/apple.jpg" }],
+        "buy": [],
+        "free": [{ "id": 73, "name": "Tubi", "logoPath": "/tubi.jpg" }]
+      }
+    },
+    {
+      "tmdbId": 70523,
+      "mediaType": "tv",
+      "title": "Dark",
+      "originalTitle": "Dark",
+      "year": 2017,
+      "overview": "Uma criança desaparece.",
+      "posterPath": null,
+      "backdropPath": null,
+      "rating": 8.4,
+      "runtimeMinutes": null,
+      "seasons": 3,
+      "genres": ["Drama"],
+      "reason": "Mistério denso com viagem no tempo.",
+      "providers": { "region": "BR", "link": null, "flatrate": [], "rent": [], "buy": [], "free": [] }
+    }
+  ],
+  "quota": { "used": 1, "limit": 5, "resetsAt": "2026-10-06T00:00:00Z" }
+}
