@@ -44,6 +44,18 @@ describe('parsePicks', () => {
     expect(parsePicks(raw)).toHaveLength(1)
   })
 
+  it('decodes HTML entities in all text fields', () => {
+    const raw = JSON.stringify({
+      picks: [{ title: 'A Chegada', originalTitle: 'Amélie &amp; Co&#39;s', reason: 'Percep&ccedil;&atilde;o do tempo &#x2014; incr&iacute;vel.', year: 2016 }],
+    })
+    expect(parsePicks(raw)[0]).toEqual({
+      title: 'A Chegada',
+      originalTitle: "Amélie & Co's",
+      reason: 'Percepção do tempo — incrível.',
+      year: 2016,
+    })
+  })
+
   it('throws ProviderError on invalid JSON', () => {
     expect(() => parsePicks('not json')).toThrow(ProviderError)
   })

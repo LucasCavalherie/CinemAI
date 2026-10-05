@@ -1,3 +1,4 @@
+import { decodeHTML } from 'entities'
 import type { ProviderName } from '../config'
 import { ProviderError } from '../lib/errors'
 import { AiPicks, type AiPick, type MediaType } from '../schemas'
@@ -24,5 +25,11 @@ export function parsePicks(raw: string): AiPick[] {
   }
   const result = AiPicks.safeParse(json)
   if (!result.success) throw new ProviderError('Provider output does not match schema')
-  return result.data.picks
+  // Alguns modelos (Gemini) devolvem entidades HTML (&ccedil;) dentro das strings do JSON.
+  return result.data.picks.map((p) => ({
+    ...p,
+    title: decodeHTML(p.title),
+    originalTitle: decodeHTML(p.originalTitle),
+    reason: decodeHTML(p.reason),
+  }))
 }

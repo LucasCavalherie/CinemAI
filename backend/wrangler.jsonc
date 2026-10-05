@@ -16,12 +16,10 @@
     "dev": {
       "name": "filmfinder-api-dev",
       "kv_namespaces": [
-        { "binding": "CACHE", "id": "local" },
-        { "binding": "CONFIG", "id": "local" }
+        { "binding": "CACHE", "id": "bfc2202dd4794dd08eb779268a43b84a" },
+        { "binding": "CONFIG", "id": "cc96ca027d414013bd2b64c8f1c0ae77" }
       ],
-      "analytics_engine_datasets": [
-        { "binding": "AI_EVENTS", "dataset": "filmfinder_ai_events_dev" }
-      ],
+      // Analytics Engine desligado no dev até ser ativado no painel (ver fatia 5).
       "vars": { "AI_GATEWAY_ID": "default" }
     }
   }
