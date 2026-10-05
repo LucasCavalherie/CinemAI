@@ -1,6 +1,13 @@
 import Foundation
 import SwiftData
 
+/// Estado dos marcadores de um título; guardado antes de uma remoção para poder desfazê-la.
+struct LibraryFlags: Equatable, Sendable {
+    var isFavorite: Bool
+    var isWatched: Bool
+    var inHistory: Bool
+}
+
 @MainActor
 final class LibraryStore {
     /// Teto de ids enviados ao backend (`excludeTmdbIds`).
@@ -84,6 +91,28 @@ final class LibraryStore {
         let pinned = items.filter { $0.isFavorite || $0.isWatched }
         let rest = items.filter { !($0.isFavorite || $0.isWatched) }
         return Array((pinned + rest).prefix(Self.maxExcluded))
+    }
+
+    func flags(for title: Title) -> LibraryFlags? {
+        guard let item = fetch(key: title.id) else { return nil }
+        return LibraryFlags(isFavorite: item.isFavorite, isWatched: item.isWatched, inHistory: item.inHistory)
+    }
+
+    /// Tira o título só do segmento indicado; os outros marcadores ficam como estão.
+    func remove(_ title: Title, from segment: LibrarySegment) {
+        switch segment {
+        case .favorites: setFavorite(title, false)
+        case .watched: setWatched(title, false)
+        case .history: removeFromHistory(title)
+        }
+    }
+
+    func restore(_ flags: LibraryFlags, for title: Title) {
+        let item = upsert(title)
+        item.isFavorite = flags.isFavorite
+        item.isWatched = flags.isWatched
+        item.inHistory = flags.inHistory
+        save()
     }
 
     func save() {
