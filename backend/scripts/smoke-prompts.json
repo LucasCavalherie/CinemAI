@@ -1,0 +1,22 @@
+[
+  { "query": "um filme leve de romance pra ver no domingo", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "ficção científica que mexe com o tempo e deixa a cabeça explodindo", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "terror psicológico sem jumpscare barato", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "animação pra ver com criança de 6 anos que adulto também goste", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "filme brasileiro recente premiado", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "comédia besteirol anos 2000", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "thriller de assalto bem amarrado", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "documentário sobre comida", "mediaType": "movie", "locale": "pt-BR", "region": "BR" },
+  { "query": "série curta de mistério pra maratonar num fim de semana", "mediaType": "tv", "locale": "pt-BR", "region": "BR" },
+  { "query": "série de comédia de escritório", "mediaType": "tv", "locale": "pt-BR", "region": "BR" },
+  { "query": "drama coreano romântico", "mediaType": "tv", "locale": "pt-BR", "region": "BR" },
+  { "query": "série de fantasia medieval com política", "mediaType": "tv", "locale": "pt-BR", "region": "BR" },
+  { "query": "anime para iniciantes", "mediaType": "tv", "locale": "pt-BR", "region": "BR" },
+  { "query": "a feel-good movie about friendship", "mediaType": "movie", "locale": "en-US", "region": "US" },
+  { "query": "slow-burn sci-fi with great visuals", "mediaType": "movie", "locale": "en-US", "region": "US" },
+  { "query": "90s action classics", "mediaType": "movie", "locale": "en-US", "region": "US" },
+  { "query": "true crime docuseries", "mediaType": "tv", "locale": "en-US", "region": "US" },
+  { "query": "British crime drama with a detective duo", "mediaType": "tv", "locale": "en-US", "region": "US" },
+  { "query": "something like Breaking Bad", "mediaType": "tv", "locale": "en-US", "region": "US" },
+  { "query": "quero chorar assistindo", "mediaType": "movie", "locale": "pt-BR", "region": "BR" }
+]
