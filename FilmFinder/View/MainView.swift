@@ -22,6 +22,12 @@ struct MainView: View {
                     Label("Perfil", systemImage: "person.circle.fill")
                 }
                 .tag(2)
+
+            SettingsView()
+                .tabItem {
+                    Label("Ajustes", systemImage: "gearshape.fill")
+                }
+                .tag(3)
         }
         .accentColor(Color.laranja)
     }
