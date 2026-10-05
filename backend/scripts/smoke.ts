@@ -4,19 +4,28 @@ type Prompt = { query: string; mediaType: 'movie' | 'tv'; locale: string; region
 type Row = { provider: string; query: string; status: number; latencyMs: number; titles: number; top3: string[]; withStreaming: number }
 
 const baseUrl = process.env.SMOKE_URL ?? 'http://localhost:8787'
-const devKey = process.env.DEV_API_KEY
-if (!devKey) throw new Error('Set DEV_API_KEY')
-
 const prompts = JSON.parse(readFileSync(new URL('./smoke-prompts.json', import.meta.url), 'utf8')) as Prompt[]
+const providers = (process.env.SMOKE_PROVIDERS ?? 'gemini,anthropic').split(',')
 const rows: Row[] = []
-const providers = (process.env.SMOKE_PROVIDERS ?? 'anthropic,gemini').split(',')
+
+/** Registra um dispositivo novo (só funciona no `dev`, com ALLOW_UNATTESTED=true). */
+async function newAccessToken(): Promise<string> {
+  const res = await fetch(`${baseUrl}/v1/devices`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ unattested: true }),
+  })
+  if (!res.ok) throw new Error(`device registration failed: ${res.status}`)
+  return ((await res.json()) as { accessToken: string }).accessToken
+}
 
 for (const provider of providers) {
   for (const p of prompts) {
+    const token = await newAccessToken()
     const started = Date.now()
     const res = await fetch(`${baseUrl}/v1/recommendations`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-dev-key': devKey, 'x-ai-provider': provider },
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${token}`, 'x-ai-provider': provider },
       body: JSON.stringify(p),
     })
     const body = (await res.json()) as { titles?: { title: string; year: number | null; providers: { flatrate: unknown[] } }[] }

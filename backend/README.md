@@ -27,12 +27,17 @@ Recebe um pedido em linguagem natural, obtém indicações de Gemini Flash-Lite 
 
     npx wrangler kv key put --env dev --binding CONFIG ai.primary openai --remote
 
-## Endpoints (Fatia 1)
+## Endpoints
 
-- `GET /health`
-- `POST /v1/recommendations` — header `x-dev-key` obrigatório; `x-ai-provider` opcional força um provedor.
+Públicos: `GET /health`, `POST /v1/auth/challenge`, `POST /v1/devices`, `POST /v1/auth/refresh`.
+Autenticados (`Authorization: Bearer <accessToken>`): `POST /v1/recommendations`, `GET /v1/me`, `DELETE /v1/me`,
+`POST /v1/auth/apple`, `POST /v1/auth/logout`.
 
-Corpo: `{ query, mediaType: "movie"|"tv", excludeTmdbIds?, locale?: "pt-BR", region?: "BR" }`
-Resposta: `{ titles: Title[], quota: null }`
+Sessão: `POST /v1/devices` devolve `{ accessToken, expiresAt, refreshToken }` (acesso de 15 min; refresh de 60 dias, rotativo).
+No ambiente `dev` (`ALLOW_UNATTESTED=true`) aceita `{ "unattested": true }`; em produção exige App Attest
+(`{ keyId, attestation, challenge }`). `x-ai-provider` só vale com `ALLOW_PROVIDER_OVERRIDE=true`.
+
+Cota: 5 buscas/dia grátis, 100/dia com a entitlement `unlimited_search` (KV `limits.free.daily`, `limits.pro.daily`).
+Erros: `{ "error": { "code", "message" } }`; cota esgotada = HTTP 402 `quota_exceeded`.
 
 Dados de filmes e séries: TMDB. Dados de streaming: JustWatch (via TMDB).
