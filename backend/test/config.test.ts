@@ -31,7 +31,7 @@ describe('loadConfig', () => {
 
   it('derives a different secondary when none is set', async () => {
     expect((await loadConfig(new MemoryKV({ 'ai.primary': 'gemini' }))).secondary).toBe('anthropic')
-    expect((await loadConfig(new MemoryKV({ 'ai.primary': 'openai' }))).secondary).toBe('anthropic')
+    expect((await loadConfig(new MemoryKV({ 'ai.primary': 'openai' }))).secondary).toBe('gemini')
     expect((await loadConfig(new MemoryKV({ 'ai.primary': 'anthropic' }))).secondary).toBe('gemini')
   })
 
