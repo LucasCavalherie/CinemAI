@@ -1,66 +1,54 @@
+import SwiftData
 import SwiftUI
 
 struct ProfileView: View {
-    
-    @ObservedObject var dataManager = DataManager.shared
-    
+    @Query(filter: #Predicate<LibraryItem> { $0.isFavorite }, sort: \.recommendedAt, order: .reverse)
+    private var favorites: [LibraryItem]
+
+    @Query(filter: #Predicate<LibraryItem> { $0.isWatched }, sort: \.recommendedAt, order: .reverse)
+    private var watched: [LibraryItem]
+
     var body: some View {
-        NavigationStack{
-            VStack(alignment: .center){
+        NavigationStack {
+            VStack(alignment: .center) {
                 Image("FilmFinder_logoPB")
                     .resizable()
                     .frame(width: 54, height: 29)
-                
+
                 Image("perfil")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 94)
                     .padding(.top, 20)
-                
+
                 Text("Meu Perfil")
                     .font(.system(size: 20))
                     .fontWidth(.expanded)
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
                     .foregroundColor(.laranja)
-                HStack{
-                    Text("\(dataManager.watched.count) Filmes Assistidos |") +
-                    Text(" \(dataManager.favorites.count) Filmes Favoritos")
-                }
-                .font(.system(size: 15))
-                .fontWeight(.medium)
-                .foregroundColor(.branco)
-                
-                VStack{
+
+                Text("\(watched.count) assistidos | \(favorites.count) favoritos")
+                    .font(.system(size: 15))
+                    .fontWeight(.medium)
+                    .foregroundColor(.branco)
+
+                VStack {
                     NavigationLink {
-                        FavoriteViews()
+                        LibraryListView(kind: .favorites)
                     } label: {
-                        FavoriteRectangle()
-                        
+                        LibraryPreviewRectangle(heading: "Favoritos", items: favorites)
                     }
                     NavigationLink {
-                        WatchedView()
+                        LibraryListView(kind: .watched)
                     } label: {
-                        WatchedRectangle()
-                        
+                        LibraryPreviewRectangle(heading: "Assistidos", items: watched)
                     }
-                    
                 }
-                
             }
             .padding(.vertical)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.cinza1)
         }
-        
-    }
-    
-    
-}
-
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }
