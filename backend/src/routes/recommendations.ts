@@ -1,6 +1,6 @@
 import type { Context } from 'hono'
 import { recommendWithFallback } from '../ai/orchestrator'
-import { loadConfig, type ProviderName } from '../config'
+import { loadConfig, type AppConfig, type ProviderName } from '../config'
 import type { Deps } from '../deps'
 import type { Env } from '../env'
 import { AiUnavailableError, ApiError } from '../lib/errors'
@@ -11,9 +11,9 @@ const AI_TIMEOUT_MS = 8000
 const MIN_PICKS = 3
 const PICKS_REQUESTED = 15
 
-function providerOrder(primary: ProviderName, forced: string | undefined): ProviderName[] {
-  if (forced === 'anthropic' || forced === 'openai') return [forced]
-  return primary === 'anthropic' ? ['anthropic', 'openai'] : ['openai', 'anthropic']
+function providerOrder(config: AppConfig, forced: string | undefined): ProviderName[] {
+  if (forced === 'anthropic' || forced === 'openai' || forced === 'gemini') return [forced]
+  return [config.primary, config.secondary]
 }
 
 export async function postRecommendations(c: Context<{ Bindings: Env }>, deps: Deps) {
@@ -27,7 +27,7 @@ export async function postRecommendations(c: Context<{ Bindings: Env }>, deps: D
     loadConfig(deps.config),
     loadExcludeLabels(deps.cache, req.mediaType, req.excludeTmdbIds),
   ])
-  const providers = providerOrder(config.primary, c.req.header('x-ai-provider')).map((name) =>
+  const providers = providerOrder(config, c.req.header('x-ai-provider')).map((name) =>
     deps.provider(name, config.models[name]),
   )
 

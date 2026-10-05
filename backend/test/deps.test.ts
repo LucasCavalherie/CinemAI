@@ -10,6 +10,7 @@ const env = {
   AI_EVENTS: { writeDataPoint },
   ANTHROPIC_API_KEY: 'a',
   OPENAI_API_KEY: 'o',
+  GEMINI_API_KEY: 'g',
   TMDB_TOKEN: 't',
   DEV_API_KEY: 'd',
   CF_ACCOUNT_ID: 'acct',
@@ -20,6 +21,7 @@ describe('gatewayBaseUrl', () => {
   it('builds AI Gateway URLs per provider', () => {
     expect(gatewayBaseUrl(env, 'anthropic')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/anthropic')
     expect(gatewayBaseUrl(env, 'openai')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/openai')
+    expect(gatewayBaseUrl(env, 'gemini')).toBe('https://gateway.ai.cloudflare.com/v1/acct/gw/google-ai-studio')
   })
 })
 
@@ -28,6 +30,7 @@ describe('createDeps', () => {
     const deps = createDeps(env)
     expect(deps.provider('anthropic', 'claude-haiku-4-5').name).toBe('anthropic')
     expect(deps.provider('openai', 'gpt-5-mini').name).toBe('openai')
+    expect(deps.provider('gemini', 'gemini-3.1-flash-lite').name).toBe('gemini')
   })
 
   it('writes AI events to Analytics Engine', () => {

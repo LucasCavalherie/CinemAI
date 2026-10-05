@@ -9,8 +9,9 @@ if (!devKey) throw new Error('Set DEV_API_KEY')
 
 const prompts = JSON.parse(readFileSync(new URL('./smoke-prompts.json', import.meta.url), 'utf8')) as Prompt[]
 const rows: Row[] = []
+const providers = (process.env.SMOKE_PROVIDERS ?? 'anthropic,gemini').split(',')
 
-for (const provider of ['anthropic', 'openai']) {
+for (const provider of providers) {
   for (const p of prompts) {
     const started = Date.now()
     const res = await fetch(`${baseUrl}/v1/recommendations`, {
@@ -33,7 +34,7 @@ for (const provider of ['anthropic', 'openai']) {
   }
 }
 
-for (const provider of ['anthropic', 'openai']) {
+for (const provider of providers) {
   const mine = rows.filter((r) => r.provider === provider)
   const ok = mine.filter((r) => r.status === 200)
   const avg = (xs: number[]) => Math.round(xs.reduce((a, b) => a + b, 0) / Math.max(xs.length, 1))

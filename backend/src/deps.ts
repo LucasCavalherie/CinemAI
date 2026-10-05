@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import OpenAI from 'openai'
 import { createAnthropicProvider } from './ai/anthropic'
+import { createGeminiProvider } from './ai/gemini'
 import { createOpenAIProvider } from './ai/openai'
 import type { AiEvent } from './ai/orchestrator'
 import type { RecommendationProvider } from './ai/types'
@@ -17,8 +18,14 @@ export type Deps = {
   log(e: AiEvent): void
 }
 
+const GATEWAY_SLUG: Record<ProviderName, string> = {
+  anthropic: 'anthropic',
+  openai: 'openai',
+  gemini: 'google-ai-studio',
+}
+
 export function gatewayBaseUrl(env: Env, provider: ProviderName): string {
-  return `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_ID}/${provider}`
+  return `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_ID}/${GATEWAY_SLUG[provider]}`
 }
 
 export function createDeps(env: Env): Deps {
@@ -31,7 +38,10 @@ export function createDeps(env: Env): Deps {
         const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, baseURL: gatewayBaseUrl(env, 'anthropic'), maxRetries: 0 })
         return createAnthropicProvider(client, model)
       }
-      const client = new OpenAI({ apiKey: env.OPENAI_API_KEY, baseURL: gatewayBaseUrl(env, 'openai'), maxRetries: 0 })
+      if (name === 'gemini') {
+        return createGeminiProvider({ apiKey: env.GEMINI_API_KEY ?? '', baseUrl: gatewayBaseUrl(env, 'gemini'), model })
+      }
+      const client = new OpenAI({ apiKey: env.OPENAI_API_KEY ?? '', baseURL: gatewayBaseUrl(env, 'openai'), maxRetries: 0 })
       return createOpenAIProvider(client, model)
     },
     log(e) {

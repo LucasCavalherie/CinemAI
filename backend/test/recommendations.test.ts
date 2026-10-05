@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { createApp } from '../src/app'
 import type { RecommendationProvider } from '../src/ai/types'
+import type { ProviderName } from '../src/config'
 import type { Deps } from '../src/deps'
 import type { Env } from '../src/env'
 import { ProviderError } from '../src/lib/errors'
@@ -11,7 +12,7 @@ import { MemoryKV } from './helpers/memoryKV'
 const env = { DEV_API_KEY: 'dev' } as Env
 const picks: AiPick[] = ['A', 'B', 'C'].map((t, i) => ({ title: t, originalTitle: t, year: 2014, reason: `r${i}` }))
 
-function makeDeps(overrides: Partial<Record<'anthropic' | 'openai', RecommendationProvider>> = {}, config = new MemoryKV()) {
+function makeDeps(overrides: Partial<Record<ProviderName, RecommendationProvider>> = {}, config = new MemoryKV()) {
   const calls: string[] = []
   const deps: Deps = {
     config,
@@ -69,21 +70,27 @@ describe('POST /v1/recommendations', () => {
     expect((await json(res)).titles.map((t: { tmdbId: number }) => t.tmdbId)).toEqual([1, 3])
   })
 
-  it('orders providers by ai.primary from config', async () => {
-    const { deps, calls } = makeDeps({}, new MemoryKV({ 'ai.primary': 'openai' }))
+  it('defaults to anthropic then gemini', async () => {
+    const { deps, calls } = makeDeps()
     await post(createApp(() => deps), valid)
-    expect(calls).toEqual(['openai', 'anthropic'])
+    expect(calls).toEqual(['anthropic', 'gemini'])
+  })
+
+  it('orders providers by ai.primary and ai.secondary from config', async () => {
+    const { deps, calls } = makeDeps({}, new MemoryKV({ 'ai.primary': 'gemini', 'ai.secondary': 'openai' }))
+    await post(createApp(() => deps), valid)
+    expect(calls).toEqual(['gemini', 'openai'])
   })
 
   it('honours x-ai-provider by using only that provider', async () => {
     const { deps, calls } = makeDeps()
-    await post(createApp(() => deps), valid, { 'x-dev-key': 'dev', 'x-ai-provider': 'openai' })
-    expect(calls).toEqual(['openai'])
+    await post(createApp(() => deps), valid, { 'x-dev-key': 'dev', 'x-ai-provider': 'gemini' })
+    expect(calls).toEqual(['gemini'])
   })
 
   it('returns 503 ai_unavailable when every provider fails', async () => {
-    const fail = (name: 'anthropic' | 'openai'): RecommendationProvider => ({ name, recommend: async () => { throw new ProviderError('x') } })
-    const { deps } = makeDeps({ anthropic: fail('anthropic'), openai: fail('openai') })
+    const fail = (name: ProviderName): RecommendationProvider => ({ name, recommend: async () => { throw new ProviderError('x') } })
+    const { deps } = makeDeps({ anthropic: fail('anthropic'), gemini: fail('gemini') })
     const res = await post(createApp(() => deps), valid)
     expect(res.status).toBe(503)
     expect((await json(res)).error.code).toBe('ai_unavailable')

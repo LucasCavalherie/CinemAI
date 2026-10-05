@@ -13,7 +13,7 @@ Relançar o FilmFinder na App Store como produto freemium, operado por nós. O f
 Mudanças principais em relação ao app atual:
 
 1. Chaves de IA e TMDB saem do app e passam a viver num backend (Cloudflare Worker).
-2. IA moderna com saída JSON garantida por schema, dois provedores (Claude Haiku 4.5 e GPT mini) com fallback e primário alternável sem deploy.
+2. IA moderna com saída JSON garantida por schema, dois provedores (Claude Haiku 4.5 e Gemini Flash-Lite) com fallback e primário/secundário alternáveis sem deploy. *(Revisão 2026-10-05: Gemini substitui GPT mini por falta de créditos OpenAI e custo menor; o adaptador OpenAI continua no código, desligado.)*
 3. Cada título mostra em quais streamings está disponível na região do usuário (TMDB `watch/providers`, dados JustWatch).
 4. Modelo freemium por cota de buscas, assinatura via StoreKit 2.
 5. Sign in with Apple opcional, para Pro valer em vários devices.
@@ -94,11 +94,12 @@ type AiPick = { title: string; originalTitle: string; year: number; reason: stri
 ```
 
 - `AnthropicProvider`: Claude Haiku 4.5 com saída estruturada por JSON schema.
-- `OpenAIProvider`: GPT mini com `response_format: json_schema` em modo strict.
+- `GeminiProvider`: Gemini Flash-Lite via `generateContent` (REST), com `generationConfig.responseMimeType = application/json` e `responseJsonSchema`.
+- `OpenAIProvider`: GPT mini com `response_format: json_schema` em modo strict (disponível, desligado por padrão).
 - Ambos chamam via URL do AI Gateway. O mesmo schema Zod valida a saída dos dois.
 - IDs de modelo ficam em KV (`ai.models.anthropic`, `ai.models.openai`), não hardcoded.
 
-**Orquestrador:** lê `ai.primary` do KV (`anthropic` ou `openai`). Tenta o primário com timeout de 8s. Erro de rede, timeout, falha de validação Zod ou menos de 3 picks válidos → tenta o secundário. Ambos falham → `ai_unavailable`, sem consumo de cota. Cada chamada registra `{ provider, model, latencyMs, fallback, picks, promptVersion }` no Analytics Engine.
+**Orquestrador:** lê `ai.primary` e `ai.secondary` do KV (`anthropic`, `gemini` ou `openai`; padrão `anthropic` → `gemini`). Tenta o primário com timeout de 8s. Erro de rede, timeout, falha de validação Zod ou menos de 3 picks válidos → tenta o secundário. Ambos falham → `ai_unavailable`, sem consumo de cota. Cada chamada registra `{ provider, model, latencyMs, fallback, picks, promptVersion }` no Analytics Engine.
 
 **Prompt:**
 
@@ -172,7 +173,7 @@ refresh_tokens (token_hash TEXT PK, device_id TEXT, expires_at)
 
 ### 4.10 Config (KV)
 
-`ai.primary`, `ai.models.anthropic`, `ai.models.openai`, `limits.free.daily`, `limits.pro.daily`. Mudanças valem sem deploy.
+`ai.primary`, `ai.secondary`, `ai.models.anthropic`, `ai.models.gemini`, `ai.models.openai`, `limits.free.daily`, `limits.pro.daily`. Mudanças valem sem deploy.
 
 ## 5. App iOS
 

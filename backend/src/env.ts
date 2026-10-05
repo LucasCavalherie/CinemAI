@@ -3,7 +3,8 @@ export interface Env {
   CONFIG: KVNamespace
   AI_EVENTS?: AnalyticsEngineDataset
   ANTHROPIC_API_KEY: string
-  OPENAI_API_KEY: string
+  OPENAI_API_KEY?: string
+  GEMINI_API_KEY?: string
   TMDB_TOKEN: string
   DEV_API_KEY: string
   CF_ACCOUNT_ID: string
