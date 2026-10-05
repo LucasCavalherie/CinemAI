@@ -10,8 +10,12 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    QuotaCard(quota: account.quota, isSignedIn: account.isSignedIn)
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
                 accountSection
-                searchesSection
                 aboutSection
             }
             .scrollContentBackground(.hidden)
@@ -37,8 +41,6 @@ struct SettingsView: View {
     private var accountSection: some View {
         Section("Conta") {
             if account.isSignedIn {
-                Label("Conectado com a Apple", systemImage: "checkmark.seal.fill")
-                    .foregroundColor(.laranja)
                 Button("Sair") {
                     Task { await account.signOut() }
                 }
@@ -82,19 +84,6 @@ struct SettingsView: View {
         case .failure:
             // Cancelou ou falhou: o desafio já foi usado pela folha, pega um novo.
             Task { await account.prepareSignIn() }
-        }
-    }
-
-    // MARK: - Buscas
-
-    private var searchesSection: some View {
-        Section("Buscas") {
-            if let quota = account.quota {
-                Text("\(quota.remaining) de \(quota.limit) buscas restantes hoje")
-            } else {
-                Text("Carregando…")
-                    .foregroundStyle(.secondary)
-            }
         }
     }
 

@@ -16,6 +16,10 @@ struct Quota: Decodable, Equatable, Sendable {
     let resetsAt: Date
 
     var remaining: Int { max(0, limit - used) }
+
+    var usedFraction: Double {
+        limit > 0 ? min(1, Double(used) / Double(limit)) : 0
+    }
 }
 
 struct RecommendationsResponse: Decodable, Sendable {
