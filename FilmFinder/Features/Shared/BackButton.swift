@@ -28,8 +28,3 @@ struct BackButton_Previews: PreviewProvider {
         BackButton()
     }
 }
-
-
-protocol ImageProvider {
-    var image: String { get set }
-}

@@ -11,7 +11,7 @@ configFiles:
 settings:
   base:
     IPHONEOS_DEPLOYMENT_TARGET: '18.0'
-    SWIFT_VERSION: '5.0'
+    SWIFT_VERSION: '6.0'
 
 packages:
   Lottie:
