@@ -37,7 +37,7 @@ describe('createDeps', () => {
     const deps = createDeps(env)
     expect(deps.provider('anthropic', 'claude-haiku-4-5').name).toBe('anthropic')
     expect(deps.provider('openai', 'gpt-5-mini').name).toBe('openai')
-    expect(deps.provider('gemini', 'gemini-3.1-flash-lite').name).toBe('gemini')
+    expect(deps.provider('gemini', 'gemini-3.5-flash-lite').name).toBe('gemini')
   })
 
   it('writes AI events to Analytics Engine', () => {

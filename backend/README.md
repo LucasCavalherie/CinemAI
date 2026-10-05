@@ -22,7 +22,7 @@ Recebe um pedido em linguagem natural, obtém indicações de Claude Haiku 4.5 o
 | `ai.primary` | `anthropic` \| `gemini` \| `openai` | `anthropic` |
 | `ai.secondary` | idem (diferente do primário) | `gemini` |
 | `ai.models.anthropic` | ID do modelo | `claude-haiku-4-5` |
-| `ai.models.gemini` | ID do modelo | `gemini-3.1-flash-lite` |
+| `ai.models.gemini` | ID do modelo | `gemini-3.5-flash-lite` |
 | `ai.models.openai` | ID do modelo | `gpt-5-mini` |
 
     npx wrangler kv key put --env dev --binding CONFIG ai.primary openai --remote
