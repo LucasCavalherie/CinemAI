@@ -1,9 +1,13 @@
+import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
+import { createAnthropicProvider } from './ai/anthropic'
+import { createOpenAIProvider } from './ai/openai'
 import type { AiEvent } from './ai/orchestrator'
 import type { RecommendationProvider } from './ai/types'
 import type { ProviderName } from './config'
 import type { Env } from './env'
 import type { KVLike } from './lib/kv'
-import type { TmdbClient } from './tmdb/client'
+import { TmdbClient } from './tmdb/client'
 
 export type Deps = {
   config: KVLike
@@ -13,6 +17,29 @@ export type Deps = {
   log(e: AiEvent): void
 }
 
-export function createDeps(_env: Env): Deps {
-  throw new Error('createDeps is wired in Task 9')
+export function gatewayBaseUrl(env: Env, provider: ProviderName): string {
+  return `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_ID}/${provider}`
+}
+
+export function createDeps(env: Env): Deps {
+  return {
+    config: env.CONFIG,
+    cache: env.CACHE,
+    tmdb: new TmdbClient(env.TMDB_TOKEN),
+    provider(name, model) {
+      if (name === 'anthropic') {
+        const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, baseURL: gatewayBaseUrl(env, 'anthropic'), maxRetries: 0 })
+        return createAnthropicProvider(client, model)
+      }
+      const client = new OpenAI({ apiKey: env.OPENAI_API_KEY, baseURL: gatewayBaseUrl(env, 'openai'), maxRetries: 0 })
+      return createOpenAIProvider(client, model)
+    },
+    log(e) {
+      env.AI_EVENTS?.writeDataPoint({
+        indexes: [e.provider],
+        blobs: [e.provider, e.ok ? 'ok' : 'fail', e.error ?? '', String(e.promptVersion)],
+        doubles: [e.latencyMs, e.picks, e.fallback ? 1 : 0],
+      })
+    },
+  }
 }
