@@ -23,6 +23,7 @@ struct FilmFinderApp: App {
                 .preferredColorScheme(.dark)
                 .environment(environment)
                 .modelContainer(container)
+                .task { await environment.warmUp() }
         }
     }
 }

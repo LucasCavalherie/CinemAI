@@ -6,10 +6,13 @@ import Observation
 final class AppEnvironment {
     let service: any RecommendationService
     let account: AccountModel
+    /// Registra o dispositivo em segundo plano ao abrir o app, para a primeira busca não esperar a atestação.
+    let warmUp: @Sendable () async -> Void
 
-    init(service: any RecommendationService, account: AccountModel) {
+    init(service: any RecommendationService, account: AccountModel, warmUp: @escaping @Sendable () async -> Void = {}) {
         self.service = service
         self.account = account
+        self.warmUp = warmUp
     }
 
     /// Monta os serviços reais: transporte HTTP, identidade do dispositivo (Keychain + App Attest) e conta.
@@ -21,7 +24,8 @@ final class AppEnvironment {
         let api = AuthorizedAPI(transport: transport, tokens: auth)
         return AppEnvironment(
             service: APIClient(api: api),
-            account: AccountModel(service: APIAccountService(transport: transport, api: api))
+            account: AccountModel(service: APIAccountService(transport: transport, api: api)),
+            warmUp: { _ = try? await auth.accessToken() }
         )
     }
 }

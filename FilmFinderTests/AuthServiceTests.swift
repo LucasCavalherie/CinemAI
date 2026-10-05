@@ -194,6 +194,24 @@ private func sha256(_ text: String) -> Data { Data(SHA256.hash(data: Data(text.u
         #expect(box.paths.count == 1)
     }
 
+    @Test func aFailedRegistrationIsNotRetriedImmediately() async throws {
+        let clock = Clock()
+        nonisolated(unsafe) var attempts = 0
+        _ = route(["/v1/devices": { _ in
+            attempts += 1
+            return (500, Data(#"{"error":{"code":"internal","message":"boom"}}"#.utf8))
+        }])
+        let service = makeService(attest: FakeAppAttest(isSupported: false), clock: clock)
+
+        await #expect(throws: APIError.server("boom")) { try await service.accessToken() }
+        await #expect(throws: APIError.server("boom")) { try await service.accessToken() }
+        #expect(attempts == 1)
+
+        clock.date = clock.date.addingTimeInterval(16)
+        await #expect(throws: APIError.server("boom")) { try await service.accessToken() }
+        #expect(attempts == 2)
+    }
+
     @Test func offlineDuringRefreshKeepsTheCredentials() async {
         let secrets = InMemorySecretStore([AuthService.Keys.refreshToken: "R1"])
         MockURLProtocol.handler = { _ in throw URLError(.notConnectedToInternet) }

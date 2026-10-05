@@ -64,7 +64,7 @@
 			"vars": {
 				"AI_GATEWAY_ID": "default",
 				"APPLE_BUNDLE_ID": "com.andre.filmfinder",
-				"APPLE_TEAM_ID": "",
+				"APPLE_TEAM_ID": "L2AH2M48T4",
 				"APPLE_KEY_ID": "",
 				"ALLOW_UNATTESTED": "true",
 				"ALLOW_PROVIDER_OVERRIDE": "true",

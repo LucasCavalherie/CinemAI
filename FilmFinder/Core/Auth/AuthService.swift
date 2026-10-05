@@ -41,8 +41,11 @@ actor AuthService: AccessTokenProvider {
     private let attest: any AppAttestProviding
     private let now: @Sendable () -> Date
 
+    private static let retryBackoff: TimeInterval = 15
+
     private var cached: (token: String, expiresAt: Date)?
     private var inflight: Task<String, Error>?
+    private var lastFailure: (error: Error, at: Date)?
 
     init(
         transport: HTTPTransport,
@@ -73,13 +76,24 @@ actor AuthService: AccessTokenProvider {
         expiresAt.timeIntervalSince(now()) > Self.renewalMargin
     }
 
-    /// Renovações simultâneas viram uma só.
+    /// Renovações simultâneas viram uma só; depois de uma falha, não tenta de novo por alguns segundos
+    /// (evita refazer a atestação — que fala com a Apple — a cada tela que pede o token).
     private func renew() async throws -> String {
         if let inflight { return try await inflight.value }
+        if let lastFailure, now().timeIntervalSince(lastFailure.at) < Self.retryBackoff { throw lastFailure.error }
         let task = Task { try await self.performRenewal() }
         inflight = task
         defer { inflight = nil }
-        return try await task.value
+        do {
+            let token = try await task.value
+            lastFailure = nil
+            return token
+        } catch is CancellationError {
+            throw CancellationError()
+        } catch {
+            lastFailure = (error, now())
+            throw error
+        }
     }
 
     private func performRenewal() async throws -> String {

@@ -5,6 +5,7 @@ enum ErrorKind {
     case offline
     case serviceUnavailable
     case quotaExceeded
+    case unauthorized
     case generic
 
     init(_ error: APIError) {
@@ -12,6 +13,7 @@ enum ErrorKind {
         case .offline: self = .offline
         case .serviceUnavailable: self = .serviceUnavailable
         case .quotaExceeded: self = .quotaExceeded
+        case .unauthorized, .forbidden: self = .unauthorized
         default: self = .generic
         }
     }
@@ -22,6 +24,7 @@ enum ErrorKind {
         case .offline: "Sem conexão"
         case .serviceUnavailable: "Serviço indisponível no momento"
         case .quotaExceeded: "Suas buscas de hoje acabaram"
+        case .unauthorized: "Não foi possível autenticar o app"
         case .generic: "Algo deu errado"
         }
     }
@@ -32,6 +35,7 @@ enum ErrorKind {
         case .offline: "Verifique sua internet e tente novamente"
         case .serviceUnavailable: "Estamos com instabilidade. Tente novamente em instantes"
         case .quotaExceeded: "Volte amanhã para novas recomendações"
+        case .unauthorized: "Atualize o app ou tente novamente em instantes"
         case .generic: "Tente novamente"
         }
     }
