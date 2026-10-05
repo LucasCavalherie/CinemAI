@@ -13,24 +13,21 @@ extension View {
     }
 }
 
+private enum SearchMethod: Hashable {
+    case description
+    case categories
+}
+
 struct SearchView: View {
-    
-    @State var message = ""
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    var btnBack : some View {
-        Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
-        }){
-            BackButton()
-    }}
-    
-    @State private var selectedSearch = "Descrição"
-    let searchs = ["Descrição", "Selecionar categorias"]
-    
-    @State private var selectedType = "Filmes"
-    let types = ["Filmes", "Séries"]
-    
+    @State private var message = ""
+    @State private var selectedType: MediaType = .movie
+    @State private var selectedMethod: SearchMethod = .description
+    @Environment(AppEnvironment.self) private var environment
+
+    private var trimmedMessage: String {
+        String(message.trimmingCharacters(in: .whitespacesAndNewlines).prefix(500))
+    }
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -39,43 +36,49 @@ struct SearchView: View {
                     .scaledToFit()
                     .frame(height: 35)
                     .padding(5)
-                
-                ScrollView (showsIndicators: false) {
-                    VStack (alignment: .leading){
+
+                if let quota = environment.account.quota {
+                    Text("\(quota.remaining) buscas restantes hoje")
+                        .font(.system(size: 13))
+                        .foregroundColor(quota.remaining == 0 ? .red : Color("branco").opacity(0.7))
+                }
+
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading) {
                         Text("Selecione o tipo de conteúdo que você está procurando:")
                             .font(.system(size: 15))
                             .fontWeight(.semibold)
                             .fontWidth(.expanded)
                             .foregroundColor(Color("branco"))
-                        
+
                         Picker("Appearance", selection: $selectedType) {
-                            Text("Filmes").tag("Filmes")
-                            Text("Séries").tag("Séries")
+                            ForEach(MediaType.allCases, id: \.self) { type in
+                                Text(type.pluralName).tag(type)
+                            }
                         }
-                        .colorMultiply(selectedType == "Filmes" ? Color("laranja") : .purple)
+                        .colorMultiply(selectedType == .movie ? Color("laranja") : .purple)
                         .pickerStyle(.segmented)
-                        
+
                         Text("Escolha um método de busca:")
                             .font(.system(size: 15))
                             .fontWeight(.semibold)
                             .fontWidth(.expanded)
                             .foregroundColor(Color("branco"))
-                        
-                        Picker("Appearance", selection: $selectedSearch) {
-                            Text("Descrição").tag("Descrição")
-                            Text("Selecionar categorias").tag("Selecionar categorias")
+
+                        Picker("Appearance", selection: $selectedMethod) {
+                            Text("Descrição").tag(SearchMethod.description)
+                            Text("Selecionar categorias").tag(SearchMethod.categories)
                         }
-                        .colorMultiply(selectedSearch == "Descrição" ? Color("laranja") : .purple)
+                        .colorMultiply(selectedMethod == .description ? Color("laranja") : .purple)
                         .pickerStyle(.segmented)
                     }
                     .padding()
-                    
-                    VStack (alignment: .center) {
-                        
-                        if selectedSearch == "Descrição" {
+
+                    VStack(alignment: .center) {
+                        if selectedMethod == .description {
                             TextField("", text: $message, axis: .vertical)
                                 .placeholder(when: message.isEmpty) {
-                                    VStack (alignment: .leading) {
+                                    VStack(alignment: .leading) {
                                         Text("Descreva o tipo de filme que você está a fim de assistir agora")
                                     }
                                     .foregroundColor(.white)
@@ -90,43 +93,39 @@ struct SearchView: View {
                                 .cornerRadius(10)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.cinza1 , lineWidth: 1)
+                                        .stroke(Color.cinza1, lineWidth: 1)
                                 )
-                            
-                                NavigationLink {
-                                    ChatGptView(type: selectedType, inputText: message)
-                                } label: {
-                                    HStack {
-                                        Text("Pesquisar \(selectedType)")
-                                        Image(systemName: "arrow.right")
-                                    }
-                                    .font(.system(size: 15))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("preto"))
-                                    .frame(width: 200, height: 40, alignment: .center)
-                                    .background(Color("laranja"))
-                                    .cornerRadius(16)
-                                    
+
+                            NavigationLink {
+                                ResultsView(mediaType: selectedType, query: trimmedMessage)
+                            } label: {
+                                HStack {
+                                    Text("Pesquisar \(selectedType.pluralNameString)")
+                                    Image(systemName: "arrow.right")
                                 }
+                                .font(.system(size: 15))
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("preto"))
+                                .frame(width: 200, height: 40, alignment: .center)
+                                .background(Color("laranja").opacity(trimmedMessage.isEmpty ? 0.4 : 1))
+                                .cornerRadius(16)
+                            }
+                            .disabled(trimmedMessage.isEmpty)
                         } else {
                             CategoriesView(type: $selectedType)
                         }
-                        
-                        
                     }
                     .padding(.vertical, 8)
                 }
             }
             .padding()
             .background(Color("cinza1"))
+            .task { await environment.account.refresh() }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
+#Preview {
+    SearchView()
+        .environment(AppEnvironment.live())
 }

@@ -20,7 +20,7 @@ struct Category: Identifiable {
 }
 
 struct CategoriesView: View {
-    @Binding var type: String
+    @Binding var type: MediaType
     
     @State var selectedGenre: [Category] = []
     private func toggleGenreSelection(_ category: Category) {
@@ -228,25 +228,32 @@ struct CategoriesView: View {
             .padding(.bottom)
             
             NavigationLink {
-                let inputText = "Estou querendo \(type) para me sentir \(selectedMood.map{$0.name }.joined(separator: ", ")), me recomende um que seja de \(selectedGenre.map{$0.name}.joined(separator: ", ")) e com um tema de \(selectedScript.map{$0.name}.joined(separator: ", "))"
-                
-                ChatGptView(type: type, inputText: inputText)
+                ResultsView(mediaType: type, query: builtQuery ?? "")
             } label: {
                 HStack {
-                    Text("Pesquisar \(type)")
+                    Text("Pesquisar \(type.pluralNameString)")
                     Image(systemName: "arrow.right")
                 }
                 .font(.system(size: 15))
                 .fontWeight(.bold)
                 .foregroundColor(Color("preto"))
                 .frame(width: 200, height: 40, alignment: .center)
-                .background(Color("laranja"))
+                .background(Color("laranja").opacity(builtQuery == nil ? 0.4 : 1))
                 .cornerRadius(16)
-                
             }
+            .disabled(builtQuery == nil)
         }
     }
     
+    private var builtQuery: String? {
+        CategoryQueryBuilder.query(
+            mediaType: type,
+            moods: selectedMood.map(\.name),
+            genres: selectedGenre.map(\.name),
+            themes: selectedScript.map(\.name)
+        )
+    }
+
     func joinedNames(from categories: [Category]) -> String {
         categories.map { NSLocalizedString($0.name, comment: "") }
                   .joined(separator: ", ")
@@ -255,6 +262,6 @@ struct CategoriesView: View {
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView(type: Binding.constant("Filmes"))
+        CategoriesView(type: .constant(.movie))
     }
 }
