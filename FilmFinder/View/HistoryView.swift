@@ -52,17 +52,6 @@ struct HistoryView: View {
     }
 }
 
-struct CustomDivider: View {
-    let color: Color
-    let width: CGFloat
-    var body: some View {
-        Rectangle()
-            .fill(color)
-            .frame(height: width)
-            .edgesIgnoringSafeArea(.horizontal)
-    }
-}
-
 struct HistoryHeader: View {
     var body: some View {
         VStack{
