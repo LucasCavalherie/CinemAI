@@ -52,6 +52,8 @@ TypeScript, Hono (roteamento), Zod (validação de entrada e de saída da IA), D
 
 ### 4.2 Identidade
 
+> **Revisão (2026-10-05):** a implementação refina esta seção — desafios guardados no D1 (uso único atômico), usuário lido do banco a cada requisição (o JWT só carrega o dispositivo), refresh rotativo com asserção do App Attest, modo "sem atestação" só no ambiente `dev` (o simulador não suporta App Attest) e exclusão de conta que falha com 502 sem apagar nada se a revogação no Apple falhar. Ver "Decisões e desvios da spec" em `docs/superpowers/plans/2026-10-05-app-and-identity.md`.
+
 - **Anônimo por padrão.** No primeiro launch o app gera uma chave App Attest e chama `POST /v1/devices`. O Worker valida a atestação com a Apple e devolve `accessToken` (JWT, 1h) + `refreshToken`. Requests seguintes usam App Attest assertion no refresh. Buscas grátis funcionam sem conta (guideline 5.1.1).
 - **Sign in with Apple opcional.** `POST /v1/auth/apple` recebe o `identityToken`, valida assinatura com o JWKS da Apple, `aud` = bundle id, `iss`, `exp`. Cria ou encontra `users` por `apple_sub` e vincula o device atual.
 - **Merge ao logar:** entitlements do device anônimo passam para o usuário; uso do dia do usuário passa a ser o maior entre os dois contadores (nunca soma a favor do usuário).
