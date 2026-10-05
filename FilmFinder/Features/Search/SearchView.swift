@@ -22,6 +22,7 @@ struct SearchView: View {
     @State private var message = ""
     @State private var selectedType: MediaType = .movie
     @State private var selectedMethod: SearchMethod = .description
+    @FocusState private var isEditing: Bool
     @Environment(AppEnvironment.self) private var environment
 
     private var trimmedMessage: String {
@@ -86,6 +87,7 @@ struct SearchView: View {
                                 .lineLimit(5...10)
                                 .foregroundColor(.white)
                                 .autocorrectionDisabled()
+                                .focused($isEditing)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 10)
                                 .frame(width: 300, height: 300, alignment: .topLeading)
@@ -120,6 +122,13 @@ struct SearchView: View {
             }
             .padding()
             .background(Color("cinza1"))
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("OK") { isEditing = false }
+                }
+            }
             .task { await environment.account.refresh() }
         }
     }
