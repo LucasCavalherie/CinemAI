@@ -11,13 +11,18 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",
+    "@peculiar/x509": "^2.1.0",
+    "cbor-x": "^1.6.6",
     "entities": "^8.1.0",
     "hono": "^4.13.13",
+    "jose": "^6.2.12",
     "openai": "^7.28.0",
+    "reflect-metadata": "^0.2.2",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261005.1",
+    "@types/node": "^26.6.4",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11",

@@ -11,7 +11,18 @@
   "analytics_engine_datasets": [
     { "binding": "AI_EVENTS", "dataset": "filmfinder_ai_events" }
   ],
-  "vars": { "AI_GATEWAY_ID": "filmfinder" },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "filmfinder", "database_id": "local", "migrations_dir": "migrations" }
+  ],
+  "vars": {
+    "AI_GATEWAY_ID": "filmfinder",
+    "APPLE_BUNDLE_ID": "com.andre.filmfinder",
+    "APPLE_TEAM_ID": "",
+    "APPLE_KEY_ID": "",
+    "ALLOW_UNATTESTED": "false",
+    "ALLOW_PROVIDER_OVERRIDE": "false",
+    "APPATTEST_ENVS": "production"
+  },
   "env": {
     "dev": {
       "name": "filmfinder-api-dev",
@@ -20,7 +31,18 @@
         { "binding": "CONFIG", "id": "cc96ca027d414013bd2b64c8f1c0ae77" }
       ],
       // Analytics Engine desligado no dev até ser ativado no painel (ver fatia 5).
-      "vars": { "AI_GATEWAY_ID": "default" }
+      "d1_databases": [
+        { "binding": "DB", "database_name": "filmfinder-dev", "database_id": "local", "migrations_dir": "migrations" }
+      ],
+      "vars": {
+        "AI_GATEWAY_ID": "default",
+        "APPLE_BUNDLE_ID": "com.andre.filmfinder",
+        "APPLE_TEAM_ID": "",
+        "APPLE_KEY_ID": "",
+        "ALLOW_UNATTESTED": "true",
+        "ALLOW_PROVIDER_OVERRIDE": "true",
+        "APPATTEST_ENVS": "development,production"
+      }
     }
   }
 }
