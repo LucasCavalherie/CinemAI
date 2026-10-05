@@ -1,0 +1,6 @@
+// "/$()/" evita que o "//" da URL seja lido como comentário.
+API_BASE_URL = https:/$()/filmfinder-api-dev.andrefw483.workers.dev
+APP_ATTEST_ENVIRONMENT = development
+PRIVACY_POLICY_URL =
+TERMS_URL =
+#include? "Local.xcconfig"
