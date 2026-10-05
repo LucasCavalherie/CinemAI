@@ -1,5 +1,5 @@
 // A Fatia 5 troca pela URL de produção.
-API_BASE_URL = https:/$()/filmfinder-api-dev.andrefw483.workers.dev
+API_BASE_URL = https:/$()/filfinder.wozniack.com
 APP_ATTEST_ENVIRONMENT = production
 PRIVACY_POLICY_URL =
 TERMS_URL =
