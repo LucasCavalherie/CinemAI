@@ -7,6 +7,8 @@ export const RecommendationRequest = z.object({
   query: z.string().trim().min(1).max(500),
   mediaType: MediaType,
   excludeTmdbIds: z.array(z.number().int().positive()).max(200).default([]),
+  /** Títulos já vistos ("Título original (ano)"), usados só no prompt da IA; o filtro de verdade é por id. */
+  excludeTitles: z.array(z.string().trim().min(1).max(160)).max(200).default([]),
   locale: z.string().regex(/^[a-z]{2}-[A-Z]{2}$/).default('en-US'),
   region: z.string().regex(/^[A-Z]{2}$/).default('US'),
 })

@@ -4,7 +4,7 @@ import { AiPicks, RecommendationRequest } from '../src/schemas'
 describe('RecommendationRequest', () => {
   it('applies defaults', () => {
     const r = RecommendationRequest.parse({ query: '  algo leve  ', mediaType: 'movie' })
-    expect(r).toEqual({ query: 'algo leve', mediaType: 'movie', excludeTmdbIds: [], locale: 'en-US', region: 'US' })
+    expect(r).toEqual({ query: 'algo leve', mediaType: 'movie', excludeTmdbIds: [], excludeTitles: [], locale: 'en-US', region: 'US' })
   })
 
   it('rejects query over 500 chars', () => {
@@ -14,6 +14,13 @@ describe('RecommendationRequest', () => {
   it('rejects more than 200 excluded ids', () => {
     const ids = Array.from({ length: 201 }, (_, i) => i + 1)
     expect(RecommendationRequest.safeParse({ query: 'x', mediaType: 'tv', excludeTmdbIds: ids }).success).toBe(false)
+  })
+
+  it('accepts up to 200 excluded titles of at most 160 characters', () => {
+    const ok = Array.from({ length: 200 }, (_, i) => `Title ${i} (2020)`)
+    expect(RecommendationRequest.safeParse({ query: 'x', mediaType: 'movie', excludeTitles: ok }).success).toBe(true)
+    expect(RecommendationRequest.safeParse({ query: 'x', mediaType: 'movie', excludeTitles: [...ok, 'one more'] }).success).toBe(false)
+    expect(RecommendationRequest.safeParse({ query: 'x', mediaType: 'movie', excludeTitles: ['a'.repeat(161)] }).success).toBe(false)
   })
 
   it('rejects bad locale and region', () => {

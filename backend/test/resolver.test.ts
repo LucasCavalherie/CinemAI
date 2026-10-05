@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { loadExcludeLabels, resolvePicks, TTL_DETAILS, TTL_LABEL, TTL_SEARCH } from '../src/tmdb/resolver'
+import { resolvePicks, TTL_DETAILS } from '../src/tmdb/resolver'
 import type { TmdbDetails } from '../src/tmdb/types'
 import type { AiPick } from '../src/schemas'
 import { interstellar } from './fixtures/tmdb'
@@ -56,28 +56,35 @@ describe('resolvePicks', () => {
     expect(titles).toHaveLength(1)
   })
 
-  it('writes search, details and label cache with TTLs, and reuses them', async () => {
+  it('caches details (7 days) and reuses them, but does not write search or label entries', async () => {
     const cache = new MemoryKV()
     const tmdb = tmdbStub({ 'A|2014': 1 })
     await resolvePicks([pick('A')], req, { tmdb, cache })
-    expect(cache.puts).toEqual(
-      expect.arrayContaining([
-        { key: 'search:movie:a:2014', value: '1', ttl: TTL_SEARCH },
-        expect.objectContaining({ key: 'tmdb:movie:1:pt-BR', ttl: TTL_DETAILS }),
-        { key: 'label:movie:1', value: 'Movie 1 (2014)', ttl: TTL_LABEL },
-      ]),
-    )
-    tmdb.search.mockClear()
+    expect(cache.puts).toEqual([expect.objectContaining({ key: 'tmdb:movie:1:pt-BR', ttl: TTL_DETAILS })])
     tmdb.details.mockClear()
     await resolvePicks([pick('A')], req, { tmdb, cache })
-    expect(tmdb.search).not.toHaveBeenCalled()
     expect(tmdb.details).not.toHaveBeenCalled()
+  })
+
+  it('still resolves when the KV cache cannot be written (daily put limit) or read', async () => {
+    const cache = {
+      get: async () => {
+        throw new Error('KV get() failed')
+      },
+      put: async () => {
+        throw new Error('KV put() limit exceeded for the day.')
+      },
+    }
+    const tmdb = tmdbStub({ 'A|2014': 1, 'B|2014': 2 })
+    const titles = await resolvePicks([pick('A'), pick('B')], req, { tmdb, cache })
+    expect(titles.map((t) => t.tmdbId)).toEqual([1, 2])
+  })
+
+  it('reports why a pick was dropped', async () => {
+    const tmdb = tmdbStub({ 'A|2014': 1 })
+    const drops: string[] = []
+    await resolvePicks([pick('A'), pick('Ghost')], req, { tmdb, cache: new MemoryKV() }, { onDrop: (p, reason) => drops.push(`${p.originalTitle}: ${reason}`) })
+    expect(drops).toEqual(['Ghost: not found on TMDB'])
   })
 })
 
-describe('loadExcludeLabels', () => {
-  it('returns labels that exist in cache, skipping unknown ids', async () => {
-    const cache = new MemoryKV({ 'label:movie:1': 'Up (2009)', 'label:tv:2': 'Dark (2017)' })
-    expect(await loadExcludeLabels(cache, 'movie', [1, 2, 3])).toEqual(['Up (2009)'])
-  })
-})

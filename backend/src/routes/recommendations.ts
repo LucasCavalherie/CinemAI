@@ -5,7 +5,7 @@ import type { AppEnv } from '../context'
 import { AiUnavailableError, ApiError } from '../lib/errors'
 import { QuotaExceededError, quotaSnapshot, refundSearch, reserveSearch } from '../quota'
 import { RecommendationRequest, type AiPick } from '../schemas'
-import { loadExcludeLabels, resolvePicks } from '../tmdb/resolver'
+import { resolvePicks } from '../tmdb/resolver'
 
 const AI_TIMEOUT_MS = 15000
 const MIN_PICKS = 3
@@ -43,7 +43,7 @@ export async function postRecommendations(c: Context<AppEnv>) {
   }
 
   try {
-    const excludeLabels = await loadExcludeLabels(deps.cache, req.mediaType, req.excludeTmdbIds)
+    const excludeLabels = req.excludeTitles
     const forced = deps.settings.allowProviderOverride ? c.req.header('x-ai-provider') : undefined
     const providers = providerOrder(config, forced).map((name) => deps.provider(name, config.models[name]))
 
@@ -61,7 +61,12 @@ export async function postRecommendations(c: Context<AppEnv>) {
       throw err
     }
 
-    const titles = await resolvePicks(picks, req, { tmdb: deps.tmdb, cache: deps.cache })
+    const drops: Record<string, number> = {}
+    const titles = await resolvePicks(picks, req, {
+      tmdb: deps.tmdb,
+      cache: deps.cache,
+    }, { onDrop: (_pick, reason) => { drops[reason] = (drops[reason] ?? 0) + 1 } })
+    console.log(JSON.stringify({ event: 'resolve', picks: picks.length, resolved: titles.length, excluded: req.excludeTmdbIds.length, drops }))
     if (titles.length === 0) await giveBack()
     return c.json({ titles, quota: await quotaSnapshot(deps.db, config, identity, deps.now()) })
   } catch (err) {

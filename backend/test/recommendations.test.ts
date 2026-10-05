@@ -57,6 +57,15 @@ describe('POST /v1/recommendations', () => {
     expect(ids(await json(res))).toEqual([1, 3])
   })
 
+  it('passes the excluded titles to the AI prompt', async () => {
+    const h = await createHarness()
+    const seen: string[][] = []
+    h.providers.gemini = { name: 'gemini', recommend: async (input) => (seen.push(input.excludeLabels), [{ title: 'A', originalTitle: 'A', year: 2014, reason: 'r' }, { title: 'B', originalTitle: 'B', year: 2014, reason: 'r' }, { title: 'C', originalTitle: 'C', year: 2014, reason: 'r' }]) }
+    const d = await h.newDevice()
+    await h.request('/v1/recommendations', { body: { ...valid, excludeTitles: ['Up (2009)', 'Dark (2017)'] }, token: d.accessToken })
+    expect(seen).toEqual([['Up (2009)', 'Dark (2017)']])
+  })
+
   it('uses gemini then anthropic by default and honours ai.primary/secondary', async () => {
     const h = await createHarness()
     const d = await h.newDevice()
