@@ -5,6 +5,8 @@ export type RawRegionProviders = {
   flatrate?: RawProvider[]
   rent?: RawProvider[]
   buy?: RawProvider[]
+  ads?: RawProvider[]
+  free?: RawProvider[]
 }
 
 export type TmdbDetails = {

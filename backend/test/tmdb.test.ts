@@ -68,12 +68,13 @@ describe('toTitle', () => {
     expect(t.providers.flatrate.map((p) => p.name)).toEqual(['Prime Video', 'Max'])
     expect(t.providers.rent).toEqual([{ id: 2, name: 'Apple TV', logoPath: '/apple.jpg' }])
     expect(t.providers.buy).toEqual([])
+    expect(t.providers.free.map((p) => p.name)).toEqual(['Tubi', 'Pluto TV'])
   })
 
   it('maps a series and handles a region without providers', () => {
     const t = toTitle(darkSeries, 'tv', 'BR', 'r')
     expect(t).toMatchObject({ title: 'Dark', year: 2017, seasons: 3, runtimeMinutes: null, backdropPath: null })
-    expect(t.providers).toEqual({ region: 'BR', link: null, flatrate: [], rent: [], buy: [] })
+    expect(t.providers).toEqual({ region: 'BR', link: null, flatrate: [], rent: [], buy: [], free: [] })
   })
 })
 

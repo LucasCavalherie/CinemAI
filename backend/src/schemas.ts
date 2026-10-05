@@ -68,5 +68,6 @@ export type Title = {
     flatrate: Provider[]
     rent: Provider[]
     buy: Provider[]
+    free: Provider[]
   }
 }

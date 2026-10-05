@@ -20,6 +20,11 @@ export const interstellar: TmdbDetails = {
           { provider_id: 119, provider_name: 'Prime Video', logo_path: '/prime.jpg', display_priority: 1 },
         ],
         rent: [{ provider_id: 2, provider_name: 'Apple TV', logo_path: '/apple.jpg', display_priority: 3 }],
+        ads: [{ provider_id: 300, provider_name: 'Pluto TV', logo_path: '/pluto.jpg', display_priority: 7 }],
+        free: [
+          { provider_id: 73, provider_name: 'Tubi', logo_path: '/tubi.jpg', display_priority: 2 },
+          { provider_id: 300, provider_name: 'Pluto TV', logo_path: '/pluto.jpg', display_priority: 7 },
+        ],
       },
       US: { link: 'https://example.com/us', buy: [{ provider_id: 2, provider_name: 'Apple TV', logo_path: '/apple.jpg', display_priority: 3 }] },
     },

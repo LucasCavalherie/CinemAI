@@ -119,7 +119,7 @@ Para cada pick, com concorrência máxima de 6:
 3. Sem resultado → repete com `title` localizado.
 4. Sem resultado → descarta o pick.
 5. Com ID: `/{movie|tv}/{id}?language={locale}&append_to_response=watch/providers`.
-6. Providers recortados para `region`: `flatrate`, `rent`, `buy` (nome, logo, prioridade) + `link` JustWatch.
+6. Providers recortados para `region`: `flatrate`, `rent`, `buy`, `free` (junção de `free` e `ads`) (nome, logo, prioridade) + `link` JustWatch.
 
 Depois: remove IDs presentes em `excludeTmdbIds`, remove duplicados, mantém a ordem da IA, devolve até 12.
 
@@ -148,6 +148,7 @@ type Title = {
     flatrate: Provider[]
     rent: Provider[]
     buy: Provider[]
+    free: Provider[]   // TMDB `free` + `ads`, sem duplicados
   }
 }
 type Provider = { id: number; name: string; logoPath: string }
@@ -231,7 +232,7 @@ Biblioteca não sincroniza entre devices no MVP.
 ### 5.6 Streaming na UI
 
 - `TitleCard`: até 3 logos de `flatrate` com rótulo "Disponível em".
-- `TitleDetail`: seções Assinatura / Aluguel / Compra; botão abre `providers.link`.
+- `TitleDetail`: seções Assinatura / Aluguel / Compra / Grátis; crédito "Dados de streaming: JustWatch" visível nesta tela (exigência do TMDB); botão abre `providers.link`.
 - Sem providers na região: texto "Não disponível em streaming na sua região".
 - Região padrão `Locale.current.region`, alterável em Ajustes.
 

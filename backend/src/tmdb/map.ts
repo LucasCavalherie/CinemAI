@@ -6,8 +6,10 @@ function yearOf(date: string | undefined): number | null {
   return Number.isFinite(y) ? y : null
 }
 
-function mapProviders(list: RawRegionProviders['flatrate']): Provider[] {
-  return [...(list ?? [])]
+function mapProviders(...lists: RawRegionProviders['flatrate'][]): Provider[] {
+  const byId = new Map<number, NonNullable<RawRegionProviders['flatrate']>[number]>()
+  for (const p of lists.flatMap((l) => l ?? [])) if (!byId.has(p.provider_id)) byId.set(p.provider_id, p)
+  return [...byId.values()]
     .sort((a, b) => a.display_priority - b.display_priority)
     .map((p) => ({ id: p.provider_id, name: p.provider_name, logoPath: p.logo_path }))
 }
@@ -39,6 +41,7 @@ export function toTitle(raw: TmdbDetails, mediaType: MediaType, region: string, 
       flatrate: mapProviders(regional?.flatrate),
       rent: mapProviders(regional?.rent),
       buy: mapProviders(regional?.buy),
+      free: mapProviders(regional?.free, regional?.ads),
     },
   }
 }
