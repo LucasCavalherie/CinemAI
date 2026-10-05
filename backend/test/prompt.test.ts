@@ -6,6 +6,10 @@ import { ProviderError } from '../src/lib/errors'
 const base = { query: 'um filme leve de romance', mediaType: 'movie' as const, locale: 'pt-BR', excludeLabels: [], count: 15 }
 
 describe('buildSystemPrompt', () => {
+  it('asks for short reasons', () => {
+    expect(buildSystemPrompt()).toContain('at most 12 words')
+  })
+
   it('is stable across calls', () => {
     expect(buildSystemPrompt()).toBe(buildSystemPrompt())
   })

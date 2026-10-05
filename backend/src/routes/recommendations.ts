@@ -7,9 +7,9 @@ import { AiUnavailableError, ApiError } from '../lib/errors'
 import { RecommendationRequest, type AiPick } from '../schemas'
 import { loadExcludeLabels, resolvePicks } from '../tmdb/resolver'
 
-const AI_TIMEOUT_MS = 8000
+const AI_TIMEOUT_MS = 15000
 const MIN_PICKS = 3
-const PICKS_REQUESTED = 15
+const PICKS_REQUESTED = 12
 
 function providerOrder(config: AppConfig, forced: string | undefined): ProviderName[] {
   if (forced === 'anthropic' || forced === 'openai' || forced === 'gemini') return [forced]

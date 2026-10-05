@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { recommendWithFallback, type AiEvent } from '../src/ai/orchestrator'
+import { PROMPT_VERSION } from '../src/ai/prompt'
 import type { RecommendationProvider } from '../src/ai/types'
 import { AiUnavailableError, ProviderError } from '../src/lib/errors'
 import type { AiPick } from '../src/schemas'
@@ -62,6 +63,6 @@ describe('recommendWithFallback', () => {
     ])
     expect(events[0]?.error).toBe('boom')
     expect(events[1]?.picks).toBe(5)
-    expect(events[1]?.promptVersion).toBe(1)
+    expect(events[1]?.promptVersion).toBe(PROMPT_VERSION)
   })
 })
