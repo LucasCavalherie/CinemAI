@@ -5,9 +5,14 @@ import { createGeminiProvider } from './ai/gemini'
 import { createOpenAIProvider } from './ai/openai'
 import type { AiEvent } from './ai/orchestrator'
 import type { RecommendationProvider } from './ai/types'
+import { createAppleClient, type AppleClient } from './auth/apple'
+import { verifyAssertion, verifyAttestation, type AttestVerifier } from './auth/appAttest'
+import { TokenService } from './auth/tokens'
 import type { ProviderName } from './config'
 import type { Env } from './env'
+import { d1Db, type Db } from './lib/db'
 import type { KVLike } from './lib/kv'
+import { loadSettings, type Settings } from './settings'
 import { TmdbClient } from './tmdb/client'
 
 export type Deps = {
@@ -16,6 +21,12 @@ export type Deps = {
   tmdb: Pick<TmdbClient, 'search' | 'details'>
   provider(name: ProviderName, model: string): RecommendationProvider
   log(e: AiEvent): void
+  db: Db
+  tokens: TokenService
+  apple: AppleClient
+  attest: AttestVerifier
+  now: () => number
+  settings: Settings
 }
 
 const GATEWAY_SLUG: Record<ProviderName, string> = {
@@ -33,6 +44,8 @@ export function gatewayHeaders(env: Env): Record<string, string> {
 }
 
 export function createDeps(env: Env): Deps {
+  const db = d1Db(env.DB)
+  const now = () => Date.now()
   return {
     config: env.CONFIG,
     cache: env.CACHE,
@@ -56,5 +69,16 @@ export function createDeps(env: Env): Deps {
         doubles: [e.latencyMs, e.picks, e.fallback ? 1 : 0],
       })
     },
+    db,
+    tokens: new TokenService(env.JWT_SECRET, db, now),
+    apple: createAppleClient({
+      teamId: env.APPLE_TEAM_ID,
+      keyId: env.APPLE_KEY_ID,
+      privateKeyPem: env.APPLE_PRIVATE_KEY,
+      bundleId: env.APPLE_BUNDLE_ID,
+    }),
+    attest: { verifyAttestation, verifyAssertion },
+    now,
+    settings: loadSettings(env),
   }
 }

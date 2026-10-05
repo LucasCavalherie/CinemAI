@@ -1,23 +1,28 @@
 import { Hono } from 'hono'
+import { requireAuth } from './auth/middleware'
+import type { AppEnv } from './context'
 import type { Deps } from './deps'
 import type { Env } from './env'
 import { ApiError, errorBody } from './lib/errors'
 import { postRecommendations } from './routes/recommendations'
 
 export function createApp(makeDeps: (env: Env) => Deps) {
-  const app = new Hono<{ Bindings: Env }>()
+  const app = new Hono<AppEnv>()
 
-  app.get('/health', (c) => c.json({ ok: true }))
-
-  // Fatia 1: proteção temporária até App Attest/SIWA (Fatia 3).
-  app.use('/v1/*', async (c, next) => {
-    if (!c.env.DEV_API_KEY || c.req.header('x-dev-key') !== c.env.DEV_API_KEY) {
-      throw new ApiError('unauthorized', 'Missing or invalid credentials', 401)
-    }
+  app.use('*', async (c, next) => {
+    c.set('deps', makeDeps(c.env))
     await next()
   })
 
-  app.post('/v1/recommendations', (c) => postRecommendations(c, makeDeps(c.env)))
+  app.get('/health', (c) => c.json({ ok: true }))
+
+  // Rotas públicas de autenticação entram aqui (Task BE-7).
+
+  const authed = new Hono<AppEnv>()
+  authed.use('*', requireAuth)
+  authed.post('/recommendations', postRecommendations)
+  // Rotas de conta entram aqui (Task BE-8).
+  app.route('/v1', authed)
 
   app.onError((err, c) => {
     if (err instanceof ApiError) return c.json(errorBody(err.code, err.message), err.status)

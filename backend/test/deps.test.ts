@@ -7,14 +7,22 @@ const writeDataPoint = vi.fn()
 const env = {
   CACHE: new MemoryKV(),
   CONFIG: new MemoryKV(),
+  DB: {},
   AI_EVENTS: { writeDataPoint },
   ANTHROPIC_API_KEY: 'a',
   OPENAI_API_KEY: 'o',
   GEMINI_API_KEY: 'g',
   TMDB_TOKEN: 't',
-  DEV_API_KEY: 'd',
   CF_ACCOUNT_ID: 'acct',
   AI_GATEWAY_ID: 'gw',
+  JWT_SECRET: 'a-test-secret-with-more-than-32-characters',
+  APPLE_TEAM_ID: 'TEAM123456',
+  APPLE_KEY_ID: 'KEY1234567',
+  APPLE_BUNDLE_ID: 'com.andre.filmfinder',
+  APPLE_PRIVATE_KEY: 'pem',
+  ALLOW_UNATTESTED: 'true',
+  ALLOW_PROVIDER_OVERRIDE: 'false',
+  APPATTEST_ENVS: 'development',
 } as unknown as Env
 
 describe('gatewayBaseUrl', () => {
@@ -33,6 +41,14 @@ describe('gatewayHeaders', () => {
 })
 
 describe('createDeps', () => {
+  it('wires identity services and settings', () => {
+    const deps = createDeps(env)
+    expect(deps.settings.appId).toBe('TEAM123456.com.andre.filmfinder')
+    expect(deps.settings.allowUnattested).toBe(true)
+    expect(typeof deps.tokens.issueAccess).toBe('function')
+    expect(typeof deps.attest.verifyAttestation).toBe('function')
+    expect(typeof deps.now()).toBe('number')
+  })
   it('creates named providers', () => {
     const deps = createDeps(env)
     expect(deps.provider('anthropic', 'claude-haiku-4-5').name).toBe('anthropic')
