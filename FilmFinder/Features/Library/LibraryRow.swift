@@ -1,39 +1,60 @@
 import SwiftUI
 
 struct LibraryRow: View {
-    let title: Title
-    let date: Date
+    let entry: LibraryEntry
 
     var body: some View {
         NavigationLink {
-            TitleDetail(title: title)
+            TitleDetail(title: entry.title)
         } label: {
-            HStack {
-                PosterImage(path: title.posterPath)
+            HStack(spacing: 12) {
+                PosterImage(path: entry.title.posterPath)
                     .frame(width: 70, height: 105)
                     .clipped()
-                    .cornerRadius(6)
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
 
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(title.title)
-                        .font(.system(size: 16))
-                        .fontWeight(.bold)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(entry.title.title)
+                        .font(.system(size: 16, weight: .bold))
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.branco)
-                    if let year = title.year {
-                        Text(String(year))
-                            .font(.system(size: 13))
-                            .foregroundColor(.branco)
+                    HStack(spacing: 8) {
+                        if let year = entry.title.year {
+                            Text(String(year))
+                        }
+                        Label(String(format: "%.1f", entry.title.rating), systemImage: "star.fill")
+                            .foregroundColor(.laranja)
+                        if let genre = entry.title.genres.first {
+                            Text(genre)
+                        }
                     }
-                    Text(date, style: .date)
-                        .font(.system(size: 10))
-                        .foregroundColor(Color(uiColor: .gray))
+                    .font(.system(size: 13))
+                    .foregroundColor(.branco)
+                    Text(entry.date, style: .date)
+                        .font(.system(size: 11))
+                        .foregroundColor(.gray)
                 }
-                .padding()
                 Spacer()
+                LibraryBadges(entry: entry)
             }
-            .padding(.leading)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+/// Selos de favorito/assistido, usados na linha e na célula da grade.
+struct LibraryBadges: View {
+    let entry: LibraryEntry
+
+    var body: some View {
+        HStack(spacing: 4) {
+            if entry.isFavorite {
+                Image(systemName: "heart.fill").foregroundColor(.rosa)
+            }
+            if entry.isWatched {
+                Image(systemName: "checkmark.circle.fill").foregroundColor(.laranja)
+            }
+        }
+        .font(.system(size: 14))
     }
 }

@@ -1,35 +1,41 @@
 import SwiftUI
 
+enum AppTab: Hashable {
+    case recommendations
+    case library
+    case settings
+}
+
+extension EnvironmentValues {
+    /// Permite a telas internas (ex.: estado vazio da Biblioteca) trocarem de aba.
+    @Entry var selectTab: @MainActor (AppTab) -> Void = { _ in }
+}
+
 struct MainView: View {
-    @State private var selectedTab = 1
-    
+    @State private var selectedTab: AppTab = .recommendations
+
     var body: some View {
         TabView(selection: $selectedTab) {
-            HistoryView()
-                .tabItem {
-                    Label("Histórico", systemImage: "clock.arrow.circlepath")
-                }
-                .tag(0)
-            
             SearchView()
                 .tabItem {
                     Label("Recomendações", systemImage: "magnifyingglass.circle.fill")
                 }
-                .tag(1)
-            
-            ProfileView()
+                .tag(AppTab.recommendations)
+
+            LibraryView()
                 .tabItem {
-                    Label("Perfil", systemImage: "person.circle.fill")
+                    Label("Biblioteca", systemImage: "books.vertical.fill")
                 }
-                .tag(2)
+                .tag(AppTab.library)
 
             SettingsView()
                 .tabItem {
                     Label("Ajustes", systemImage: "gearshape.fill")
                 }
-                .tag(3)
+                .tag(AppTab.settings)
         }
         .accentColor(Color.laranja)
+        .environment(\.selectTab) { selectedTab = $0 }
     }
 }
 
