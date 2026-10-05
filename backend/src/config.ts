@@ -9,8 +9,8 @@ export type AppConfig = {
 }
 
 export const DEFAULT_CONFIG: AppConfig = {
-  primary: 'anthropic',
-  secondary: 'gemini',
+  primary: 'gemini',
+  secondary: 'anthropic',
   models: { anthropic: 'claude-haiku-4-5', openai: 'gpt-5-mini', gemini: 'gemini-3.5-flash-lite' },
 }
 
@@ -25,7 +25,7 @@ export async function loadConfig(kv: KVLike): Promise<AppConfig> {
     kv.get('ai.models.gemini'),
   ])
   const p = isProvider(primary) ? primary : DEFAULT_CONFIG.primary
-  const fallbackDefault: ProviderName = p === 'anthropic' ? 'gemini' : 'anthropic'
+  const fallbackDefault: ProviderName = p === 'gemini' ? 'anthropic' : DEFAULT_CONFIG.primary
   const s = isProvider(secondary) && secondary !== p ? secondary : fallbackDefault
   return {
     primary: p,

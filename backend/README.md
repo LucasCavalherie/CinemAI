@@ -1,6 +1,6 @@
 # FilmFinder API (Cloudflare Worker)
 
-Recebe um pedido em linguagem natural, obtém indicações de Claude Haiku 4.5 ou Gemini Flash-Lite (com fallback; GPT mini disponível, desligado por padrão) e devolve títulos resolvidos no TMDB com onde assistir.
+Recebe um pedido em linguagem natural, obtém indicações de Gemini Flash-Lite ou Claude Haiku 4.5 (com fallback; GPT mini disponível, desligado por padrão) e devolve títulos resolvidos no TMDB com onde assistir.
 
 ## Desenvolvimento
 
@@ -19,8 +19,8 @@ Recebe um pedido em linguagem natural, obtém indicações de Claude Haiku 4.5 o
 
 | Chave | Valores | Padrão |
 |---|---|---|
-| `ai.primary` | `anthropic` \| `gemini` \| `openai` | `anthropic` |
-| `ai.secondary` | idem (diferente do primário) | `gemini` |
+| `ai.primary` | `gemini` \| `anthropic` \| `openai` | `gemini` |
+| `ai.secondary` | idem (diferente do primário) | `anthropic` |
 | `ai.models.anthropic` | ID do modelo | `claude-haiku-4-5` |
 | `ai.models.gemini` | ID do modelo | `gemini-3.5-flash-lite` |
 | `ai.models.openai` | ID do modelo | `gpt-5-mini` |

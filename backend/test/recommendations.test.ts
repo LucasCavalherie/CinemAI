@@ -70,10 +70,10 @@ describe('POST /v1/recommendations', () => {
     expect((await json(res)).titles.map((t: { tmdbId: number }) => t.tmdbId)).toEqual([1, 3])
   })
 
-  it('defaults to anthropic then gemini', async () => {
+  it('defaults to gemini then anthropic', async () => {
     const { deps, calls } = makeDeps()
     await post(createApp(() => deps), valid)
-    expect(calls).toEqual(['anthropic', 'gemini'])
+    expect(calls).toEqual(['gemini', 'anthropic'])
   })
 
   it('orders providers by ai.primary and ai.secondary from config', async () => {

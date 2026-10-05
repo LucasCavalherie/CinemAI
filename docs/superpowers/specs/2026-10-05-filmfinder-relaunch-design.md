@@ -13,7 +13,7 @@ Relançar o FilmFinder na App Store como produto freemium, operado por nós. O f
 Mudanças principais em relação ao app atual:
 
 1. Chaves de IA e TMDB saem do app e passam a viver num backend (Cloudflare Worker).
-2. IA moderna com saída JSON garantida por schema, dois provedores (Claude Haiku 4.5 e Gemini Flash-Lite) com fallback e primário/secundário alternáveis sem deploy. *(Revisão 2026-10-05: Gemini substitui GPT mini por falta de créditos OpenAI e custo menor; o adaptador OpenAI continua no código, desligado.)*
+2. IA moderna com saída JSON garantida por schema, dois provedores (Gemini Flash-Lite primário e Claude Haiku 4.5 fallback) com fallback e primário/secundário alternáveis sem deploy. *(Revisão 2026-10-05: Gemini substitui GPT mini por falta de créditos OpenAI e custo menor; o adaptador OpenAI continua no código, desligado.)*
 3. Cada título mostra em quais streamings está disponível na região do usuário (TMDB `watch/providers`, dados JustWatch).
 4. Modelo freemium por cota de buscas, assinatura via StoreKit 2.
 5. Sign in with Apple opcional, para Pro valer em vários devices.
@@ -99,7 +99,7 @@ type AiPick = { title: string; originalTitle: string; year: number; reason: stri
 - Ambos chamam via URL do AI Gateway. O mesmo schema Zod valida a saída dos dois.
 - IDs de modelo ficam em KV (`ai.models.anthropic`, `ai.models.openai`), não hardcoded.
 
-**Orquestrador:** lê `ai.primary` e `ai.secondary` do KV (`anthropic`, `gemini` ou `openai`; padrão `anthropic` → `gemini`). Tenta o primário com timeout de 8s. Erro de rede, timeout, falha de validação Zod ou menos de 3 picks válidos → tenta o secundário. Ambos falham → `ai_unavailable`, sem consumo de cota. Cada chamada registra `{ provider, model, latencyMs, fallback, picks, promptVersion }` no Analytics Engine.
+**Orquestrador:** lê `ai.primary` e `ai.secondary` do KV (`anthropic`, `gemini` ou `openai`; padrão `gemini` → `anthropic`). Tenta o primário com timeout de 8s. Erro de rede, timeout, falha de validação Zod ou menos de 3 picks válidos → tenta o secundário. Ambos falham → `ai_unavailable`, sem consumo de cota. Cada chamada registra `{ provider, model, latencyMs, fallback, picks, promptVersion }` no Analytics Engine.
 
 **Prompt:**
 
